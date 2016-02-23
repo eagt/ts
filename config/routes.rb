@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get 'professionals/show'
 
-  get 'professionals/new'
+  get 'profsign'    => 'professionals#new'
 
   get 'professionals/create'
 
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   get 'professionals/destroy'
 
-  get 'companies/new'
+ get 'compasign'    => 'companies#new'
 
   get 'companies/edit'
 
