@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class ProfessionalsControllerTest < ActionController::TestCase
+  
   test "should get index" do
     get :index
     assert_response :success
@@ -14,6 +15,7 @@ class ProfessionalsControllerTest < ActionController::TestCase
   test "should get new" do
     get :new
     assert_response :success
+    assert_select "title", "Professional Sign Up | Ts App"
   end
 
   test "should get create" do

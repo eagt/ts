@@ -36,5 +36,5 @@ class UsersControllerTest < ActionController::TestCase
     get :destroy
     assert_response :success
   end
-
 end
+

@@ -1,37 +1,8 @@
 require 'test_helper'
 
 class CompaniesControllerTest < ActionController::TestCase
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit
-    assert_response :success
-  end
-
-  test "should get rails" do
-    get :rails
-    assert_response :success
-  end
-
-  test "should get generate" do
-    get :generate
-    assert_response :success
-  end
-
-  test "should get controller" do
-    get :controller
-    assert_response :success
-  end
-
-  test "should get Companies" do
-    get :Companies
-    assert_response :success
-  end
-
-  test "should get index" do
+  
+    test "should get index" do
     get :index
     assert_response :success
   end
@@ -44,9 +15,10 @@ class CompaniesControllerTest < ActionController::TestCase
   test "should get new" do
     get :new
     assert_response :success
+    assert_select "title", "Company Sign Up | Ts App"
   end
 
-  test "should get create" do
+   test "should get create" do
     get :create
     assert_response :success
   end
