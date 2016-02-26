@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CompaniesControllerTest < ActionController::TestCase
+class ProfessionalSignupTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

@@ -1,2 +1,14 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<% provide(:title, "Show User") %> 
+
+<h1>Users Show Action</h1>
+<p>Here I will show the user details </p>
+
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+      <%= @user.first_name %>  <!-- If I want to show the email i could put    (, <%= @user.email %>) -->
+      </h1>
+    </section>
+  </aside>
+</div>

@@ -1,0 +1,16 @@
+
+
+<% if object && object.errors.size > 0 %>
+  <div id="errorExplanation">
+    <div class="alert alert-danger">
+    <p>The form contains <%= pluralize(object.errors.size, "error") %> , which prohibited this record from being saved </p>
+    <p> Please check the following <%= pluralize(object.errors.size, "error") %> : </p>
+      </div>
+      <ul>
+      <% object.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<%end %>
+

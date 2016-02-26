@@ -6,15 +6,27 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
+    
   end
 
-  def new
+   def new
+    @user = User.new
   end
+
+   def create
+    #@user = User.new(params[:user])    => Not the final implementation!
+    @user = User.new(user_params)
+      if @user.save
+        flash[:success] = "Welcome to TS App!"
+      # Handle a successful save.
+        redirect_to @user
+      else
+       render 'new'
+      end
+   end
 
   def edit
-  end
-
-  def create
   end
 
   def update
@@ -22,4 +34,11 @@ class UsersController < ApplicationController
 
   def destroy
   end
+
+  private
+
+    def user_params
+      params.require(:user).permit(:first_name, :email, :password,
+                                   :password_confirmation)
+    end
 end

@@ -1,2 +1,16 @@
-<h1>Companies#show</h1>
-<p>Find me in app/views/companies/show.html.erb</p>
+<% provide(:title, "Show Company") %> 
+
+<h1>Company Show Action</h1>
+<p>Here I will show the company details </p>
+
+
+<div class="row">
+  <aside class="col-md-4">
+    <section class="company_info">
+      <h1>
+      <%= @company.company %>  
+      <!-- If I want to show the email i could put    (, <%= @company.email %>) -->
+      </h1>
+    </section>
+  </aside>
+</div>

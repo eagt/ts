@@ -15,4 +15,10 @@ module ApplicationHelper
       page_title + " | " + base_title                 # String concatenation
     end
   end
+
+
+  def error_messages_for(object)
+    render(:partial => 'shared_error_messages/error_messages', :locals => {:object => object}) 
+  end
+
 end

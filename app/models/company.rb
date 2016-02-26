@@ -1,13 +1,12 @@
-class User < ActiveRecord::Base
+class Company < ActiveRecord::Base
 
-validates :first_name, presence: true, length: { maximum: 20 }
+	validates :company, presence: true, length: { maximum: 20 }
+	include SharedMethods
+ 	
 
-include SharedMethods
 
 end
 
-# /* ----  All this was passed to the shared_method model  ---- */ 
-# has_secure_password
 # before_save { email.downcase! }
 # #before_save { self.email = email.downcase }	
 # validates :first_name, presence: true, length: { maximum: 20 }
@@ -18,4 +17,3 @@ end
 # validates :password, presence: true, length: { minimum: 6 }
 
 # end
-

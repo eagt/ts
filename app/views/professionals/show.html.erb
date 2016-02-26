@@ -1,2 +1,16 @@
-<h1>Professionals#show</h1>
-<p>Find me in app/views/professionals/show.html.erb</p>
+<% provide(:title, "Show Professional") %> 
+
+<h1>Professional Show Action</h1>
+<p>Here I will show the professional details </p>
+
+
+<div class="row">
+  <aside class="col-md-4">
+    <section class="company_info">
+      <h1>
+      <%= @professional.first_name%>  
+      <!-- If I want to show the email i could put    (, <%= @professional.email %>) -->
+      </h1>
+    </section>
+  </aside>
+</div>

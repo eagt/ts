@@ -1,48 +1,46 @@
 Rails.application.routes.draw do
   
+  resources :professionals
+  resources :companies
+  resources :users
+
   get 'professionals/index'
 
   get 'professionals/show'
 
   get 'profsign'    => 'professionals#new'
 
-  get 'professionals/create'
+  #get 'professionals/create'
 
   get 'professionals/edit'
 
-  get 'professionals/update'
+  #get 'professionals/update'
 
   get 'professionals/delete'
 
-  get 'professionals/destroy'
+ # get 'professionals/destroy'
 
- get 'compasign'    => 'companies#new'
+ get 'compasign' => 'companies#new'
 
   get 'companies/edit'
 
-  get 'companies/rails'
-
-  get 'companies/generate'
-
-  get 'companies/controller'
-
-  get 'companies/Companies'
+ 
 
   get 'companies/index'
 
   get 'companies/show'
 
-  get 'companies/new'
+  #get 'companies/new'
 
-  get 'companies/create'
+ # get 'companies/create'
 
   get 'companies/edit'
 
-  get 'companies/update'
+  #get 'companies/update'
 
   get 'companies/delete'
 
-  get 'companies/destroy'
+  #get 'companies/destroy'
 
   #get 'static_pages/home'
 
@@ -54,7 +52,9 @@ Rails.application.routes.draw do
 
   get 'contact_us' => 'static_pages#contact_us'
 
-   get 'signup'  => 'users#new'
+ 
+
+  get 'signup'  => 'users#new'
   
   get 'users/index'
 
@@ -62,11 +62,11 @@ Rails.application.routes.draw do
 
   get 'users/edit'
 
-  get 'users/create'
+  #get 'users/create'
 
-  get 'users/update'
+  #get 'users/update'
 
-  get 'users/destroy'
+  #get 'users/destroy'
 
 
   #match ':controller(/:action(/:id))', :via => [:get, :post]
