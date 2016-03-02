@@ -38,7 +38,7 @@ class ProfessionalsController < ApplicationController
 private
 
     def professional_params
-      params.require(:professional).permit(:first_name, :email, :password,
+      params.require(:professional).permit(:name, :email, :password,
                                    :password_confirmation)
     end
 

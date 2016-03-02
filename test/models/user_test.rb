@@ -3,7 +3,7 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
 
   def setup
-    @user = User.new(:first_name => "Example User", :email => "user@example.com",
+    @user = User.new(:name => "Example User", :email => "user@example.com",
 							      :password => "foobar", :password_confirmation => "foobar")
   end
 
@@ -12,8 +12,8 @@ class UserTest < ActiveSupport::TestCase
   end
 
 
-  test "first_name should be present" do
-    @user.first_name = "     "
+  test "name should be present" do
+    @user.name = "     "
     assert_not @user.valid?
   end
 
@@ -43,8 +43,8 @@ class UserTest < ActiveSupport::TestCase
 
 
 
-  test "first_name should not be too long" do  # this is done to validate the length
-    @user.first_name = "a" * 21					 # This is put atleast one above the maximun set on the model
+  test "name should not be too long" do  # this is done to validate the length
+    @user.name = "a" * 21					 # This is put atleast one above the maximun set on the model
     assert_not @user.valid?						 # So, it will ensures that it's taking the maximun value only.
   end
 
@@ -86,7 +86,9 @@ class UserTest < ActiveSupport::TestCase
       assert_not @user.valid?
     end
 
-
+    test "authenticated? should return false for a user with nil digest" do
+    assert_not @user.authenticated?('')
+  end
   end
 
 

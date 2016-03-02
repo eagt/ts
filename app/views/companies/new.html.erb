@@ -9,28 +9,13 @@ site once the company has decided it wants to try the Ts application. Once the p
 he comapny will be created and the company's application administrator could create other users with the users form -->
 
 
-<%= error_messages_for(@company) %>
+<%= error_messages_for(@company) %> 
 
-    <div class="row">
-    <div class="row">
+<div class="row">
   <div class="col-md-6 col-md-offset-3">
-
-    <%= form_for(@company) do |f| %>    
-
-      <%= f.label :company %>
-      <%= f.text_field :company, class: 'form-control'%>
-
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
-
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
-
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-
-      <%= f.submit "Create Company account", class: "btn btn-primary" %>
-    <% end %>
-
+     <%= form_for(:company, :url => {:action => 'create', :id => @company.id}) do |f| %>
+     <%= render(:partial => "shared/form", :locals => {:f =>f}) %>     
+     <%= f.submit "Create my Company account", class: "btn btn-primary" %>
+     <% end %>
   </div>
 </div> 

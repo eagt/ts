@@ -1,0 +1,23 @@
+
+<!-- What is intended with this partial form is to apply the DRY concept. This will be used
+to create new and update objects  such as : Users, Professionals and Companies. -->    
+
+ 
+ 		<!--   /**  Form used for sign Up  **/  -->
+   
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control' %>
+
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control' %>
+
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control' %>
+
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+   
+
+
+

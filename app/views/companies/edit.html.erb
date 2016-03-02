@@ -1,2 +1,18 @@
-<h1>Companies#edit</h1>
-<p>Find me in app/views/companies/edit.html.erb</p>
+<% provide(:title, 'Edit Company') %>
+<% @page_title = "Edit Company: #{@company.name}" -%>  <!-- This may cause problems -->
+
+<%= link_to("<< Back to List", {:action => 'index'}, :class => 'back-link') %>
+
+<!-- When action is implemented fully, I must be able to update all the users details -->
+
+<div class="company edit">
+  <h1>Edit Company</h1>
+  <%= error_messages_for(@Company) %>
+
+	  <%= form_for(:company, :url => {:action => 'update', :id => @company.id}) do |f| %>
+	  <%= render(:partial => 'shared/form', :locals => {:f => f} ) %>
+	<div class="form_buttons">
+	   <%= submit_tag('Update ompany') %>
+	</div>
+  	  <% end %>
+</div>

@@ -5,7 +5,7 @@ class CreateCompanies < ActiveRecord::Migration
     create_table :companies do |t|
 
         t.string "id_code", :limit => 25
-        t.string "company", :limit => 50, :null => false
+        t.string "name", :limit => 50, :null => false
         t.string "email", :default => "@", :null => false
 
 # Below, once it's especified that the Head Quarter has been created, the system
@@ -18,12 +18,13 @@ class CreateCompanies < ActiveRecord::Migration
         t.boolean "acc_active", :default => false
 
         t.string "password_digest"
+         t.string "remember_digest"
         t.datetime "last_in"
 
         t.timestamps null: false
     end
 
-        add_index("companies", "company")
+        add_index("companies", "name")
         add_index("companies", "email")
         add_index("companies", "head_quarter")
   

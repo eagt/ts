@@ -1,8 +1,26 @@
 Rails.application.routes.draw do
   
+  
   resources :professionals
   resources :companies
   resources :users
+
+
+  get   'ulogin'   => 'sessions#new'
+  post   'ulogin'   => 'sessions#create'
+  delete 'ulogout'  => 'sessions#destroy'
+
+  get    'clogin'   => 'sessions#new'
+  post   'clogin'   => 'sessions#create'
+  delete 'clogout'  => 'sessions#destroy'
+
+
+  get    'plogin'   => 'sessions#new'
+  post   'plogin'   => 'sessions#create'
+  delete 'plogout'  => 'sessions#destroy'
+
+
+
 
   get 'professionals/index'
 
