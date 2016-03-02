@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :users
 
 
+
   get   'ulogin'   => 'sessions#new'
   post   'ulogin'   => 'sessions#create'
   delete 'ulogout'  => 'sessions#destroy'
@@ -82,7 +83,10 @@ Rails.application.routes.draw do
 
   #get 'users/create'
 
-  #get 'users/update'
+  patch 'users/update' 
+
+
+  
 
   #get 'users/destroy'
 

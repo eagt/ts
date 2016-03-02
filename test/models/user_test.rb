@@ -57,7 +57,7 @@ class UserTest < ActiveSupport::TestCase
 # Now the two validations below are used to make sure not just that invalid email addresses like user@example,com are rejected, 
 # but also that valid addresses like user@example.com are accepted
     test "email validation should accept valid addresses" do
-    valid_addresses = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org
+      valid_addresses = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org
                          first.last@foo.jp alice+bob@baz.cn]
     	valid_addresses.each do |valid_address|
       	@user.email = valid_address
