@@ -8,6 +8,7 @@
 	  <%= form_for(:user, :url => {:action => 'create', :id => @user.id}) do |f| %>
 	  <%= render(:partial => "shared/form", :locals => {:f =>f}) %>
 	  <%= f.submit "Create my User account", class: "btn btn-primary" %>
+	  <!-- It is missing a cancel button -->
 	  <% end %>
  </div>
 </div>

@@ -55,13 +55,19 @@ ActiveRecord::Schema.define(version: 20160224201843) do
   add_index "professionals", ["specialty"], name: "index_professionals_on_specialty", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",            limit: 20,                null: false
-    t.string   "last_name",       limit: 20
-    t.string   "email",           limit: 255, default: "@", null: false
-    t.string   "password_digest", limit: 255
-    t.string   "remember_digest", limit: 255
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.string   "name",              limit: 20,                  null: false
+    t.string   "last_name",         limit: 20
+    t.string   "email",             limit: 255, default: "@",   null: false
+    t.string   "password_digest",   limit: 255
+    t.string   "remember_digest",   limit: 255
+    t.boolean  "admin"
+    t.string   "activation_digest", limit: 255
+    t.boolean  "activated",                     default: false
+    t.datetime "activated_at"
+    t.string   "reset_digest",      limit: 255
+    t.datetime "reset_sent_at"
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
