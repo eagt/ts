@@ -11,7 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303192451) do
+ActiveRecord::Schema.define(version: 20160304134131) do
+
+  create_table "appointments", force: :cascade do |t|
+    t.integer  "company_id",       limit: 4
+    t.integer  "branch_id",        limit: 4
+    t.integer  "professional_id",  limit: 4
+    t.integer  "client_id",        limit: 4
+    t.integer  "appointment_code", limit: 4
+    t.integer  "follow_up_code",   limit: 4
+    t.string   "service",          limit: 25
+    t.string   "creator",          limit: 255
+    t.string   "logged_as",        limit: 255
+    t.datetime "date_time",                                      null: false
+    t.string   "status",           limit: 255
+    t.string   "task_type",        limit: 50
+    t.text     "task_note",        limit: 65535
+    t.string   "photo",            limit: 255
+    t.boolean  "needs_followup",                 default: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+  end
+
+  add_index "appointments", ["appointment_code"], name: "index_appointments_on_appointment_code", using: :btree
+  add_index "appointments", ["branch_id"], name: "index_appointments_on_branch_id", using: :btree
+  add_index "appointments", ["client_id"], name: "index_appointments_on_client_id", using: :btree
+  add_index "appointments", ["company_id"], name: "index_appointments_on_company_id", using: :btree
+  add_index "appointments", ["date_time"], name: "index_appointments_on_date_time", using: :btree
+  add_index "appointments", ["follow_up_code"], name: "index_appointments_on_follow_up_code", using: :btree
+  add_index "appointments", ["professional_id"], name: "index_appointments_on_professional_id", using: :btree
+  add_index "appointments", ["status"], name: "index_appointments_on_status", using: :btree
 
   create_table "branches", force: :cascade do |t|
     t.integer  "company_id",      limit: 4
@@ -103,6 +132,23 @@ ActiveRecord::Schema.define(version: 20160303192451) do
   add_index "contact_details", ["state"], name: "index_contact_details_on_state", using: :btree
   add_index "contact_details", ["user_id"], name: "index_contact_details_on_user_id", using: :btree
 
+  create_table "employments", force: :cascade do |t|
+    t.integer  "company_id",          limit: 4
+    t.integer  "professional_id",     limit: 4
+    t.boolean  "validated",                     default: false
+    t.datetime "absent_on"
+    t.datetime "Holidays_from"
+    t.datetime "Holidays_to"
+    t.integer  "total_days_holidays", limit: 4
+    t.integer  "total_days_off",      limit: 4
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+  end
+
+  add_index "employments", ["company_id", "professional_id"], name: "index_employments_on_company_id_and_professional_id", using: :btree
+  add_index "employments", ["total_days_holidays"], name: "index_employments_on_total_days_holidays", using: :btree
+  add_index "employments", ["total_days_off"], name: "index_employments_on_total_days_off", using: :btree
+
   create_table "payment_details", force: :cascade do |t|
     t.integer  "appointment_id",            limit: 4
     t.float    "total_project_price",       limit: 24
@@ -139,6 +185,41 @@ ActiveRecord::Schema.define(version: 20160303192451) do
   add_index "professionals", ["last_name"], name: "index_professionals_on_last_name", using: :btree
   add_index "professionals", ["service"], name: "index_professionals_on_service", using: :btree
   add_index "professionals", ["specialty"], name: "index_professionals_on_specialty", using: :btree
+
+  create_table "update_deletes", force: :cascade do |t|
+    t.integer  "company_id",         limit: 4
+    t.integer  "branch_id",          limit: 4
+    t.integer  "professional_id",    limit: 4
+    t.integer  "client_id",          limit: 4
+    t.integer  "contact_details_id", limit: 4
+    t.integer  "payment_details_id", limit: 4
+    t.integer  "employment_id",      limit: 4
+    t.integer  "appointments_id",    limit: 4
+    t.integer  "update_deletes_id",  limit: 4
+    t.string   "name",               limit: 255
+    t.string   "last_name",          limit: 255
+    t.string   "table_name",         limit: 255
+    t.string   "column_name",        limit: 255
+    t.string   "element",            limit: 255
+    t.string   "action_taken",       limit: 255
+    t.text     "reason",             limit: 65535
+    t.string   "new_element",        limit: 255
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
+
+  add_index "update_deletes", ["action_taken"], name: "index_update_deletes_on_action_taken", using: :btree
+  add_index "update_deletes", ["appointments_id"], name: "index_update_deletes_on_appointments_id", using: :btree
+  add_index "update_deletes", ["branch_id"], name: "index_update_deletes_on_branch_id", using: :btree
+  add_index "update_deletes", ["client_id"], name: "index_update_deletes_on_client_id", using: :btree
+  add_index "update_deletes", ["company_id"], name: "index_update_deletes_on_company_id", using: :btree
+  add_index "update_deletes", ["contact_details_id"], name: "index_update_deletes_on_contact_details_id", using: :btree
+  add_index "update_deletes", ["employment_id"], name: "index_update_deletes_on_employment_id", using: :btree
+  add_index "update_deletes", ["last_name"], name: "index_update_deletes_on_last_name", using: :btree
+  add_index "update_deletes", ["new_element"], name: "index_update_deletes_on_new_element", using: :btree
+  add_index "update_deletes", ["professional_id"], name: "index_update_deletes_on_professional_id", using: :btree
+  add_index "update_deletes", ["table_name"], name: "index_update_deletes_on_table_name", using: :btree
+  add_index "update_deletes", ["update_deletes_id"], name: "index_update_deletes_on_update_deletes_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",              limit: 20,                  null: false
