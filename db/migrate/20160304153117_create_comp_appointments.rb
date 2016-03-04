@@ -16,7 +16,6 @@ class CreateCompAppointments < ActiveRecord::Migration
  
    end
 
-
    def down
  
      drop_table :comp_appointments

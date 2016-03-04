@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
 
 include SharedMethods
 
+has_many :updates_deletes
+
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest

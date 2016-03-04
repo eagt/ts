@@ -2,9 +2,23 @@ class Company < ActiveRecord::Base
 
 	#validates :name, presence: true, length: { maximum: 20 }
 	include SharedMethods
- 	
 
+	# 0ne-to-One
+	has_one :contact_details
+	
+	# One-to- Many	
+	has_many :branches
+	has_many :updates_deletes
 
+ 	# Many-to-Many Simple
+ 	has_and_belongs_to_many :clients
+
+ 	# Many-to-Many Rich
+ 	has_many :comp_appointments
+
+ 	# Many-to-Many through
+ 	has_many :employments
+ 	has_many :professionals, through => :employments
 end
 
 # before_save { email.downcase! }
