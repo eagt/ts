@@ -37,9 +37,11 @@ class CreateUpdatesDeletes < ActiveRecord::Migration
      	add_index("update_deletes", "professional_id")
      	add_index("update_deletes", "client_id")
      	add_index("update_deletes", "contact_details_id")
+        add_index("update_deletes", "payment_details_id")
       	add_index("update_deletes", "employment_id")
       	add_index("update_deletes", "appointments_id")      
      	add_index("update_deletes", "update_deletes_id")
+
 
      	add_index("update_deletes", "table_name")
      	add_index("update_deletes", "last_name")
