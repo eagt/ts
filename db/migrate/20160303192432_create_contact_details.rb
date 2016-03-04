@@ -25,7 +25,15 @@ class CreateContactDetails < ActiveRecord::Migration
 	      t.timestamps null: false
 
 	    end
-	    add_index :contact_details, ["company_id", "branch_id", "branch_id", "professional_id", "client_id", "user_id")
+	    #add_index :contact_details, ["company_id", "branch_id", "professional_id", "client_id", "user_id")
+		add_index("contact_details", "company_id")
+		add_index("contact_details", "branch_id")
+		add_index("contact_details", "professional_id")
+		add_index("contact_details", "client_id")
+		add_index("contact_details", "user_id")
+		add_index("contact_details", "city")
+		add_index("contact_details", "state")
+		add_index("contact_details", "country")
 	  end
 
 

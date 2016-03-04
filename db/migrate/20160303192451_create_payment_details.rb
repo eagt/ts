@@ -15,7 +15,8 @@ class CreatePaymentDetails < ActiveRecord::Migration
 
        t.timestamps null: false
     end
-    	add_index :payment_details, ["appointment_id"]
+    	 add_index("payment_details","appointment_id")
+       add_index("payment_details","total_project_price")
   end
   
 

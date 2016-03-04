@@ -24,23 +24,29 @@ class CreateBranches < ActiveRecord::Migration
       
       
 
-# It will be necessary to create usernames and password for each user. It may be that these usrnames and passwords
-# could be assigned to each branch independely by the global admin user in the company. It has to be taking
-# into account that the Branch Admin user won't be able to do CRUD in anything to do with the Company
+# # It will be necessary to create usernames and password for each user. It may be that these usrnames and passwords
+# # could be assigned to each branch independely by the global admin user in the company. It has to be taking
+# # into account that the Branch Admin user won't be able to do CRUD in anything to do with the Company
      
-      # t.string "password_digest"
+       # t.string "password_digest"
       
-      t.datetime "last_in"
+       t.datetime "last_in"
 
-      t.timestamps null: false
+       t.timestamps null: false
 
-    end
-      add_index :branches, ["company_id", "professional_id", "name", "id_code", "email"]
+     end
+#       This is a multi column index ... add_index :branches, ["company_id", "professional_id", "name", "id_code", "email"]
+        add_index("branches", "company_id")
+        add_index("branches", "professional_id")
+        add_index("branches", "name")
+        add_index("branches", "id_code")
+        add_index("branches", "email")
+
   end
 
 
   def down
-    create_table :branches 
+    drop_table :branches 
   end
 
 end

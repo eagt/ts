@@ -41,9 +41,14 @@ def up
 
         t.timestamps null: false
     end
-        add_index :companies, [ "professional_id", "id_code", "name", "email" "head_quarter"] 
-
+       # add_index :companies, [ "professional_id", "id_code", "name", "email", "head_quarter"] 
+        add_index("companies", "professional_id")
+        add_index("companies", "id_code")
+        add_index("companies", "name")
+        add_index("companies", "email")
+        add_index("companies", "head_quarter")
   end
+
 
 
   def down

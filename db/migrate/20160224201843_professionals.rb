@@ -40,7 +40,18 @@ class Professionals < ActiveRecord::Migration
         t.timestamps null: false
 
       end
-        add_index :professionals, ["company_id", "id_code", "last_name", "service", "specialty", "dob","email"]
+        #add_index :professionals, ["company_id", "id_code", "last_name", "service", "specialty", "dob","email"]
+        
+        add_index("professionals", "company_id")
+        add_index("professionals", "id_code")
+        add_index("professionals", "last_name")
+        add_index("professionals", "service")
+        add_index("professionals", "specialty")
+        add_index("professionals", "dob")
+        add_index("professionals", "email")
+
+
+
     end
 
     def down

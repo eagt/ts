@@ -27,8 +27,13 @@ class CreateClients < ActiveRecord::Migration
 	      t.timestamps null: false
 
 	   	end
-	      add_index :clients, ["company_id", "professional_id", "branch_id", "dob", "email", "last_name"] 
-
+	      #add_index :clients, ["company_id", "professional_id", "branch_id", "dob", "email", "last_name"] 
+	        add_index("clients", "company_id")
+	        add_index("clients", "professional_id")
+	        add_index("clients", "branch_id")
+	        add_index("clients", "dob")
+	        add_index("clients", "email")
+	        add_index("clients", "last_name")
 	end
 
 	def down
