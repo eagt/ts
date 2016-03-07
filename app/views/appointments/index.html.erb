@@ -1,0 +1,67 @@
+
+
+
+
+<% provide(:title, "Appointment Index") %> 
+
+<!-- <% @page_tittle = " Appointments " %> -->
+
+<div class="ppointment index">
+	
+		<h2> Appointments </h2>
+
+		
+
+<%= link_to("Add New Appointment", new_appointment_path, :class => 'action new') %>
+		
+	<!-- Here I will pluralize to say how many Appointments are/is found -->
+
+		<div><%= pluralize(@appointments.size, 'appointment') %> found</div>
+		
+		<table class= "table table-striped" summary="Appointment List">
+		  <thead>
+			<tr>
+				
+				<th>id</th>
+				<th>Company</th>
+				<th>Branch</th>	
+				<th>Professional</th>				
+	   			<th>Client</th>
+	   			<th>Status</th>
+	   			<th>Date/Time</th>
+				<th>Actions</th>
+			</tr>
+		  </thead>
+		  <tbody>
+
+		<% @appointments.each do |appointment| %>
+		<tr>	
+				<td><%= appointment.id %></td>		
+				<td><%= appointment.company %></td>
+				<td><%= appointment.branch %></td>
+				<td><%= appointment.professional %></td>
+				<td><%= appointment.client %></td>
+				<td><%= appointment.status %></td>
+				<td><%= appointment.date_time %></td>
+						<!-- 	
+				<td class="center"><%= appointment.branches.size %></td>
+				<td class="center"><%= appointment.clients.size %></td>
+				<td class="center"><%= appointment.appointments.size %></td> -->			
+
+				<td class="actions">
+
+			<%#= link_to("View Appointment|s", {:controller => 'appointment|s', :appointment_id => appointment_id}, :class => 'action show') %>
+				
+				<%= link_to("Show", appointment, :class => 'action show') %>
+				<%= link_to("Edit", [:edit,appointment], :class => 'action edit') %>
+				<%= link_to("Delete", {:action => 'delete', :id => appointment.id},:class => 'action delete') %>
+	
+
+				<%#= <%= link_to("Delete", [:delete,company], :class => 'action delete') %> 
+			 </td>
+		</tr>
+		<% end %>
+		</tbody>
+	</table>
+</div>
+

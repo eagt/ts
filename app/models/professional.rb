@@ -21,7 +21,14 @@ class Professional < ActiveRecord::Base
 
 	# Many-to-Many through
 	has_many :employments
- 	has_many :companies, through => :employments
+ 	has_many :companies, :through => :employments
+
+
+ 	scope :sorted_name, lambda { order("professionals.name ASC")}
+	scope :sorted_lastname, lambda { order("professionals.last_name ASC")}
+  	scope :newest_first, lambda { order("professionals.created_at DESC")}
+  	scope :search, lambda {|query|
+    where(["name LIKE ?", "%#{query}%"])}
 end
 
 # before_save { email.downcase! }

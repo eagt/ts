@@ -4,8 +4,6 @@ def up
 
     create_table :companies do |t|
 
-        t.integer "professional_id"
-
         t.string "id_code", :limit => 25
         t.string "name", :limit => 50, :null => false
         t.string "email", :default => "@", :null => false
@@ -22,10 +20,10 @@ def up
         # will show the rest as branches unless somethng else is specified. In the view must be 
         # a button to link to create new branch once it is inside a Companny edit.
 
-        t.string "service", :limit => 25
+        t.string "discipline", :limit => 25
 
-        t.boolean "head_quarter", :default => true 
-        t.string "branch"      
+        t.boolean "head_quarter", :visible => false, :default => true 
+             
         
 
         # It will be necessary to create usernames and password for each user. It may be that these usrnames and passwords
@@ -42,7 +40,7 @@ def up
         t.timestamps null: false
     end
        # add_index :companies, [ "professional_id", "id_code", "name", "email", "head_quarter"] 
-        add_index("companies", "professional_id")
+
         add_index("companies", "id_code")
         add_index("companies", "name")
         add_index("companies", "email")

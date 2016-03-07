@@ -1,8 +1,6 @@
 <% provide(:title, "Company Sign Up") %>
 
-
-
-<h1>Company Sign Up</h1>
+<h1>Company Sign Up or Add New Company == Developing purposes </h1>
 
 <!-- This form will be completed by the company's application administrator at the company's
 site once the company has decided it wants to try the Ts application. Once the process is completed, t
@@ -11,11 +9,24 @@ he comapny will be created and the company's application administrator could cre
 
 <%= error_messages_for(@company) %> 
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-     <%= form_for(:company, :url => {:action => 'create', :id => @company.id}) do |f| %>
-     <%= render(:partial => "shared/form", :locals => {:f =>f}) %>     
-     <%= f.submit "Create my Company account", class: "btn btn-primary" %>
-     <% end %>
-  </div>
-</div> 
+<!--<% @page_title = t(:company).pluralize(locale) %> -->
+
+<%= link_to("<< Back to Menu", {:controller => 'companies', :action => 'index'}, :class => 'back-link') %>
+<!-- <%#= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %> -->
+
+<div class="companies new">
+  <h2><%= t(:create) + " " + t(:company) %></h2>
+		  <%= form_for(@company) do |f| %>
+
+		    <%= render(:partial => "form", :locals => {:f => f}) %>
+
+
+		    <div class="form_buttons">
+		       <%= submit_tag("Create Company") %>
+
+
+		   <!--  <div class="form-buttons"> 
+		      <%#= submit_tag(t(:create) + " " + t(:company)) %> -->
+		    </div>
+		  <% end %>
+</div>

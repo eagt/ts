@@ -4,7 +4,7 @@ class CreateBranches < ActiveRecord::Migration
 
     create_table :branches do |t|
       t.integer "company_id", :visible => false  # I can change it if I want to see it
-      t.integer "professional_id", :visible => false  # I can change it if I want to see it
+      #t.integer "professional_id", :visible => false  # I can change it if I want to see it
      
      # In the next two columns I will leave the visible value while developing and testing...
       t.string "creator", :visible => true  # This has to be FILL IN automatically and kept on the data base depending who is the logger when creating it
@@ -37,7 +37,7 @@ class CreateBranches < ActiveRecord::Migration
      end
 #       This is a multi column index ... add_index :branches, ["company_id", "professional_id", "name", "id_code", "email"]
         add_index("branches", "company_id")
-        add_index("branches", "professional_id")
+       
         add_index("branches", "name")
         add_index("branches", "id_code")
         add_index("branches", "email")

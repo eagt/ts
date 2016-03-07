@@ -11,7 +11,9 @@ module SharedMethods
 
  included do
 
-    has_secure_password
+  # THE VALIDATION HAS_SECURE_PASSWORD BELOW IS COMMENTED OUT WHILE THE USERS, COMPANIES & PROFESSIONALS 
+  # ARE DEFINED HOW ARE THEY GOIN TO SIGN UP & LOG IN.
+    #has_secure_password
     
       #before_save { self.email = email.downcase }  or 
     before_save { email.downcase! }
@@ -24,8 +26,11 @@ module SharedMethods
     validates :email, presence: true, length: { maximum: 45 }, format: { with: VALID_EMAIL_REGEX }, 
                                    uniqueness: { case_sensitive: false }                     
 
-    validates :password, presence: true, length: { minimum: 6 }, allow_nil: true # To avoid duplicate messages
-    validates :password_confirmation, presence: true, length: { minimum: 6 }
+
+    # THE TWO VALIDATIONS BELOW ARE COMMENTED OUT WHILE THE USERS, COMPANIES & PROFESSIONALS 
+    # ARE DEFINED HOW ARE THEY GOIN TO SIGN UP & LOG IN.
+    # validates :password, presence: true, length: { minimum: 6 }, allow_nil: true # To avoid duplicate messages
+    # validates :password_confirmation, presence: true, length: { minimum: 6 }
     end
 end
 

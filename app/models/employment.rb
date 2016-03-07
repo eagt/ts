@@ -9,6 +9,6 @@ class Employment < ActiveRecord::Base
  	# Many-to-Many Rich
 
  	belongs_to :company
- 	belongs_to :profsessional
+ 	belongs_to :professional
  	# Many-to-Many through
 end

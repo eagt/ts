@@ -1,110 +1,205 @@
 Rails.application.routes.draw do
+
+ #match ':controller(/:action(/:id))', :via => [:get, :post]
+  # get 'employments/index'
+
+  # get 'employments/show'
+
+  # get 'employments/new'
+
+  # get 'employments/edit'
+
+  # get 'employments/delete'
+
+  # get 'updates_deletes/index'
+
+  # get 'updates_deletes/show'
+
+  # get 'updates_deletes/new'
+
+  # get 'updates_deletes/edit'
+
+  # get 'updates_deletes/delete'
+
+  # get 'payment_details/index'
+
+  # get 'payment_details/show'
+
+  # get 'payment_details/new'
+
+  # get 'payment_details/edit'
+
+  # get 'payment_details/delete'
+
+  # get 'payment_details/index'
+
+  # get 'payment_details/show'
+
+  # get 'payment_details/new'
+
+  # get 'payment_details/edit'
+
+  # get 'payment_details/delete'
+
+  # get 'contact_details/index'
+
+  # get 'contact_details/show'
+
+  # get 'contact_details/new'
+
+  # get 'contact_details/edit'
+
+  # get 'contact_details/delete'
+
+  # get 'branches/index'
+
+  # get 'branches/show'
+
+  # get 'branches/new'
+
+  # get 'branches/edit'
+
+  # get 'branches/delete'
+
+  # get 'appointments/index'
+
+  # get 'appointments/show'
+
+  # get 'appointments/new'
+
+  # get 'appointments/edit'
+
+  # get 'appointments/delete'
+
+  # get 'clients/index'
+
+  # get 'clients/show'
+
+  # get 'clients/new'
+
+  # get 'clients/edit'
+
+  # get 'clients/delete'
+
+  # root 'static_pages#home'
+
+  # get 'help'    => 'static_pages#help'
+
+  # get 'about'   => 'static_pages#about'
+
+  # get 'contact_us' => 'static_pages#contact_us'
+
+  # get 'signup'  => 'users#new'  # I need to Find a way to do it in a better way.
+
+
+
+  resources :professionals
   
-  root 'static_pages#home'
+  resources :companies do
+    member do
+      get :delete
+    end
+  end
+  
+  resources :users
+  resources :appointments
+  resources :clients
+  resources :branches
+  resources :updates_deletes
+  resources :payment_details 
+  resources :contact_details
+  resources :employments
+#   get 'profsign'    => 'professionals#new'
 
-  get 'help'    => 'static_pages#help'
-
-  get 'about'   => 'static_pages#about'
-
-  get 'contact_us' => 'static_pages#contact_us'
-
-  get 'signup'  => 'users#new'  # I need to Find a way to do it in a better way.
-
-
-
-  resources :professionals, :companies, :users
-
-  get 'profsign'    => 'professionals#new'
-
-  get 'compasign' => 'companies#new'
+#   get 'compasign' => 'companies#new'
 
  
 
-  get 'password_resets/new'
+#   get 'password_resets/new'
 
-  get 'password_resets/edit'
-
-
+#   get 'password_resets/edit'
 
 
 
 
-  get   'ulogin'   => 'sessions#new'
-  post   'ulogin'   => 'sessions#create'
-  delete 'ulogout'  => 'sessions#destroy'
-
-  # get    'clogin'   => 'sessions#new'
-  # post   'clogin'   => 'sessions#create'
-  # delete 'clogout'  => 'sessions#destroy'
 
 
-  # get    'plogin'   => 'sessions#new'
-  # post   'plogin'   => 'sessions#create'
-  # delete 'plogout'  => 'sessions#destroy'
+#   get   'ulogin'   => 'sessions#new'
+#   post   'ulogin'   => 'sessions#create'
+#   delete 'ulogout'  => 'sessions#destroy'
+
+#   # get    'clogin'   => 'sessions#new'
+#   # post   'clogin'   => 'sessions#create'
+#   # delete 'clogout'  => 'sessions#destroy'
+
+
+#   # get    'plogin'   => 'sessions#new'
+#   # post   'plogin'   => 'sessions#create'
+#   # delete 'plogout'  => 'sessions#destroy'
   
  
 
-  #resources :professionals, :companies, :users
+#   #resources :professionals, :companies, :users
 
- #  get 'professionals/index'
+#  #  get 'professionals/index'
 
- #  get 'professionals/show'
+#  #  get 'professionals/show'
 
-  #get 'profsign'    => 'professionals#new'
+#   #get 'profsign'    => 'professionals#new'
 
- #  #get 'professionals/create'
+#  #  #get 'professionals/create'
 
- #  get 'professionals/edit'
+#  #  get 'professionals/edit'
 
- #  #get 'professionals/update'
+#  #  #get 'professionals/update'
 
- #  get 'professionals/delete'
+#  #  get 'professionals/delete'
 
- # # get 'professionals/destroy'
+#  # # get 'professionals/destroy'
 
-  get 'compasign' => 'companies#new'
+#   #get 'compasign' => 'companies#new'
 
- #  get 'companies/edit'
+#  #  get 'companies/edit'
 
  
 
- #  get 'companies/index'
+#  #  get 'companies/index'
 
- #  get 'companies/show'
+#  #  get 'companies/show'
 
- #  #get 'companies/new'
+#  #  #get 'companies/new'
 
- # # get 'companies/create'
+#  # # get 'companies/create'
 
- #  get 'companies/edit'
+#  #  get 'companies/edit'
 
- #  #get 'companies/update'
+#  #  #get 'companies/update'
 
- #  get 'companies/delete'
+#  #  get 'companies/delete'
 
- #  #get 'companies/destroy'
+#  #  #get 'companies/destroy'
 
-# get 'signup'  => 'usersn#ew'
+# # get 'signup'  => 'usersn#ew'
  
 
 
    resources :account_activations, only: [:edit]
    resources :password_resets,     only: [:new, :create, :edit, :update]
   
- #  get 'users/index'
+#  #  get 'users/index'
 
- #  get 'users/show'
+#  #  get 'users/show'
 
- #  get 'users/edit'
+#  #  get 'users/edit'
 
- #  #get 'users/create'
+#  #  #get 'users/create'
 
  #  #patch 'users/:id' => 'users#update' 
 
  #  #get 'users/destroy'
 
 
- # # match ':controller(/:action(/:id))', :via => [:get, :post]
+  #match ':controller(/:action(/:id))', :via => [:get, :post]
 
  #  # The priority is based upon order of creation: first created -> highest priority.
  #  # See how all your routes lay out with "rake routes".

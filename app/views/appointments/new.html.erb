@@ -1,0 +1,32 @@
+<% provide(:title, "New Appointments") %>
+
+<h1>Add New Appointment </h1>
+
+<!-- This form will be completed by the appointment's application administrator at the appointment's
+site once the appointment has decided it wants to try the Ts application. Once the process is completed, t
+he comapny will be created and the appointment's application administrator could create other users with the users form -->
+
+
+<%= error_messages_for(@appointment) %> 
+
+<!--<% @page_title = t(:appointment).pluralize(locale) %> -->
+
+<%= link_to("<< Back to Menu", {:controller => 'appointments', :action => 'index'}, :class => 'back-link') %>
+<!-- <%#= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %> -->
+
+<div class="appointments new">
+  <h2><%= t(:create) + " " + t(:appointment) %></h2>
+		  <%= form_for(@appointment) do |f| %>
+
+		    <%= render(:partial => "form", :locals => {:f => f}) %>
+
+
+		    <div class="form_buttons">
+		       <%= submit_tag("Create Appointment") %>
+
+
+		   <!--  <div class="form-buttons"> 
+		      <%#= submit_tag(t(:create) + " " + t(:appointment)) %> -->
+		    </div>
+		  <% end %>
+</div>

@@ -1,16 +1,99 @@
 <% provide(:title, "Show Company") %> 
 
-<h1>Company Show Action</h1>
-<p>Here I will show the company details </p>
+<h1>Company Details</h1>
+
+<%= link_to("<< Back to Menu", {:controller => 'companies', :action => 'index'}, :class => 'back-link') %>
 
 
-<div class="row">
-  <aside class="col-md-4">
-    <section class="company_info">
-      <h1>
-      <%= @company.name %>  
-      <!-- If I want to show the email i could put    (, <%= @company.email %>) -->
-      </h1>
-    </section>
-  </aside>
+
+<div class="companies show">
+
+<div class="table-responsive">
+    <table id="show_table" class="display responsive" summary="company detail view">
+      <tbody>
+
+      <tr>	
+		<th><%= t(:id) %></th>
+		<td><%= @company.id%></td>
+	 </tr>
+     <tr>	
+		<th><%= t(:id_code) %></th>
+		<td><%= @company.id_code %></td>
+	 </tr>
+	 <tr>
+		<th><%=  t(:name) %></th>
+		<td><%= @company.name %></td>
+	 </tr>
+		<th> <%= t(:email) %></th>
+		<td><%= @company.email  %></td>
+	</tr>
+
+<!-- If Contact Details isn't placed in index  I think that this is a great place to place contact details
+<%#= link_to(t(:contact_details), {:controller => 'contact_details', :professional_id => professional.id}, :class => 'action show') %> 
+-->
+
+
+
+
+
+<!-- This has to be FILL IN automatically and kept on the data base depending who is the logger when creating it. It could be either Company or Professional. In the View  it has to be a dropdown with both ooptions. -->
+	<tr>
+		<th> <%= t(:creator) %></th>  
+		<td><%= @company.creator %></td>
+	</tr>
+
+<!-- This has to be FILL IN automatically depending who is the logger in the current session. It would be deleted as soon as the user log off. Sort of virtual attribute. -->
+	 <tr>
+	 	<th> <%= t(:logged_as) %></th>
+		<td><%= @company.logged_as %></td>
+	 </tr>
+	 <tr>
+		<th> <%= t(:discipline) %></th>
+		<td><%= @company.discipline %></td>
+	</tr>
+
+ 	<tr>
+ 		<th> <%= t(:creator) %></th>
+		<td><%= @company.creator %></td>
+	</tr>
+	<tr>
+		<th><%= t(:last_in) %></th>
+		<td><%= @company.last_in %></td>
+ 	</tr>
+
+		<!-- <tr>
+		<th><%#= t(:pass_active) %></th>
+		<td><%#= @company.pass_active ? 'true' : 'false' %></td>
+		 </tr>
+		 <tr>
+		<th><%#= (:acc_active) %></th>
+		<td><%#= @company.acc_active ? 'true' : 'false' %></td>
+		 </tr>
+		 <tr>
+		<th><#%= (:password_digest) %></th>
+		<td><%#= @company.password_digest ? 'true' : 'false' %></td>
+		 </tr>
+		 <tr>
+			<th><%#= t(:last_in) %></th>
+		<td><%#= @company.last_in %></td>
+		 </tr> -->
+	 <tr>
+		<th><%= t(:Created_at) %></th>
+		<td><%= @company.created_at %></td>
+	 </tr>
+	 <tr>
+		<th> <%= t(:Updated_at) %></th>
+		<td><%= @company.updated_at %></td>
+	 </tr>
+
+
+	 <!-- This link below will take me to see more contact details
+	 <%#= link_to("<< Contact Details", {:controller => 'contact_details', :action => 'show'}, :class => 'back-link') %> -->
+	 
+	    </tbody>
+</table>
+
 </div>
+
+<%= javascript_tag("$(document).ready( function () {$('#show_table').DataTable();} );") %>
+<%= javascript_tag("$('#show_table').DataTable( {responsive: true, paging: false} );") %>

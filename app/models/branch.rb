@@ -5,6 +5,7 @@ class Branch < ActiveRecord::Base
 	
 	# One-to- Many	
 	belongs_to :company
+	has_many :appointments
 	has_many :updates_deletes
 
 	# Many-to-Many Simple
@@ -14,6 +15,6 @@ class Branch < ActiveRecord::Base
  	# Many-to-Many Rich
 
  	# Many-to-Many through
-	has_and_belongs_to_many :appointments
+
 	
 end

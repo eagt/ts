@@ -1,10 +1,8 @@
-class Professionals < ActiveRecord::Migration
+class CreateProfessionals < ActiveRecord::Migration
 
     def up
 
       create_table :professionals do |t|
-
-        t.integer "company_id"
 
         # In the next two columns I will leave the visible value while developing and testing...
         t.string "creator", :visible => true  # This has to be FILL IN automatically and kept on the data base depending who is the logger when creating it
@@ -42,7 +40,7 @@ class Professionals < ActiveRecord::Migration
       end
         #add_index :professionals, ["company_id", "id_code", "last_name", "service", "specialty", "dob","email"]
         
-        add_index("professionals", "company_id")
+    
         add_index("professionals", "id_code")
         add_index("professionals", "last_name")
         add_index("professionals", "service")
