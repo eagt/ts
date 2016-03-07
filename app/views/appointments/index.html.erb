@@ -6,7 +6,7 @@
 
 <!-- <% @page_tittle = " Appointments " %> -->
 
-<div class="ppointment index">
+<div class="appointment index">
 	
 		<h2> Appointments </h2>
 
@@ -23,6 +23,7 @@
 			<tr>
 				
 				<th>id</th>
+				<th>Discipline</th>
 				<th>Company</th>
 				<th>Branch</th>	
 				<th>Professional</th>				
@@ -39,22 +40,17 @@
 				<td><%= appointment.id %></td>		
 				<td><%= appointment.company %></td>
 				<td><%= appointment.branch %></td>
-				<td><%= appointment.professional %></td>
-				<td><%= appointment.client %></td>
+				<td><%#= appointment.professional %></td>
+				<td><%#= appointment.client %></td>
 				<td><%= appointment.status %></td>
 				<td><%= appointment.date_time %></td>
-						<!-- 	
-				<td class="center"><%= appointment.branches.size %></td>
-				<td class="center"><%= appointment.clients.size %></td>
-				<td class="center"><%= appointment.appointments.size %></td> -->			
-
 				<td class="actions">
 
 			<%#= link_to("View Appointment|s", {:controller => 'appointment|s', :appointment_id => appointment_id}, :class => 'action show') %>
 				
 				<%= link_to("Show", appointment, :class => 'action show') %>
 				<%= link_to("Edit", [:edit,appointment], :class => 'action edit') %>
-				<%= link_to("Delete", {:action => 'delete', :id => appointment.id},:class => 'action delete') %>
+				<%#= link_to("Delete", {:action => 'delete', :id => appointment.id},:class => 'action delete') %>
 	
 
 				<%#= <%= link_to("Delete", [:delete,company], :class => 'action delete') %> 

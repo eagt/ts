@@ -16,7 +16,7 @@ he comapny will be created and the appointment's application administrator could
 
 <div class="appointments new">
   <h2><%= t(:create) + " " + t(:appointment) %></h2>
-  
+
 		  <%= form_for(@appointment) do |f| %>
 
 		    <%= render(:partial => "form", :locals => {:f => f}) %>

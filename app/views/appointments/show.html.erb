@@ -11,72 +11,71 @@
 <div class="table-responsive">
     <table id="show_table" class="display responsive" summary="appointment detail view">
       <tbody>
-	  <tr>
-        <th><%= f.label(:discipline, t(:discipline)) %></th>
-        <td><%= f.text_field(:discipline) %></td>
-      </tr>
- 		
- 	  <tr>
-        <th><%= f.label(:company_id, t(:company)) %></th>
-        <td><%= f.text_field(:company_id) %></td>
-      </tr>
-      <tr>
-        <th><%= f.label(:branch_id, t(:branch)) %></th>
-        <td><%= f.text_field(:branch_id) %></td>
+	
+  <tr>  
+    <th><%= t(:discipline) %></th>
+    <td><%= @appointment.discipline %></td>
+   </tr>
+   <tr> 
+    <th><%= t(:company_id) %></th>
+    <td><%= @appointment.company_id %></td>
+   </tr>
+   <tr> 
+    <th><%= t(:branch_id) %></th>
+    <td><%= @appointment.branch_id %></td>
+   </tr>
+   <tr> 
+    <th><%= t(:client_id) %></th>
+    <td><%= @appointment.client_id %></td>
+   </tr>
+   <tr> 
+    <th><%= t(:status) %></th>
+    <td><%= @appointment.status %></td>
+   </tr>
+   <tr> 
+    <th><%= t(:appointment_code) %></th>
+    <td><%= @appointment.appointment_code %></td>
+   </tr>
+   <tr> 
+   <th><%= t(:follow_up_code) %></th>
+    <td><%= @appointment.follow_up_code %></td>
+   </tr>
+   <tr> 
+    <th><%= t(:task_type) %></th>
+    <td><%= @appointment.task_type %></td>
+   </tr>
+   <tr> 
+    <th><%= t(:task_note) %></th>
+    <td><%= @appointment.task_note %></td>
+   </tr>
+   <tr> 
+    <th><%= t(:photo) %></th>
+    <td><%= @appointment.photo %></td>
+   </tr>
+   <tr> 
+    <th><%= t(:needs_followup) %></th>
+    <td><%= @appointment.needs_followup %></td>
+   </tr>
+   <tr> 
+    <th><%= t(:payment_details_id) %></th>
+    <td><%= @appointment.payment_details_id %></td>
+   </tr>
+   <tr> 
+    <th><%= t(:creator) %></th>
+    <td><%= @appointment.creator %></td>
+   </tr>
+   <tr> 
+    <th><%= t(:logged_as) %></th>
+    <td><%= @appointment.logged_as %></td>
+   </tr>
+
+
+
 
      <!--   </tr>  <tr>
         <th><%#= f.label(:professional_id, t(:professiopnal)) %></th>
         <td><%#= f.text_field(:professional_id) %></td>
-      </tr>  -->    
-
-      <tr>
-        <th><%= f.label(:client_id, t(:client)) %></th>
-        <td><%= f.text_field(:client_id) %></td>
-      </tr>       
-      <tr>
-        <th><%= f.label(:date_time, t(:date_time)) %></th>
-        <td><%= f.text_field(:date_time) %></td>
-      </tr>    
-      <tr>
-        <th><%= f.label(:status, t(:status)) %></th>
-        <td><%= f.text_field(:status) %></td>
-      </tr> 
-      <tr>
-        <th><%= f.label(:appointment_code, t(:appointment_code)) %></th>
-        <td><%= f.text_field(:appointment_code) %></td>
-      </tr>   
-  	  <tr>
-        <th><%= f.label(:follow_up_code, t(:follow_up_code)) %></th>
-        <td><%= f.text_field(:follow_up_code) %></td>
-      </tr> 
-      <tr>
-        <th><%= f.label(:task_type, t(:task_type)) %></th>
-        <td><%= f.text_field(:task_type) %></td>
-      </tr>  
-      <tr>
-        <th><%= f.label(:task_note, t(:task_note)) %></th>
-        <td><%= f.text_field(:task_note) %></td>
-      </tr> 
-        <tr>
-        <th><%= f.label(:photo, t(:photo)) %></th>
-        <td><%= f.text_field(:photo) %></td>
-      </tr>   
-        <tr>
-        <th><%= f.label(:needs_followup, t(:needs_followup)) %></th>
-        <td><%= f.text_field(:needs_followup) %></td>
-      </tr>   
-        <tr>
-        <th><%= f.label(:payment_details, t(:payment_details)) %></th>
-        <td><%= f.text_field(:payment_details) %></td>
-      </tr>     
-      <tr>
-        <th><%= f.label(:creator, t(:creator)) %></th>
-        <td><%= f.text_field(:creator) %></td>
-      </tr>   
-        <tr>
-        <th><%= f.label(:logged_as, t(:logged_as)) %></th>
-        <td><%= f.text_field(:logged_as) %></td>
-      </tr>   
+      </tr>  -->     
    </tbody>
 </table>
 
@@ -85,69 +84,4 @@
 <%= javascript_tag("$(document).ready( function () {$('#show_table').DataTable();} );") %>
 <%= javascript_tag("$('#show_table').DataTable( {responsive: true, paging: false} );") %>
 
-	 <tr>
-        <th><%= f.label(:discipline, t(:discipline)) %></th>
-        <td><%= f.text_field(:discipline) %></td>
-      </tr>
- 		
- 	  <tr>
-        <th><%= f.label(:company_id, t(:company)) %></th>
-        <td><%= f.text_field(:company_id) %></td>
-      </tr>
-      <tr>
-        <th><%= f.label(:branch_id, t(:branch)) %></th>
-        <td><%= f.text_field(:branch_id) %></td>
-
-     <!--   </tr>  <tr>
-        <th><%#= f.label(:professional_id, t(:professiopnal)) %></th>
-        <td><%#= f.text_field(:professional_id) %></td>
-      </tr>  -->    
-
-      <tr>
-        <th><%= f.label(:client_id, t(:client)) %></th>
-        <td><%= f.text_field(:client_id) %></td>
-      </tr>       
-      <tr>
-        <th><%= f.label(:date_time, t(:date_time)) %></th>
-        <td><%= f.text_field(:date_time) %></td>
-      </tr>    
-      <tr>
-        <th><%= f.label(:status, t(:status)) %></th>
-        <td><%= f.text_field(:status) %></td>
-      </tr> 
-      <tr>
-        <th><%= f.label(:appointment_code, t(:appointment_code)) %></th>
-        <td><%= f.text_field(:appointment_code) %></td>
-      </tr>   
-  	  <tr>
-        <th><%= f.label(:follow_up_code, t(:follow_up_code)) %></th>
-        <td><%= f.text_field(:follow_up_code) %></td>
-      </tr> 
-      <tr>
-        <th><%= f.label(:task_type, t(:task_type)) %></th>
-        <td><%= f.text_field(:task_type) %></td>
-      </tr>  
-      <tr>
-        <th><%= f.label(:task_note, t(:task_note)) %></th>
-        <td><%= f.text_field(:task_note) %></td>
-      </tr> 
-        <tr>
-        <th><%= f.label(:photo, t(:photo)) %></th>
-        <td><%= f.text_field(:photo) %></td>
-      </tr>   
-        <tr>
-        <th><%= f.label(:needs_followup, t(:needs_followup)) %></th>
-        <td><%= f.text_field(:needs_followup) %></td>
-      </tr>   
-        <tr>
-        <th><%= f.label(:payment_details, t(:payment_details)) %></th>
-        <td><%= f.text_field(:payment_details) %></td>
-      </tr>     
-      <tr>
-        <th><%= f.label(:creator, t(:creator)) %></th>
-        <td><%= f.text_field(:creator) %></td>
-      </tr>   
-        <tr>
-        <th><%= f.label(:logged_as, t(:logged_as)) %></th>
-        <td><%= f.text_field(:logged_as) %></td>
-      </tr>   
+	 
