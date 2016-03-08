@@ -1,2 +1,66 @@
-<h1>Branches#index</h1>
-<p>Find me in app/views/branches/index.html.erb</p>
+
+
+
+
+<% provide(:title, "Branch Index") %> 
+
+
+<div class="Branch index">
+	
+		<h2> Branches </h2>
+
+		
+
+<%= link_to("Add New Branch", new_branch_path, :class => 'action new') %>
+		
+	<!-- Here I will pluralize to say how many companies are/is found -->
+
+		<div><%= pluralize(@branches.size, 'branch') %> found</div>
+		
+		<table class= "table table-striped" summary="Branch List">
+		  <thead>
+			<tr>				
+				<th>id</th>
+				<th>Id Code</th>
+				<th>Discipline</th>
+				<th>Name</th>
+				<th>Company</th>
+				<th>email</th>
+				<th>Professionals</th>  <!-- This field will be visible only if the @current_user = Company. Make sure of this -->
+				<th>Clients</th>
+				<th>Appointments</th>
+				<th>Actions</th>
+			</tr>
+		  </thead>
+		  <tbody>
+
+		<% @branches.each do |branch| %>
+		<tr>	
+				<td><%= branch.id %></td>		
+				<td><%= branch.id_code %></td>
+				<td><%= branch.discipline %></td>
+				<td><%= branch.name %></td>
+				<td><%= branch.company_id %></td>
+				<td><%= branch.email %></td>
+				<td class="center"><%= branch.professionals.size %></td> 
+				
+				<td class="center"><%= branch.clients.size %></td>
+				<td class="center"><%= branch.appointments.size %></td>			
+
+				<td class="actions">
+
+			<%#= link_to("View Companies", {:controller => 'companies', :company_id => company.id}, :class => 'action show') %>
+				
+				<%= link_to("Show", branch, :class => 'action show') %>
+				<%= link_to("Edit", [:edit,branch], :class => 'action edit') %>
+				<%= link_to("Delete", {:action => 'delete', :id => branch.id},:class => 'action delete') %>
+		
+
+				<%#= <%= link_to("Delete", [:delete,company], :class => 'action delete') %> 
+			 </td>
+		</tr>
+		<% end %>
+		</tbody>
+	</table>
+</div>
+

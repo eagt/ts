@@ -37,11 +37,12 @@
 
 		<% @appointments.each do |appointment| %>
 		<tr>	
-				<td><%= appointment.id %></td>		
-				<td><%= appointment.company %></td>
-				<td><%= appointment.branch %></td>
-				<td><%#= appointment.professional %></td>
-				<td><%#= appointment.client %></td>
+				<td><%= appointment.id %></td>	
+				<td><%= appointment.discipline %></td>		
+				<td><%= appointment.company_id %></td>
+				<td><%= appointment.branch_id %></td>
+				<td><%#= appointment.professional_id %></td>
+				<td><%= appointment.client_id %></td>
 				<td><%= appointment.status %></td>
 				<td><%= appointment.date_time %></td>
 				<td class="actions">
@@ -50,7 +51,7 @@
 				
 				<%= link_to("Show", appointment, :class => 'action show') %>
 				<%= link_to("Edit", [:edit,appointment], :class => 'action edit') %>
-				<%#= link_to("Delete", {:action => 'delete', :id => appointment.id},:class => 'action delete') %>
+				<%= link_to("Delete", {:action => 'delete', :id => appointment.id},:class => 'action delete') %>
 	
 
 				<%#= <%= link_to("Delete", [:delete,company], :class => 'action delete') %> 

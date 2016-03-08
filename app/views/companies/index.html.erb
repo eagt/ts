@@ -24,6 +24,7 @@
 				
 				<th>id</th>
 				<th>Id Code</th>
+				<th>Discipline</th>
 				<th>Name</th>	<!-- This field will be visible only if the @current_user = Professional. Make sure of this -->
 				<th>email</th>
 				<th>Professionals</th>    <!-- This field will be visible only if the @current_user = Company. Make sure of this -->
@@ -39,6 +40,7 @@
 		<tr>	
 				<td><%= company.id %></td>		
 				<td><%= company.id_code %></td>
+				<td><%= company.discipline %></td>
 				<td><%= company.name %></td>
 				<td><%= company.email %></td>
 				<td class="center"><%= company.professionals.size %></td> 

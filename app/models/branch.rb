@@ -16,5 +16,12 @@ class Branch < ActiveRecord::Base
 
  	# Many-to-Many through
 
+
+ 	# scopes
+ 	scope :sorted_name, lambda { order("branches.name ASC")}
+  	scope :newest_first, lambda { order("branches.created_at DESC")}
+  	scope :search, lambda {|query| where (["name LIKE?", "%#{query}%"])}
+
+
 	
 end

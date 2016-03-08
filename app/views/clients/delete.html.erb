@@ -1,2 +1,18 @@
-<h1>Clients#delete</h1>
-<p>Find me in app/views/clients/delete.html.erb</p>
+<% @page_tittle = "Delete Client" %>
+
+<%= link_to("<< Back to Menu", {:action => 'index'}, :class => 'back-link') %>
+
+<div class="companies delete">
+	<h2> Delete Client </h2>
+
+		<%= form_for(@client, :html => {:method => :delete}) do |f| %>
+
+			<p class="reference-name"><%= "Are you sure you want to permanently delete #{@client.name.upcase} client?" %></p>
+
+		<div class="form_buttons">
+			<%= submit_tag("Delete Client") %>
+		</div>
+
+		<% end %>
+
+</div>

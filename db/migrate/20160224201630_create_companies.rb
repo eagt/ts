@@ -4,9 +4,12 @@ def up
 
     create_table :companies do |t|
 
+        t.string "discipline", :limit => 25
         t.string "id_code", :limit => 25
         t.string "name", :limit => 50, :null => false
         t.string "email", :default => "@", :null => false
+
+         t.integer "contact_details_id", :visible => false
 
           # In the next two columns I will leave the visible value while developing and testing...
         t.string "creator", :visible => true  # This has to be FILL IN automatically and kept on the data base depending who is the logger when creating it
@@ -44,7 +47,7 @@ def up
         add_index("companies", "id_code")
         add_index("companies", "name")
         add_index("companies", "email")
-        add_index("companies", "head_quarter")
+        add_index("companies", "discipline")
   end
 
 

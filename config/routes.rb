@@ -81,19 +81,19 @@ Rails.application.routes.draw do
 
   # get 'clients/delete'
 
-  # root 'static_pages#home'
+   root 'static_pages#home'
 
-  # get 'help'    => 'static_pages#help'
+   get 'help'    => 'static_pages#help'
 
-  # get 'about'   => 'static_pages#about'
+   get 'about'   => 'static_pages#about'
 
-  # get 'contact_us' => 'static_pages#contact_us'
+   get 'contact_us' => 'static_pages#contact_us'
 
   # get 'signup'  => 'users#new'  # I need to Find a way to do it in a better way.
 
 
-
-  resources :professionals
+  resources :users
+ 
   
   resources :companies do
     member do
@@ -101,32 +101,73 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :users
-  resources :appointments
-  resources :clients
-  resources :branches
-  resources :updates_deletes
-  resources :payment_details 
-  resources :contact_details
-  resources :employments
+
+
+  resources :appointments do
+     member do
+        get :delete
+    end
+  end
+
+   resources :professionals do
+     member do
+        get :delete
+    end
+  end
+
+  resources :clients do
+     member do
+        get :delete
+    end
+  end
+
+  resources :branches do
+     member do
+        get :delete
+    end
+  end
+
+  resources :updates_deletes do
+     member do
+        get :delete
+    end
+  end
+
+  resources :payment_details do
+     member do
+        get :delete
+    end
+  end
+
+  resources :contact_details do
+     member do
+        get :delete
+    end
+  end
+
+  resources :employments do
+     member do
+        get :delete
+    end
+  end
 #   get 'profsign'    => 'professionals#new'
 
 #   get 'compasign' => 'companies#new'
 
  
 
-#   get 'password_resets/new'
+   get 'password_resets/new'
 
-#   get 'password_resets/edit'
-
-
+   get 'password_resets/edit'
 
 
 
 
-#   get   'ulogin'   => 'sessions#new'
-#   post   'ulogin'   => 'sessions#create'
-#   delete 'ulogout'  => 'sessions#destroy'
+
+
+   get   'ulogin'   => 'sessions#new'
+   post   'ulogin'   => 'sessions#create'
+   delete 'ulogout'  => 'sessions#destroy'
 
 #   # get    'clogin'   => 'sessions#new'
 #   # post   'clogin'   => 'sessions#create'

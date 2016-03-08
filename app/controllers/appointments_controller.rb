@@ -8,7 +8,7 @@ class AppointmentsController < ApplicationController
 
 
   def show
-     @appointments  = Appointment.find(params[:id])
+     @appointment  = Appointment.find(params[:id])
   end
 
 
@@ -33,12 +33,38 @@ class AppointmentsController < ApplicationController
   end
 
 
+ def edit
+     @appointment  = Appointment.find(params[:id])
+     @appointment_count = Appointment.count
+   end
 
-  # def edit
-  # end
+   def update
+  # Find an existing object using the form parameters
+       @appointment  = Appointment.find(params[:id])       
+  #  Update the object 
+      if @appointment.update_attributes(appointment_params)
+       flash[:notice] = " Appointment updated successfully!"
+  #  If the update succeeds, it will redirect some where (this case, index action)
+       redirect_to(:action => 'show', :id => @appointment.id)
+       else 
+  #  If the save fails, redisplay the form so the user can fix the problem and the submit it
+      @appointment_count = Appointment.count
+       render('edit')
+       end
+     end
 
-  # def delete
-  # end
+  
+   def delete
+     @appointment  = Appointment.find(params[:id])
+   end
+
+   def destroy
+#     #I Find an existing object using the form parameters
+     appointment = Appointment.find(params[:id]).destroy 
+     flash[:notice] = "Appointment destroyed successfully!"
+     redirect_to(:action => 'index')
+   end
+ 
 
 
    private

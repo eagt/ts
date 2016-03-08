@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20160304163324) do
     t.integer  "branch_id",          limit: 4
     t.integer  "client_id",          limit: 4
     t.string   "discipline",         limit: 25
-    t.datetime "date_time",                        default: '2016-03-07 14:40:38', null: false
+    t.datetime "date_time",                        default: '2016-03-08 21:20:44', null: false
     t.string   "status",             limit: 255
     t.integer  "appointment_code",   limit: 4
     t.integer  "follow_up_code",     limit: 4
@@ -56,19 +56,21 @@ ActiveRecord::Schema.define(version: 20160304163324) do
   add_index "appointments_clients", ["appointment_id", "client_id"], name: "index_appointments_clients_on_appointment_id_and_client_id", using: :btree
 
   create_table "branches", force: :cascade do |t|
-    t.integer  "company_id", limit: 4
-    t.string   "creator",    limit: 255
-    t.string   "logged_as",  limit: 255
-    t.string   "name",       limit: 50,                 null: false
-    t.string   "id_code",    limit: 25
-    t.string   "email",      limit: 255, default: "@",  null: false
-    t.boolean  "branch",                 default: true
+    t.integer  "company_id",         limit: 4
+    t.string   "discipline",         limit: 25
+    t.string   "name",               limit: 50,                null: false
+    t.string   "id_code",            limit: 25
+    t.string   "email",              limit: 255, default: "@", null: false
+    t.integer  "contact_details_id", limit: 4
+    t.string   "creator",            limit: 255
+    t.string   "logged_as",          limit: 255
     t.datetime "last_in"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
   end
 
   add_index "branches", ["company_id"], name: "index_branches_on_company_id", using: :btree
+  add_index "branches", ["discipline"], name: "index_branches_on_discipline", using: :btree
   add_index "branches", ["email"], name: "index_branches_on_email", using: :btree
   add_index "branches", ["id_code"], name: "index_branches_on_id_code", using: :btree
   add_index "branches", ["name"], name: "index_branches_on_name", using: :btree
@@ -88,18 +90,22 @@ ActiveRecord::Schema.define(version: 20160304163324) do
   add_index "branches_professionals", ["branch_id", "professional_id"], name: "index_branches_professionals_on_branch_id_and_professional_id", using: :btree
 
   create_table "clients", force: :cascade do |t|
-    t.string   "creator",    limit: 255
-    t.string   "logged_as",  limit: 255
-    t.string   "id_code",    limit: 25
-    t.string   "name",       limit: 50,                null: false
-    t.string   "last_name",  limit: 50,                null: false
+    t.integer  "company_id",         limit: 4
+    t.string   "discipline",         limit: 25
+    t.string   "id_code",            limit: 25
+    t.string   "name",               limit: 50,                null: false
+    t.string   "last_name",          limit: 50,                null: false
     t.date     "dob"
-    t.string   "email",      limit: 255, default: "@"
-    t.string   "photo",      limit: 255
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.string   "email",              limit: 255, default: "@"
+    t.integer  "contact_details_id", limit: 4
+    t.string   "photo",              limit: 255
+    t.string   "creator",            limit: 255
+    t.string   "logged_as",          limit: 255
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
   end
 
+  add_index "clients", ["discipline"], name: "index_clients_on_discipline", using: :btree
   add_index "clients", ["dob"], name: "index_clients_on_dob", using: :btree
   add_index "clients", ["email"], name: "index_clients_on_email", using: :btree
   add_index "clients", ["last_name"], name: "index_clients_on_last_name", using: :btree
@@ -119,20 +125,21 @@ ActiveRecord::Schema.define(version: 20160304163324) do
   add_index "clients_profesionals", ["client_id", "professional_id"], name: "index_clients_profesionals_on_client_id_and_professional_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
-    t.string   "id_code",      limit: 25
-    t.string   "name",         limit: 50,                 null: false
-    t.string   "email",        limit: 255, default: "@",  null: false
-    t.string   "creator",      limit: 255
-    t.string   "logged_as",    limit: 255
-    t.string   "discipline",   limit: 25
-    t.boolean  "head_quarter",             default: true
+    t.string   "discipline",         limit: 25
+    t.string   "id_code",            limit: 25
+    t.string   "name",               limit: 50,                 null: false
+    t.string   "email",              limit: 255, default: "@",  null: false
+    t.integer  "contact_details_id", limit: 4
+    t.string   "creator",            limit: 255
+    t.string   "logged_as",          limit: 255
+    t.boolean  "head_quarter",                   default: true
     t.datetime "last_in"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
   end
 
+  add_index "companies", ["discipline"], name: "index_companies_on_discipline", using: :btree
   add_index "companies", ["email"], name: "index_companies_on_email", using: :btree
-  add_index "companies", ["head_quarter"], name: "index_companies_on_head_quarter", using: :btree
   add_index "companies", ["id_code"], name: "index_companies_on_id_code", using: :btree
   add_index "companies", ["name"], name: "index_companies_on_name", using: :btree
 

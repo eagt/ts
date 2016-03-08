@@ -1,2 +1,17 @@
-<h1>Appointments#edit</h1>
-<p>Find me in app/views/appointments/edit.html.erb</p>
+<% provide(:title, 'Edit Appointment') %>
+
+
+<%= link_to("<< Back to Menu", {:action => 'index'}, :class => 'back-link') %>
+
+<!-- When action is implemented fully, I must be able to update all the users details -->
+
+<div class="appointment edit">
+  <h1>Edit Appointment</h1>
+  <%= error_messages_for(@appointment) %>
+		  <%= form_for(@appointment) do |f| %>
+		  <%= render(:partial => "form", :locals => {:f => f}) %>
+		<div class="form_buttons">
+		   <%= submit_tag('Update Appointment') %>
+		</div>
+	  	  <% end %>
+</div>

@@ -1,2 +1,25 @@
-<h1>Clients#new</h1>
-<p>Find me in app/views/clients/new.html.erb</p>
+<% provide(:title, "Add New Client") %>
+
+<h1>Add New Client </h1>
+
+
+<%= error_messages_for(@client) %> 
+
+<!--<% @page_title = t(:client).pluralize(locale) %> -->
+
+<%= link_to("<< Back to Menu", {:controller => 'clients', :action => 'index'}, :class => 'back-link') %>
+
+<div class="clients new">
+  <h2><%= t(:create) + " " + t(:client) %></h2>
+		  <%= form_for(@client) do |f| %>
+
+		    <%= render(:partial => "form", :locals => {:f => f}) %>
+
+
+		    <div class="form_buttons">
+		       <%= submit_tag("Create Client") %>
+		   <!--  <div class="form-buttons"> 
+		      <%#= submit_tag(t(:create) + " " + t(:client)) %> -->
+		    </div>
+		  <% end %>
+</div>

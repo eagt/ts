@@ -1,2 +1,17 @@
-<h1>Branches#edit</h1>
-<p>Find me in app/views/branches/edit.html.erb</p>
+<% provide(:title, 'Edit Branch') %>
+
+
+<%= link_to("<< Back to Menu", {:action => 'index'}, :class => 'back-link') %>
+
+<!-- When action is implemented fully, I must be able to update all the users details -->
+
+<div class="branch edit">
+  <h1>Edit Branch</h1>
+  <%= error_messages_for(@branch) %>
+	  <%= form_for(@branch) do |f| %>
+	  <%= render(:partial => 'shared/form', :locals => {:f => f} ) %>
+	<div class="form_buttons">
+	   <%= submit_tag('Update Branch') %>
+	</div>
+  	  <% end %>
+</div>

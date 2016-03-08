@@ -1,0 +1,29 @@
+
+<%= error_messages_for(@branch) %>
+
+<div class="table-responsive">
+  <table id="fields_table" class="display responsive" summary="Branch form fields">
+    <tbody>
+      <tr>
+        <th><%= f.label(:name, t(:name)) %></th>
+        <td><%= f.text_field(:name) %></td>
+      </tr>
+      <tr>
+        <th><%= f.label(:last_name, t(:last_name)) %></th>
+        <td><%= f.text_field(:last_name) %></td>
+      </tr>    
+      <tr>
+        <th><%= f.label(:id_code, t(:id_code)) %></th>
+        <td><%= f.text_field(:id_code) %></td>
+      </tr>      
+      <tr>
+        <th><%= f.label(:email, t(:email)) %></th>
+        <td><%= f.text_field(:email) %></td>
+      </tr>   
+    </tbody>
+    <%#= f.hidden_field(:id_token, :value => @branch.id_token) %>
+  </table>
+</div>
+
+<%= javascript_tag("$(document).ready( function () {$('#fields_table').DataTable();} );") %>
+<%= javascript_tag("$('#fields_table').DataTable( {responsive: true, paging: false} );") %>

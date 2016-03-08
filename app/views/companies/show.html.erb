@@ -20,6 +20,10 @@
 		<th><%= t(:id_code) %></th>
 		<td><%= @company.id_code %></td>
 	 </tr>
+	  <tr>
+		<th> <%= t(:discipline) %></th>
+		<td><%= @company.discipline %></td>
+	</tr>
 	 <tr>
 		<th><%=  t(:name) %></th>
 		<td><%= @company.name %></td>
@@ -31,11 +35,10 @@
 <!-- If Contact Details isn't placed in index  I think that this is a great place to place contact details
 <%#= link_to(t(:contact_details), {:controller => 'contact_details', :professional_id => professional.id}, :class => 'action show') %> 
 -->
-
-
-
-
-
+	</tr>
+		<th> <%= t(:contact_details_id) %></th>
+		<td><%= @company.contact_details_id  %></td>
+	</tr>
 <!-- This has to be FILL IN automatically and kept on the data base depending who is the logger when creating it. It could be either Company or Professional. In the View  it has to be a dropdown with both ooptions. -->
 	<tr>
 		<th> <%= t(:creator) %></th>  
@@ -47,15 +50,6 @@
 	 	<th> <%= t(:logged_as) %></th>
 		<td><%= @company.logged_as %></td>
 	 </tr>
-	 <tr>
-		<th> <%= t(:discipline) %></th>
-		<td><%= @company.discipline %></td>
-	</tr>
-
- 	<tr>
- 		<th> <%= t(:creator) %></th>
-		<td><%= @company.creator %></td>
-	</tr>
 	<tr>
 		<th><%= t(:last_in) %></th>
 		<td><%= @company.last_in %></td>

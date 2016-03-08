@@ -1,2 +1,67 @@
-<h1>Clients#index</h1>
-<p>Find me in app/views/clients/index.html.erb</p>
+
+
+
+
+<% provide(:title, "Clients Index") %> 
+
+<!-- <% @page_tittle = " Clients " %> -->
+
+<div class="client index">
+	
+		<h2> Clients </h2>
+
+		
+
+<%= link_to("Add New Client", new_client_path, :class => 'action new') %>
+		
+	<!-- Here I will pluralize to say how many client/s are/is found -->
+
+		<div><%= pluralize(@clients.size, 'client') %> found</div>
+		
+		<table class= "table table-striped" summary="Client List">
+		  <thead>
+			<tr>
+				
+				<th>id</th>
+				<th>Id Code</th>
+				<th>Discipline</th>
+				<th>Company</th>
+				<!-- <th>Branch</th>  Note: Find the way to bring the brach info here -->
+				<th>Name</th>	<!-- This field will be visible only if the @current_user = Professional. Make sure of this -->
+				<th>Last Name</th>
+				<th>email</th>
+				<th>Appointments</th>
+				<th>Actions</th>
+			</tr>
+		  </thead>
+		  <tbody>
+
+		<% @clients.each do |client| %>
+		<tr>	
+				<td><%= client.id %></td>		
+				<td><%= client.id_code %></td>
+				<td><%= client.discipline %></td>
+				<td><%= client.company_id %></td>
+				<!-- <td><%#= client.branch_id %></td> -->
+				<td><%= client.name %></td>
+				<td><%= client.last_name %></td>
+				<td><%= client.email %></td> 
+						
+				<td class="center"><%= client.appointments.size %></td>			
+
+				<td class="actions">
+
+			<%#= link_to("View clients", {:controller => 'clients', :client_id => client.id}, :class => 'action show') %>				
+				<%= link_to("Show", client, :class => 'action show') %>
+				<%= link_to("Edit", [:edit,client], :class => 'action edit') %>
+				<%= link_to("Delete", {:action => 'delete', :id => client.id},:class => 'action delete') %>
+		
+
+				<%#= <%= link_to("Delete", [:delete,client], :class => 'action delete') %> 
+			 </td>
+		</tr>
+		<% end %>
+		</tbody>
+	</table>
+</div>
+

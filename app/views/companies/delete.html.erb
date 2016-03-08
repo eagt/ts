@@ -6,9 +6,8 @@
 	<h2> Delete Company </h2>
 
 		<%= form_for(@company, :html => {:method => :delete}) do |f| %>
-			<p> Are you sure you want to permanently delete this company? </p>	
-
-			<p class="reference-name"><%= @company.name %></p>
+			
+			<p class="reference-name"><%= "Are you sure you want to permanently delete #{@company.name.upcase} company?" %></p>
 
 		<div class="form_buttons">
 			<%= submit_tag("Delete Company") %>
