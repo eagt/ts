@@ -1,23 +1,15 @@
 <% provide(:title, "Show Branch") %> 
 
-<h1>Branch Details</h1>
+<h2>Branch Details</h2>
 
 <%= link_to("<< Back to Menu", {:controller => 'branches', :action => 'index'}, :class => 'back-link') %>
-
-
-
 <div class="branches show">
 
 <div class="table-responsive">
     <table id="show_table" class="display responsive" summary="branch detail view">
       <tbody>
-
-
-	 <tr>
-		<th><%=  t(:name) %></th>
-		<td><%= @branch.name %></td>
-	 </tr>
-     <tr>	
+      	<br>
+       <tr>	
 		<th><%= t(:id) %></th>
 		<td><%= @branch.id%></td>
 	 </tr>
@@ -29,7 +21,12 @@
 		<th> <%= t(:discipline) %></th>
 		<td><%= @branch.discipline %></td>
 	 </tr>
-	  <tr>
+
+	 <tr>
+		<th><%=  t(:name) %></th>
+		<td><%= @branch.name %></td>
+	 </tr> 
+	 <tr>
 		<th><%=  t(:company_id) %></th>
 		<td><%= @branch.company_id %></td>
 	 </tr>
@@ -54,17 +51,7 @@
 	</tr>
 
 <!-- This has to be FILL IN automatically depending who is the logger in the current session. It would be deleted as soon as the user log off. Sort of virtual attribute. -->
-	 <tr>
-	 	<th> <%= t(:logged_as) %></th>
-		<td><%= @branch.logged_as %></td>
-	 </tr>
-
-	<tr>
-		<th><%= t(:last_in) %></th>
-		<td><%= @branch.last_in %></td>
- 	</tr>
-
-		<!-- <tr>
+			<!-- <tr>
 		<th><%#= t(:pass_active) %></th>
 		<td><%#= @company.pass_active ? 'true' : 'false' %></td>
 		 </tr>

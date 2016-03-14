@@ -7,7 +7,8 @@ class CreateEmployments < ActiveRecord::Migration
       t.integer "company_id"
       t.integer "professional_id"
 
-      t.boolean "validated", :default => false
+      t.boolean "validated", :default => false  # This attribute will change to true once the professional confirms the relation
+                                                # clicking on the link found on the email to confirm Employment relationship
 
       t.datetime "absent_on"
 
@@ -15,6 +16,8 @@ class CreateEmployments < ActiveRecord::Migration
       t.datetime "Holidays_to"
       t.integer "total_days_holidays"
       t.integer "total_days_off"
+      t.integer "creator"
+      t.integer "logged_as"
       t.timestamps null: false
 
     end

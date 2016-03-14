@@ -1,17 +1,10 @@
 
-
-
-
 <% provide(:title, "Appointment Index") %> 
 
 <!-- <% @page_tittle = " Appointments " %> -->
 
 <div class="appointment index">
-	
 		<h2> Appointments </h2>
-
-		
-
 <%= link_to("Add New Appointment", new_appointment_path, :class => 'action new') %>
 		
 	<!-- Here I will pluralize to say how many Appointments are/is found -->
@@ -20,16 +13,19 @@
 		
 		<table class= "table table-striped" summary="Appointment List">
 		  <thead>
+		  	<br>
 			<tr>
 				
 				<th>id</th>
 				<th>Discipline</th>
 				<th>Company</th>
 				<th>Branch</th>	
-				<th>Professional</th>				
+		<!-- 		<th>Professional</th>	 -->			
 	   			<th>Client</th>
 	   			<th>Status</th>
 	   			<th>Date/Time</th>
+	   			<th>Creator</th>
+	   			<th>Logged As</th>
 				<th>Actions</th>
 			</tr>
 		  </thead>
@@ -41,10 +37,12 @@
 				<td><%= appointment.discipline %></td>		
 				<td><%= appointment.company_id %></td>
 				<td><%= appointment.branch_id %></td>
-				<td><%#= appointment.professional_id %></td>
+				<!-- <td><%#= appointment.professional.prof_appointments_id %></td> -->
 				<td><%= appointment.client_id %></td>
 				<td><%= appointment.status %></td>
 				<td><%= appointment.date_time %></td>
+				<td><%= appointment.creator %></td>
+				<td><%= appointment.logged_as %></td>
 				<td class="actions">
 
 			<%#= link_to("View Appointment|s", {:controller => 'appointment|s', :appointment_id => appointment_id}, :class => 'action show') %>

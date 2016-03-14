@@ -1,2 +1,15 @@
-<h1>UpdatesDeletes#delete</h1>
-<p>Find me in app/views/updates_deletes/delete.html.erb</p>
+<% @page_tittle = "Delete Updates/Delte" %>
+
+<div class="updates_deletes delete">
+	<h2> Delete Upadates/Delete </h2>
+		<%= link_to("<< Back to Menu", {:action => 'index'}, :class => 'back-link') %>
+			<%= form_for(@updates_delete, :html => {:method => :delete}) do |f| %>
+				<p></p>
+				<p class="reference-name"><%= "Are you sure you want to permanently delete updates_delete with id No. #{@updates_delete.id} ?" %></p>
+
+					<div class="form_buttons">
+						<%= submit_tag("Delete Contact Details") %>
+					</div>
+			<% end %>
+
+</div>

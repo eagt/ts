@@ -1,18 +1,12 @@
 <% @page_tittle = "Delete Company" %>
-
-<%= link_to("<< Back to Menu", {:action => 'index'}, :class => 'back-link') %>
-
 <div class="companies delete">
 	<h2> Delete Company </h2>
-
-		<%= form_for(@company, :html => {:method => :delete}) do |f| %>
-			
+	<%= link_to("<< Back to Menu", {:action => 'index'}, :class => 'back-link') %>
+	<p></p>
+		<%= form_for(@company, :html => {:method => :delete}) do |f| %>			
 			<p class="reference-name"><%= "Are you sure you want to permanently delete #{@company.name.upcase} company?" %></p>
-
 		<div class="form_buttons">
 			<%= submit_tag("Delete Company") %>
 		</div>
-
 		<% end %>
-
 </div>

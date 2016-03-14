@@ -1,2 +1,61 @@
-<h1>UpdatesDeletes#show</h1>
-<p>Find me in app/views/updates_deletes/show.html.erb</p>
+<% provide(:title, "Show Updates Delete") %> 
+
+<h2>Upadate Deletes</h2>
+
+<%= link_to("<< Back to Menu", {:controller => 'updates_deletes', :action => 'index'}, :class => 'back-link') %>
+<div class="updates deletes show">
+
+	<div class="table-responsive">
+	    <table id="show_table" class="display responsive" summary="updates deletes view">
+	      	<tbody>
+	      		<br>
+					<!--  -->
+					<tr>
+						<th> <%= t(:name) %></th>
+						<td><%= @updates_delete.name  %></td>
+					</tr>
+				<!-- 	</tr></tr>
+						<th> <%= t(:last_name) %></th>
+						<td><%= @updates_delete.last_name %></td>
+					</tr></tr></tr> -->
+					<tr>
+						<th> <%= t(:table_name) %></th>
+						<td><%= @updates_delete.table_name  %></td>
+					</tr>
+					<tr>
+						<th> <%= t(:column_name) %></th>
+						<td><%= @updates_delete.column_name  %></td>
+					</tr>
+
+					<tr>
+						<th> <%= t(:element) %></th>
+						<td><%= @updates_delete.element %></td>
+					</tr>
+						<th> <%= t(:action_taken) %></th>
+						<td><%= @updates_delete.action_taken  %></td>
+					</tr>
+					<tr>
+						<th> <%= t(:reason) %></th>
+						<td><%= @updates_delete.reason  %></td>	
+					</tr>
+					<tr>
+						<th> <%= t(:new_element) %></th>
+						<td><%= @updates_delete.new_element  %></td>
+					</tr>
+					   <tr>
+				    <th><%= t(:Created_at) %></th>
+				    <td><%= @updates_delete.created_at %></td>
+				   </tr>
+				   <tr>
+				    <th> <%= t(:Updated_at) %></th>
+				    <td><%= @updates_delete.updated_at %></td>
+				   </tr>
+				 
+			</tbody>
+		</table>
+	</div>
+
+<%= javascript_tag("$(document).ready( function () {$('#show_table').DataTable();} );") %>
+<%= javascript_tag("$('#show_table').DataTable( {responsive: true, paging: false} );") %>
+
+

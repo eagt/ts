@@ -1,2 +1,17 @@
-<h1>Employments#new</h1>
-<p>Find me in app/views/employments/new.html.erb</p>
+<% provide(:title, "Add New Employment") %>
+   <h2><%= t(:create) + " " + t(:employment) %></h2><!-- 
+<%#= error_messages_for(@employment) %>  -->
+<!--<% @page_title = t(:employment).pluralize(locale) %> -->
+<%= link_to("<< Back to Menu", {:controller => 'employments', :action => 'index'}, :class => 'back-link') %>
+	<div class="employment new">
+				  <%= form_for(@employment) do |f| %>
+				  <%= render(:partial => "form", :locals => {:f => f}) %>
+				  <div class="form_buttons">
+				       <%= submit_tag("Create Employment") %>
+
+
+				   <!--  <div class="form-buttons"> 
+				      <%#= submit_tag(t(:create) + " " + t(:employment)) %> -->
+				    </div>
+				  <% end %>
+	</div>

@@ -1,2 +1,50 @@
-<h1>UpdatesDeletes#index</h1>
-<p>Find me in app/views/updates_deletes/index.html.erb</p>
+
+
+<% provide(:title, "Updates Deletes Index") %> 
+
+<div class="update deletes index">
+	
+  <h2> Updates Deletes </h2>
+	<%= link_to("Add New Updates/Detes", new_updates_delete_path, :class => 'action new') %>
+
+			<div><%= pluralize(@updates_deletes.size, 'Upadates Delete') %> found</div>			
+				<table class= "table table-striped" summary="updates_delete List">
+					  <thead>
+					  <br>
+						<tr>		
+							<th>id </th>
+						<!-- 	<th>User ID </th>
+			 -->			<th>Table Name </th>	
+							<th>Column Name </th>
+							<th>Element </th>
+							<th>Action Taken </th>
+							<th>Reason </th> 		
+							<th>New Element </th> 
+							<th>Actions </th> 
+						
+						</tr>
+					  </thead>
+					  <tbody>
+						<% @updates_deletes.each do |updates_delete| %>
+							<tr>	
+									<td><%= updates_delete.id %></td>	
+								<!--     <td><%#= updates_delete.user_id %></td>	 -->
+									<td><%= updates_delete.table_name %></td>
+									<td><%= updates_delete.column_name %></td>
+									<td><%= updates_delete.element %></td>
+									<td><%= updates_delete.action_taken %></td>		
+									<td><%= updates_delete.reason %></td>
+									<td><%= updates_delete.new_element %></td>
+
+									<td class="actions">
+									
+									<%= link_to("Show", updates_delete, :class => 'action show') %>
+									<%= link_to("Edit", [:edit,updates_delete], :class => 'action edit') %>
+									<%= link_to("Delete", {:action => 'delete', :id => updates_delete.id},:class => 'action delete') %>
+									 </td>
+							</tr>
+						<% end %>
+					</tbody>
+			</table>
+</div>
+

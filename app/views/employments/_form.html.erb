@@ -1,0 +1,37 @@
+ 
+ 
+ 		<!--   /**  Form used for New/Update  **/  -->
+<%= error_messages_for(@employment) %> 
+<div class="table-responsive">
+  <table id="fields_table" class="display responsive" summary="employment form fields">
+      <tbody> 
+        <br>
+        <!--   <tr>
+            <th><%#= f.label(:address_type, t(:address_type)) %></th>
+            <td><%#= f.text_field(:address_type) %></td>
+          </tr>   -->  
+          <tr>
+            <th><%= f.label(:company_id, t(:company)) %></th>
+            <td><%= f.text_field(:company_id) %></td>
+          </tr>
+          <tr>
+            <th><%= f.label(:professional_id, t(:professional)) %></th>
+            <td><%= f.text_field(:professional_id) %></td>
+          <tr>
+            <th><%= f.label(:validated, t(:validated)) %></th>
+            <td><%= f.text_field(:validated) %></td>
+          </tr>       
+          <tr>
+            <th><%= f.label(:creator, t(:creator)) %></th>
+            <td><%= f.text_field(:creator) %></td>
+          </tr>    
+     </tbody>
+    <%#= f.hidden_field(:id_token, :value => @appointmnet.id_token) %>
+  </table>
+</div>
+<br>
+<%= javascript_tag("$(document).ready( function () {$('#fields_table').DataTable();} );") %>
+<%= javascript_tag("$('#fields_table').DataTable( {responsive: true, paging: false} );") %>
+
+
+                  

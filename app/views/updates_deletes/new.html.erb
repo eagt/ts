@@ -1,2 +1,22 @@
-<h1>UpdatesDeletes#new</h1>
-<p>Find me in app/views/updates_deletes/new.html.erb</p>
+<% provide(:title, "Add New Updates Deletes") %>
+
+   <h2><%= t(:create) + " " + t(:updates_delete) %></h2>
+
+<!-- 
+<%#= error_messages_for(@updates_delete) %>  -->
+
+<!--<% @page_title = t(:updates_delete).pluralize(locale) %> -->
+
+<%= link_to("<< Back to Menu", {:controller => 'updates_deletes', :action => 'index'}, :class => 'back-link') %>
+		<div class="updates_delete new">
+		  	<%= form_for(@updates_delete) do |f| %>
+		    <%= render(:partial => "form", :locals => {:f => f}) %>
+			    <div class="form_buttons">
+			       <%= submit_tag("Create Updates Deletes") %>
+
+
+			   <!--  <div class="form-buttons"> 
+			      <%#= submit_tag(t(:create) + " " + t(:updates_delete)) %> -->
+			    </div>
+		  <% end %>
+		</div>

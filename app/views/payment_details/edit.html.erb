@@ -1,2 +1,13 @@
-<h1>PaymentDetails#edit</h1>
-<p>Find me in app/views/payment_details/edit.html.erb</p>
+<% provide(:title, 'Edit Payment Details') %>
+
+<div class="payment_detail edit">
+  <h2>Edit Payment Detail</h2>
+			<%= link_to("<< Back to Menu", {:action => 'index'}, :class => 'back-link') %>
+  			<%= error_messages_for(@payment_detail) %>
+		    <%= form_for(@payment_detail) do |f| %>
+	        <%= render(:partial => 'form', :locals => {:f => f} ) %>
+				<div class="form_buttons">
+				   <%= submit_tag('Update Payment Detail') %>
+				</div>
+  	  		<% end %>
+</div>

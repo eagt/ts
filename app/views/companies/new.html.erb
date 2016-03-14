@@ -1,30 +1,18 @@
-<% provide(:title, "Company Sign Up") %>
+<% provide(:title, " Add New Company") %>
 
-<h1>Company Sign Up or Add New Company == Developing purposes </h1>
+<%= error_messages_for(@company) %> 
 
 <!-- This form will be completed by the company's application administrator at the company's
 site once the company has decided it wants to try the Ts application. Once the process is completed, t
 he comapny will be created and the company's application administrator could create other users with the users form -->
-
-
-<%= error_messages_for(@company) %> 
-
 <!--<% @page_title = t(:company).pluralize(locale) %> -->
-
-<%= link_to("<< Back to Menu", {:controller => 'companies', :action => 'index'}, :class => 'back-link') %>
-<!-- <%#= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %> -->
-
 <div class="companies new">
   <h2><%= t(:create) + " " + t(:company) %></h2>
+  <%= link_to("<< Back to Menu", {:controller => 'companies', :action => 'index'}, :class => 'back-link') %>
 		  <%= form_for(@company) do |f| %>
-
 		    <%= render(:partial => "form", :locals => {:f => f}) %>
-
-
 		    <div class="form_buttons">
 		       <%= submit_tag("Create Company") %>
-
-
 		   <!--  <div class="form-buttons"> 
 		      <%#= submit_tag(t(:create) + " " + t(:company)) %> -->
 		    </div>

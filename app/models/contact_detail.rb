@@ -15,4 +15,10 @@ class ContactDetail < ActiveRecord::Base
 	# Many-to-Many Simple
  	# Many-to-Many Rich
  	# Many-to-Many through
+
+
+ 	# scopes
+ 	scope :sorted_id, lambda { order("contact_details.id ASC")}
+  	scope :newest_first, lambda { order("contact_details.created_at DESC")}
+  	scope :search, lambda {|query| where (["name LIKE?", "%#{query}%"])}
 end

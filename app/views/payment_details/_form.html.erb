@@ -1,0 +1,44 @@
+
+ 		<!--   /**  Form used for New/Update  **/  -->
+
+
+<%= error_messages_for(@payment_detail) %> 
+
+<div class="table-responsive">
+  <table id="fields_table" class="display responsive" summary="payment details form fields">
+    <tbody> 
+      <br>
+         <!--  <tr>
+            <th><%= f.label(:id, t(:id)) %></th>
+            <td><%= f.text_field(:id) %></td>
+          <tr>        Note: I could leave to be seen for development or leave hide/ unseen-->
+          <tr>
+            <th><%= f.label(:appointment_id, t(:appointment_id_id)) %></th>  
+
+            <td><%= f.text_field(:appointment_id) %></td>
+          </tr>
+          <tr>
+            <th><%= f.label(:total_project_price, t(:total_project_price)) %></th>
+            <td><%= f.text_field(:total_project_price) %></td>
+          <tr>
+            <th><%= f.label(:task_payment, t(:task_payment)) %></th>
+            <td><%= f.text_field(:task_payment) %></td>
+          </tr>       
+          <tr>
+            <th><%= f.label(:professional_fee, t(:professional_fee)) %></th>
+            <td><%= f.text_field(:professional_fee) %></td>
+          </tr>    
+          <tr>
+            <th><%= f.label(:remaining_project_payment, t(:remaining_project_payment)) %></th>
+            <td><%= f.text_field(:remaining_project_payment) %></td>
+          </tr> 
+     </tbody>
+    <%#= f.hidden_field(:id_token, :value => @appointmnet.id_token) %>
+  </table>
+</div>
+<br>
+<%= javascript_tag("$(document).ready( function () {$('#fields_table').DataTable();} );") %>
+<%= javascript_tag("$('#fields_table').DataTable( {responsive: true, paging: false} );") %>
+
+
+                  

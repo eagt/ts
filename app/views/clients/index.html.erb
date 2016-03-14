@@ -8,25 +8,20 @@
 
 <div class="client index">
 	
-		<h2> Clients </h2>
-
-		
-
+<h2> Clients </h2>
 <%= link_to("Add New Client", new_client_path, :class => 'action new') %>
 		
 	<!-- Here I will pluralize to say how many client/s are/is found -->
-
-		<div><%= pluralize(@clients.size, 'client') %> found</div>
-		
+		<div><%= pluralize(@clients.size, 'client') %> found</div>		
 		<table class= "table table-striped" summary="Client List">
 		  <thead>
-			<tr>
-				
+		  	<br>
+			<tr>				
 				<th>id</th>
 				<th>Id Code</th>
 				<th>Discipline</th>
 				<th>Company</th>
-				<!-- <th>Branch</th>  Note: Find the way to bring the brach info here -->
+				<th>Branch</th>  
 				<th>Name</th>	<!-- This field will be visible only if the @current_user = Professional. Make sure of this -->
 				<th>Last Name</th>
 				<th>email</th>
@@ -42,7 +37,7 @@
 				<td><%= client.id_code %></td>
 				<td><%= client.discipline %></td>
 				<td><%= client.company_id %></td>
-				<!-- <td><%#= client.branch_id %></td> -->
+				<td><%= client.branch_id %></td>
 				<td><%= client.name %></td>
 				<td><%= client.last_name %></td>
 				<td><%= client.email %></td> 

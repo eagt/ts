@@ -1,2 +1,43 @@
-<h1>PaymentDetails#index</h1>
-<p>Find me in app/views/payment_details/index.html.erb</p>
+
+<% provide(:title, "Payment Details Index") %> 
+<!-- <% @page_tittle = " Payment Details " %> -->
+	<div class="payment details index">	
+		<h2> Payment Details Index </h2>
+			<%= link_to("Add New Payment Details", new_payment_detail_path, :class => 'action new') %>		
+	<!-- Here I will pluralize to say how many Payment Details are/is found -->
+				<div><%= pluralize(@payment_details.size, 'Payment Detail') %> found</div>
+
+					<table class= "table table-striped" summary="Payment_detail List">
+					  <thead>
+						<tr>	
+							<th>ID</th>			
+							<th>Appointment ID</th>
+							<th>Total Project Price </th>
+							<th>Task Payment </th>
+							<th>Professional fee </th>	
+							<th>Remainig Proyect Payment </th>
+							<th>Actions </th>
+						</tr>
+					  </thead>
+						  <tbody>
+							<% @payment_details.each do |payment_detail| %>
+							    <tr>	
+									<td><%= payment_detail.id %></td>
+									<td><%= payment_detail.appointment_id %></td>		
+									<td><%= payment_detail.total_project_price %></td>
+									<td><%= payment_detail.task_payment %></td>
+									<td><%= payment_detail.professional_fee %></td>
+									<td><%= payment_detail.remaining_project_payment %></td>
+									
+									<td class="actions">
+									<%= link_to("Show", payment_detail, :class => 'action show') %>
+									<%= link_to("Edit", [:edit,payment_detail], :class => 'action edit') %>
+									<%= link_to("Delete", {:action => 'delete', :id => payment_detail.id},:class => 'action delete') %>
+									 </td>
+							    </tr>
+							<% end %>
+						</tbody>
+					</table>
+
+	</div>
+

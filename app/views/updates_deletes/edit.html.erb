@@ -1,2 +1,15 @@
-<h1>UpdatesDeletes#edit</h1>
-<p>Find me in app/views/updates_deletes/edit.html.erb</p>
+<% provide(:title, 'Edit Updates Delete') %>
+<!-- When action is implemented fully, I must be able to update all the users details -->
+
+<div class="updates_delete edit">
+  <h2>Edit Contact Detail</h2>
+	<%= link_to("<< Back to Menu", {:action => 'index'}, :class => 'back-link') %>
+  	<%= error_messages_for(@updates_delete) %>
+  		 <br> 
+		  <%= form_for(@updates_delete) do |f| %>
+		  <%= render(:partial => 'form', :locals => {:f => f} ) %>
+		<div class="form_buttons">
+		   <%= submit_tag('Update Contact Detail') %>
+		</div>
+	  	  <% end %>
+</div>

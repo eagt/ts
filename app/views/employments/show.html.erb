@@ -1,2 +1,43 @@
-<h1>Employments#show</h1>
-<p>Find me in app/views/employments/show.html.erb</p>
+<% provide(:title, "Show Employment") %> 
+
+<h2> Employment </h2>
+<%= link_to("<< Back to Menu", {:controller => 'employments', :action => 'index'}, :class => 'back-link') %>
+<div class="employments show">
+<div class="table-responsive">
+    <table id="show_table" class="display responsive" summary="employment view">
+      <tbody>
+      		<br>
+			<tr>
+				<th> <%= t(:id) %></th>
+				<td><%= @employment .id  %></td>
+			</tr>
+			<tr>
+				<th> <%= t(:company_id) %></th>
+				<td><%= @employment .company_id  %></td>
+			</tr>
+			<tr>
+				<th> <%= t(:professional_id) %></th>
+				<td><%= @employment .professional_id  %></td>
+			</tr>
+			<tr>
+				<th> <%= t(:validated) %></th>
+				<td><%= @employment .validated  %></td>
+			</tr>		
+			<tr>
+				<th> <%= t(:creator) %></th>
+				<td><%= @employment .creator %></td>
+			</tr>
+			<tr>
+			    <th><%= t(:Created_at) %></th>
+			    <td><%= @appointment.created_at %></td>
+		   </tr>
+		   <tr>
+			    <th> <%= t(:Updated_at) %></th>
+			    <td><%= @appointment.updated_at %></td>
+		   </tr>	
+	 </tbody>
+	</table>
+</div>
+
+<%= javascript_tag("$(document).ready( function () {$('#show_table').DataTable();} );") %>
+<%= javascript_tag("$('#show_table').DataTable( {responsive: true, paging: false} );") %>

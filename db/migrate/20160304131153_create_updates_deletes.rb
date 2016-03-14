@@ -1,6 +1,7 @@
 class CreateUpdatesDeletes < ActiveRecord::Migration
+  
   def up
-    create_table :update_deletes do |t|
+    create_table :updates_deletes  do |t|
 
     	t.integer "company_id"
     	t.integer "branch_id"
@@ -10,9 +11,7 @@ class CreateUpdatesDeletes < ActiveRecord::Migration
     	t.integer "payment_details_id" 
 
         t.integer "employment_id"       
-        t.integer "appointments_id"  
-        t.integer "update_deletes_id" 
-     
+        t.integer "appointments_id"    
 
     # Below are the details that are going to be pull out 
     # from the database and be recorded on this tbale. The name and
@@ -32,25 +31,23 @@ class CreateUpdatesDeletes < ActiveRecord::Migration
         t.timestamps null: false
      end
 
-    	add_index("update_deletes", "company_id")
-     	add_index("update_deletes", "branch_id")
-     	add_index("update_deletes", "professional_id")
-     	add_index("update_deletes", "client_id")
-     	add_index("update_deletes", "contact_details_id")
-        add_index("update_deletes", "payment_details_id")
-      	add_index("update_deletes", "employment_id")
-      	add_index("update_deletes", "appointments_id")      
-     	add_index("update_deletes", "update_deletes_id")
-
-
-     	add_index("update_deletes", "table_name")
-     	add_index("update_deletes", "last_name")
-     	add_index("update_deletes", "action_taken")
-     	add_index("update_deletes", "new_element")
+    	add_index("updates_deletes", "company_id")
+     	add_index("updates_deletes", "branch_id")
+     	add_index("updates_deletes", "professional_id")
+     	add_index("updates_deletes", "client_id")
+     	add_index("updates_deletes", "contact_details_id")
+        add_index("updates_deletes", "payment_details_id")
+      	add_index("updates_deletes", "employment_id")
+      	add_index("updates_deletes", "appointments_id")      
+     	
+     	add_index("updates_deletes", "table_name")
+     	add_index("updates_deletes", "last_name")
+     	add_index("updates_deletes", "action_taken")
+     	add_index("updates_deletes", "new_element")
     end
 
-  	def down
-    drop_table :update_deletes 
-    end
+  	 def down
+     drop_table :updates_deletes 
+     end
 
 end

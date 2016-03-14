@@ -3,6 +3,7 @@
 <div class="table-responsive">
   <table id="fields_table" class="display responsive" summary="Appointmnet form fields">
     <tbody>
+      <br>
       <tr>
         <th><%= f.label(:discipline, t(:discipline)) %></th>
         <td><%= f.text_field(:discipline) %></td>
@@ -28,7 +29,11 @@
       <tr>
         <th><%= f.label(:date_time, t(:date_time)) %></th>
         <td><%= f.text_field(:date_time) %></td>
-      </tr>    
+      </tr> 
+<!--       <tr>
+        <th><%#= f.label(:prof_appointments_id, t(:profesional)) %></th>
+        <td><%#= f.text_field(:prof_appointments_id) %></td>
+      </tr>    -->   
       <tr>
         <th><%= f.label(:status, t(:status)) %></th>
         <td><%= f.text_field(:status) %></td>

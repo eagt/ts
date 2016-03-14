@@ -1,0 +1,46 @@
+<!--   /**  Form used for New/Update  **/  -->
+<%= error_messages_for(@updates_delete) %> 
+
+<div class="table-responsive">
+  <table id="fields_table" class="display responsive" summary="contact details form fields">
+    <tbody> 
+      <br> 
+  <!--     <tr>
+        <th><%= f.label(:user, t(:user_id)) %></th>
+        <td><%= f.text_field(:user) %></td>
+      </tr> -->
+
+          <tr>
+            <th><%= f.label(:table_name, t(:table_name)) %></th>
+            <td><%= f.text_field(:table_name) %></td>
+          </tr> 
+          <tr>
+            <th><%= f.label(:column_name, t(:column_name)) %></th>
+            <td><%= f.text_field(:column_name) %></td>
+          </tr>       
+          <tr>
+            <th><%= f.label(:element, t(:element)) %></th>
+            <td><%= f.text_field(:element) %></td>
+          </tr>    
+          <tr>
+            <th><%= f.label(:action_taken, t(:action_taken)) %></th>
+            <td><%= f.text_field(:action_taken) %></td>
+          </tr> 
+          <tr>
+            <th><%= f.label(:reason, t(:reason)) %></th>
+            <td><%= f.text_field(:reason) %></td>
+          </tr> 
+          <tr>
+            <th><%= f.label(:new_element, t(:new_element)) %></th>
+            <td><%= f.text_field(:new_element) %></td>
+          </tr>        
+     </tbody>
+    <%#= f.hidden_field(:id_token, :value => @appointmnet.id_token) %>
+  </table>
+</div>
+<br>
+<%= javascript_tag("$(document).ready( function () {$('#fields_table').DataTable();} );") %>
+<%= javascript_tag("$('#fields_table').DataTable( {responsive: true, paging: false} );") %>
+
+
+                  

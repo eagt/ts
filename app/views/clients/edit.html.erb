@@ -1,13 +1,13 @@
 <% provide(:title, 'Edit Client') %>
 
 
-<%= link_to("<< Back to Menu", {:action => 'index'}, :class => 'back-link') %>
+
 
 <!-- When action is implemented fully, I must be able to update all the users details -->
-
+<%= error_messages_for(@client) %>
 <div class="client edit">
-  <h1>Edit Client</h1>
-  <%= error_messages_for(@client) %>
+  <h2>Edit Client</h2>
+  <%= link_to("<< Back to Menu", {:action => 'index'}, :class => 'back-link') %> 
 	  <%= form_for(@client) do |f| %>
 	  <%= render(:partial => 'form', :locals => {:f => f} ) %>
 	<div class="form_buttons">

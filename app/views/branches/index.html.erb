@@ -8,17 +8,15 @@
 <div class="Branch index">
 	
 		<h2> Branches </h2>
-
-		
-
 <%= link_to("Add New Branch", new_branch_path, :class => 'action new') %>
 		
 	<!-- Here I will pluralize to say how many companies are/is found -->
-
+		
 		<div><%= pluralize(@branches.size, 'branch') %> found</div>
 		
 		<table class= "table table-striped" summary="Branch List">
 		  <thead>
+		  	<br>
 			<tr>				
 				<th>id</th>
 				<th>Id Code</th>
@@ -26,6 +24,7 @@
 				<th>Name</th>
 				<th>Company</th>
 				<th>email</th>
+
 				<th>Professionals</th>  <!-- This field will be visible only if the @current_user = Company. Make sure of this -->
 				<th>Clients</th>
 				<th>Appointments</th>

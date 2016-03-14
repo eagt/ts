@@ -1,2 +1,13 @@
-<h1>Employments#delete</h1>
-<p>Find me in app/views/employments/delete.html.erb</p>
+<% @page_tittle = "Delete Employment" %>
+<div class="employment delete">
+
+	<h2> Delete Company </h2>
+<%= link_to("<< Back to Menu", {:action => 'index'}, :class => 'back-link') %>
+		<%= form_for(@employment, :html => {:method => :delete}) do |f| %>
+			<p></p>
+			<p class="reference-name"><%= "Are you sure you want to permanently delete employment with id No. #{@employment.id} ?" %></p>
+		<div class="form_buttons">
+			<%= submit_tag("Delete Employment ") %>
+		</div>
+		<% end %>
+</div>

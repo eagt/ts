@@ -1,17 +1,14 @@
 <% provide(:title, "Show Client") %> 
 
-<h1>Client Details</h1>
+<h2>Client Details</h2>
 
 <%= link_to("<< Back to Menu", {:controller => 'clients', :action => 'index'}, :class => 'back-link') %>
-
-
-
 <div class="clients show">
 
 <div class="table-responsive">
     <table id="show_table" class="display responsive" summary="client detail view">
       <tbody>
-
+	 <br>
      <tr>	
 		<th><%= t(:id) %></th>
 		<td><%= @client.id%></td>
@@ -33,6 +30,9 @@
 	 <tr>
 		<th><%=  t(:company_id) %></th>
 		<td><%= @client.company_id %></td>
+	 </tr>
+	  <th> <%= t(:branch_id) %></th>
+		<td><%= @client.branch_id  %></td>
 	 </tr>
    	 <th> <%= t(:email) %></th>
 		<td><%= @client.email  %></td>

@@ -1,5 +1,6 @@
 class CreatePaymentDetails < ActiveRecord::Migration
-  def change
+  
+  def up
     create_table :payment_details do |t|
 
 

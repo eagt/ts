@@ -1,18 +1,14 @@
 <% provide(:title, 'Edit Professional') %>
-<% @page_title = "Edit Professional: #{@professional.name}" -%>  <!-- This may cause problems -->
-
-<%= link_to("<< Back to List", {:action => 'index'}, :class => 'back-link') %>
-
-<!-- When action is implemented fully, I must be able to update all the users details -->
 
 <div class="professional edit">
-  <h1>Edit Professional</h1>
-  <%= error_messages_for(@professional) %>
-
-	  <%= form_for(:professional, :url => {:action => 'update', :id => @professional.id}) do |f| %>
-	  <%= render(:partial => 'shared/form', :locals => {:f => f} ) %>
-	<div class="form_buttons">
-	   <%= submit_tag('Update professional') %>
-	</div>
-  	  <% end %>
+	  <h2>Edit Professional</h2>
+	  <%= link_to("<< Back to List", {:action => 'index'}, :class => 'back-link') %>
+	  <%= error_messages_for(@professional) %>
+	  		<br>
+		    <%= form_for(@professional) do |f| %>
+			  <%= render(:partial => 'form', :locals => {:f => f} ) %>
+			<div class="form_buttons">
+			   <%= submit_tag('Update Professional') %>
+			</div>
+		  	  <% end %>
 </div>

@@ -1,2 +1,43 @@
-<h1>Employments#index</h1>
-<p>Find me in app/views/employments/index.html.erb</p>
+
+<% provide(:title, "Employment Index") %> 
+<!-- <% @page_tittle = " Employment " %> -->
+<div class="employment index">
+	
+		<h2> Employment </h2>
+<%= link_to("Add New Employment", new_employment_path, :class => 'action new') %>		
+	<!-- Here I will pluralize to say how many Employment are/is found -->
+		<div><%= pluralize(@employments.size, 'Employment') %> found</div>		
+		<table class= "table table-striped" summary="Employment List">
+		  <thead>
+		  	<br>
+			<tr>				
+				<th>id</th>
+				<th>Company </th>
+				<th>Professional</th>	
+				<th>Validated</th>
+				<th>Creator</th> 
+				<th>Actions</th> 		
+			</tr>
+		  </thead>
+		  <tbody>
+
+		<% @employments.each do |employment| %>
+		<tr>	
+				<td><%= employment.id %></td>
+				<td><%= employment.company_id %></td>
+				<td><%= employment.professional_id %></td>
+				<td><%= employment.validated %></td>
+				<td><%= employment.creator %></td>
+
+				<td class="actions">
+				
+				<%= link_to("Show", employment, :class => 'action show') %>
+				<%= link_to("Edit", [:edit,employment], :class => 'action edit') %>
+				<%= link_to("Delete", {:action => 'delete', :id => employment.id},:class => 'action delete') %>
+				 </td>
+		</tr>
+		<% end %>
+		</tbody>
+	</table>
+</div>
+

@@ -1,15 +1,11 @@
 <% provide(:title, 'Edit Company') %>
-
-
-<%= link_to("<< Back to Menu", {:action => 'index'}, :class => 'back-link') %>
-
 <!-- When action is implemented fully, I must be able to update all the users details -->
-
 <div class="company edit">
-  <h1>Edit Company</h1>
+  <h2>Edit Company</h2>
+  <%= link_to("<< Back to Menu", {:action => 'index'}, :class => 'back-link') %>
   <%= error_messages_for(@company) %>
 	  <%= form_for(@company) do |f| %>
-	  <%= render(:partial => 'shared/form', :locals => {:f => f} ) %>
+	  <%= render(:partial => 'form', :locals => {:f => f} ) %>
 	<div class="form_buttons">
 	   <%= submit_tag('Update Company') %>
 	</div>

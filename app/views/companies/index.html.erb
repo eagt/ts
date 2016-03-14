@@ -8,27 +8,22 @@
 
 <div class="company index">
 	
-		<h2> Companies </h2>
-
-		
-
-<%= link_to("Add New Company", new_company_path, :class => 'action new') %>
-		
+<h2> Companies </h2>
+<%= link_to("Add New Company", new_company_path, :class => 'action new') %>		
 	<!-- Here I will pluralize to say how many companies are/is found -->
-
-		<div><%= pluralize(@companies.size, 'company') %> found</div>
-		
-		<table class= "table table-striped" summary="Company List">
+<div><%= pluralize(@companies.size, 'company') %> found</div>		
+<table class= "table table-striped" summary="Company List">
 		  <thead>
+		  	<br>
 			<tr>
-				
 				<th>id</th>
 				<th>Id Code</th>
 				<th>Discipline</th>
 				<th>Name</th>	<!-- This field will be visible only if the @current_user = Professional. Make sure of this -->
 				<th>email</th>
-				<th>Professionals</th>    <!-- This field will be visible only if the @current_user = Company. Make sure of this -->
 				<th>Branches</th> 
+		
+				<th>Professionals</th>    <!-- This field will be visible only if the @current_user = Company. Make sure of this -->
 				<th>Clients</th>
 				<th>Appointments</th>
 				<th>Actions</th>
@@ -43,8 +38,8 @@
 				<td><%= company.discipline %></td>
 				<td><%= company.name %></td>
 				<td><%= company.email %></td>
-				<td class="center"><%= company.professionals.size %></td> 
 				<td class="center"><%= company.branches.size %></td>
+				<td class="center"><%= company.professionals.size %></td> 				
 				<td class="center"><%= company.clients.size %></td>
 				<td class="center"><%= company.appointments.size %></td>			
 

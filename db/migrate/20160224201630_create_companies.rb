@@ -4,7 +4,8 @@ def up
 
     create_table :companies do |t|
 
-        t.string "discipline", :limit => 25
+     
+        
         t.string "id_code", :limit => 25
         t.string "name", :limit => 50, :null => false
         t.string "email", :default => "@", :null => false

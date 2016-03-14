@@ -5,6 +5,7 @@ class CreateClients < ActiveRecord::Migration
 	    create_table :clients do |t|
 
 	      t.integer "company_id", :visible => false
+	      t.integer "branch_id", :visible => false
 
 		  t.string "discipline", :limit => 25	
 
@@ -27,6 +28,8 @@ class CreateClients < ActiveRecord::Migration
 
 	   	end
 	      #add_index :clients, ["company_id", "professional_id", "branch_id", "dob", "email", "last_name"] 
+	        add_index("clients", "company_id")
+	        add_index("clients", "branch_id")
 	        add_index("clients", "dob")
 	        add_index("clients", "email")
 	        add_index("clients", "last_name")

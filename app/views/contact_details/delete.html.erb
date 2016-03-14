@@ -1,2 +1,13 @@
-<h1>ContactDetails#delete</h1>
-<p>Find me in app/views/contact_details/delete.html.erb</p>
+<% @page_tittle = "Delete Contact Details" %>
+
+<div class="contact_details delete">
+	<h2> Delete Contact Detail </h2>	
+	<%= link_to("<< Back to Menu", {:action => 'index'}, :class => 'back-link') %>
+		<p></p>
+		<%= form_for(@contact_detail, :html => {:method => :delete}) do |f| %>			
+			<p class="reference-name"><%= "Are you sure you want to permanently delete contact_detail with id No. #{@contact_detail.id} ?" %></p>
+		<div class="form_buttons">
+			<%= submit_tag("Delete Contact Details") %>
+		</div>
+		<% end %>
+</div>

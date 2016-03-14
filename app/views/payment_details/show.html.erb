@@ -1,2 +1,49 @@
-<h1>PaymentDetails#show</h1>
-<p>Find me in app/views/payment_details/show.html.erb</p>
+<% provide(:title, "Show Payment Details") %> 
+
+<h2>Payment Details</h2>
+
+<%= link_to("<< Back to Menu", {:controller => 'payment_details', :action => 'index'}, :class => 'back-link') %>
+<div class="payment details show">
+
+		<div class="table-responsive">
+		    <table id="show_table" class="display responsive" summary="payment_detail view">
+		      		<tbody>
+		      			<br>
+					     </tr>
+							<th> <%= t(:id) %></th>
+							<td><%= @payment_detail.id  %></td>
+						</tr> 	      	
+						</tr>
+							<th> <%= t(:appointment_id_id) %></th>
+							<td><%= @payment_detail.appointment_id  %></td>
+						</tr>
+						<tr>
+							<th> <%= t(:total_project_price) %></th>
+							<td><%= @payment_detail.total_project_price  %></td>
+						</tr>
+						<tr>
+							<th> <%= t(:task_payment) %></th>
+							<td><%= @payment_detail.task_payment  %></td>
+						</tr>
+						<tr>
+							<th> <%= t(:professional_fee) %></th>
+							<td><%= @payment_detail.professional_fee  %></td>
+						</tr>
+						<tr>
+							<th> <%= t(:remaining_project_payment) %></th>
+							<td><%= @payment_detail.remaining_project_payment %></td>
+						</tr>
+						<tr>
+						    <th><%= t(:Created_at) %></th>
+						    <td><%= @appointment.created_at %></td>
+					   </tr>
+					   <tr>
+						    <th> <%= t(:Updated_at) %></th>
+						    <td><%= @appointment.updated_at %></td>
+					   </tr>
+					</tbody>
+			</table>
+		</div>
+
+<%= javascript_tag("$(document).ready( function () {$('#show_table').DataTable();} );") %>
+<%= javascript_tag("$('#show_table').DataTable( {responsive: true, paging: false} );") %>

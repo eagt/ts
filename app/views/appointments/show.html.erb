@@ -1,6 +1,6 @@
 <% provide(:title, "Show Appointment") %> 
 
-<h1>Appointmnet Details</h1>
+<h2>Appointmnet Details</h2>
 
 <%= link_to("<< Back to Menu", {:controller => 'appointments', :action => 'index'}, :class => 'back-link') %>
 
@@ -11,7 +11,11 @@
 <div class="table-responsive">
     <table id="show_table" class="display responsive" summary="appointment detail view">
       <tbody>
-	
+
+    <tr>  
+    <th><%= t(:id) %></th>
+    <td><%= @appointment.id %></td>
+   </tr>	
    <tr>  
     <th><%= t(:discipline) %></th>
     <td><%= @appointment.discipline %></td>
@@ -70,11 +74,11 @@
    </tr>
     <tr>
     <th><%= t(:Created_at) %></th>
-    <td><%= @branch.created_at %></td>
+    <td><%= @appointment.created_at %></td>
    </tr>
    <tr>
     <th> <%= t(:Updated_at) %></th>
-    <td><%= @branch.updated_at %></td>
+    <td><%= @appointment.updated_at %></td>
    </tr>
 
 

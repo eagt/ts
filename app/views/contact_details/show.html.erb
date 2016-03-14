@@ -1,28 +1,51 @@
-<h1>ContactDetails#show</h1>
-<p>Find me in app/views/contact_details/show.html.erb</p>
+<% provide(:title, "Show Contact Details") %> 
 
+<h2>Contact Details</h2>
+<%= link_to("<< Back to Menu", {:controller => 'contact_details', :action => 'index'}, :class => 'back-link') %>
+<div class="contact details show">
+<div class="table-responsive">
+	    <table id="show_table" class="display responsive" summary="contact detail view">
+	      <tbody>
+	      	<br>
+			      	<!-- 
+				</tr>
+					<th> <%= t(:address_type) %></th>
+					<td><%= @contact_detail.address_type  %></td>
+				</tr> -->
+				 <tr>	
+					<th><%= t(:id) %></th>
+					<td><%= @contact_detail.id%></td>
+				 </tr>
+				</tr>
+					<th> <%= t(:address) %></th>
+					<td><%= @contact_detail.address  %></td>
+				</tr></tr>
+					<th> <%= t(:city) %></th>
+					<td><%= @contact_detail.city  %></td>
+				</tr></tr>
+					<th> <%= t(:state) %></th>
+					<td><%= @contact_detail.state  %></td>
+				</tr></tr>
+					<th> <%= t(:country) %></th>
+					<td><%= @contact_detail.country  %></td>
+				</tr>
+				</tr></tr>
+					<th> <%= t(:telephone) %></th>
+					<td><%= @contact_detail.telephone %></td>
+				</tr>
+				<tr>
+				    <th><%= t(:Created_at) %></th>
+				    <td><%= @appointment.created_at %></td>
+			   </tr>
+			   <tr>
+			    	<th> <%= t(:Updated_at) %></th>
+			   	    <td><%= @appointment.updated_at %></td>
+			   </tr>
 
+		 </tbody>
+	</table>
 
+</div>
 
-
-</tr>
-		<th> <%= t(:address_type) %></th>
-		<td><%= @company.address_type  %></td>
-	</tr>
-	</tr>
-		<th> <%= t(:address) %></th>
-		<td><%= @company.address  %></td>
-	</tr></tr>
-		<th> <%= t(:city) %></th>
-		<td><%= @company.city  %></td>
-	</tr></tr>
-		<th> <%= t(:state) %></th>
-		<td><%= @company.state  %></td>
-	</tr></tr>
-		<th> <%= t(:country) %></th>
-		<td><%= @company.country  %></td>
-	</tr>
-	</tr></tr>
-		<th> <%= t(:tel) %></th>
-		<td><%= @company.tel  %></td>
-	</tr>
+<%= javascript_tag("$(document).ready( function () {$('#show_table').DataTable();} );") %>
+<%= javascript_tag("$('#show_table').DataTable( {responsive: true, paging: false} );") %>

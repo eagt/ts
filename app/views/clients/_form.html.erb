@@ -1,9 +1,26 @@
 
-<%= error_messages_for(@branch) %>
+<%= error_messages_for(@client) %>
 
 <div class="table-responsive">
   <table id="fields_table" class="display responsive" summary="Branch form fields">
     <tbody>
+      <br>
+      <tr>
+        <th><%= f.label(:id_code, t(:id_code)) %></th>
+        <td><%= f.text_field(:id_code) %></td>
+      </tr> 
+      <tr>
+        <th><%= f.label(:discipline, t(:discipline)) %></th>
+        <td><%= f.text_field(:discipline) %></td>
+      </tr> 
+       <tr>
+        <th><%= f.label(:company_id, t(:company_id)) %></th>
+        <td><%= f.text_field(:company_id) %></td>
+      </tr> 
+       <tr>
+        <th><%= f.label(:branch_id, t(:branch_id)) %></th>
+        <td><%= f.text_field(:branch_id) %></td>
+      </tr>  
       <tr>
         <th><%= f.label(:name, t(:name)) %></th>
         <td><%= f.text_field(:name) %></td>
@@ -12,14 +29,20 @@
         <th><%= f.label(:last_name, t(:last_name)) %></th>
         <td><%= f.text_field(:last_name) %></td>
       </tr>    
-      <tr>
-        <th><%= f.label(:id_code, t(:id_code)) %></th>
-        <td><%= f.text_field(:id_code) %></td>
-      </tr>      
+         
       <tr>
         <th><%= f.label(:email, t(:email)) %></th>
         <td><%= f.text_field(:email) %></td>
       </tr>   
+      <tr>
+        <th><%= f.label(:contact_details_id, t(:contact_details_id)) %></th>
+        <td><%= f.text_field(:contact_details_id) %></td>
+      </tr> 
+       <tr>
+        <th><%= f.label(:creator, t(:creator)) %></th>
+        <td><%= f.text_field(:creator) %></td>
+      </tr> 
+
     </tbody>
     <%#= f.hidden_field(:id_token, :value => @branch.id_token) %>
   </table>

@@ -1,5 +1,6 @@
 class ClientsController < ApplicationController
   
+  layout "companies" 
 
   def index
     @clients = Client.sorted_lname
@@ -59,7 +60,7 @@ class ClientsController < ApplicationController
 
   private
   def client_params
-    params.require(:client).permit(:id_code, :discipline, :company_id, :name, :last_name, :email, :dod, :photo, :contact_details_id, :creator, :logged_as)
+    params.require(:client).permit(:id_code, :discipline, :company_id, :branch_id, :name, :last_name, :email, :dod, :photo, :contact_details_id, :creator, :logged_as)
 
 
 

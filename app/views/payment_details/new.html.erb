@@ -1,2 +1,18 @@
-<h1>PaymentDetails#new</h1>
-<p>Find me in app/views/payment_details/new.html.erb</p>
+<% provide(:title, "Add New Paymrnt Details") %>
+
+   <h2><%= t(:create) + " " + t(:payment_detail) %></h2>
+	<%= error_messages_for(@payment_detail) %>  
+
+	<!--<% @page_title = t(:payment_detail).pluralize(locale) %> -->
+	<%= link_to("<< Back to Menu", {:controller => 'payment_details', :action => 'index'}, :class => 'back-link') %>
+			<div class="payment_detail new">
+
+					  <%= form_for(@payment_detail) do |f| %>
+					    <%= render(:partial => "form", :locals => {:f => f}) %>
+						    <div class="form_buttons">
+						       <%= submit_tag("Create Payment Detail") %>
+						   <!--  <div class="form-buttons"> 
+						      <%#= submit_tag(t(:create) + " " + t(:payment_detail)) %> -->
+						    </div>
+					  <% end %>
+			</div>

@@ -1,18 +1,17 @@
-<% provide(:title, 'Professional Sign Up') %>
+<% provide(:title, 'Create Professional') %>
 
-<h1>Professional Sign Up</h1>
+<!--<% @page_title = t(:professional).pluralize(locale) %> -->
+	<div class="professionals new">
+	  <h2><%= t(:create) + " " + t(:professional) %></h2>
 
-<!-- This form will be completed by the company's application administrator at the company's
-site once the company has decided it wants to try the Ts application. Once the process is completed, t
-he comapny will be created and the company's application administrator could create other users with the users form -->
-
-<%= error_messages_for(@professional) %>
-   
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-     <%= form_for(:professional, :url => {:action => 'create', :id => @professional.id}) do |f| %>
-     <%= render(:partial => "shared/form", :locals => {:f =>f}) %>
-      <%= f.submit "Create my Professional account", class: "btn btn-primary" %>
-     <% end %>
-  </div>
-</div> 
+			<%= link_to("<< Back to Menu", {:controller => 'professionals', :action => 'index'}, :class => 'back-link') %>
+	   		<%= error_messages_for(@professional) %> 
+			  <%= form_for(@professional) do |f| %>
+			    <%= render(:partial => "form", :locals => {:f => f}) %>
+				    <div class="form_buttons">
+				       <%= submit_tag("Create Professional") %>
+				   <!--  <div class="form-buttons"> 
+				      <%#= submit_tag(t(:create) + " " + t(:professional)) %> -->
+				    </div>
+			  <% end %>
+	</div>

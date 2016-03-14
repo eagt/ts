@@ -4,6 +4,8 @@ class CreateProfessionals < ActiveRecord::Migration
 
       create_table :professionals do |t|
 
+         t.string "discipline", :limit => 25
+
         # In the next two columns I will leave the visible value while developing and testing...
         t.string "creator", :visible => true  # This has to be FILL IN automatically and kept on the data base depending who is the logger when creating it
                                                # It could be either Company or Professional. In the View  it has to be a dropdown with both ooptions.
@@ -15,12 +17,14 @@ class CreateProfessionals < ActiveRecord::Migration
         t.string "id_code", :limit => 25
         t.string "name", :limit => 50, :null => false
         t.string "last_name", :limit => 50   #:null => false
-        t.date "dob", :null => false
+        t.date "dob", :null => false, :default => Time.now
         t.string "email", :default => "@", :null => false
 
         t.string "service", :limit => 25
 
         t.string "specialty", :limit => 25
+
+         t.integer "contact_details_id", :visible => false
         
 
         # It will be necessary to create usernames and password for each user. It may be that these usrnames and passwords
@@ -30,8 +34,8 @@ class CreateProfessionals < ActiveRecord::Migration
         # t.boolean "pass_active", :default => false 
         # t.boolean "acc_active", :default => false  
 
-        # t.string "password_digest"
-        # t.string "remember_digest"
+        t.string "password_digest"
+        t.string "remember_digest"
 
         t.datetime "last_in"
 
@@ -40,17 +44,15 @@ class CreateProfessionals < ActiveRecord::Migration
       end
         #add_index :professionals, ["company_id", "id_code", "last_name", "service", "specialty", "dob","email"]
         
-    
+        add_index("professionals", "discipline")
         add_index("professionals", "id_code")
         add_index("professionals", "last_name")
         add_index("professionals", "service")
         add_index("professionals", "specialty")
         add_index("professionals", "dob")
         add_index("professionals", "email")
-
-
-
     end
+
 
     def down
       drop_table :professionals

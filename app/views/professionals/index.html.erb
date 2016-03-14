@@ -1,2 +1,58 @@
-<h1>Professionals#index</h1>
-<p>Find me in app/views/professionals/index.html.erb</p>
+
+<% provide(:title, "Professionals Index") %> 
+
+<!-- <% @page_tittle = " Professionals " %> -->
+
+<div class="professionals index">
+	
+<h2> Professionals </h2>
+<%= link_to("Add New Professional", new_professional_path, :class => 'action new') %>
+		
+	<div><%= pluralize(@professionals.size, 'company') %> found</div>		
+		<table class= "table table-striped" summary="Professional List">
+			  <thead>
+				<tr>
+					<br>
+					<th>id</th>
+					<th>Id Code</th>
+					<th>Discipline</th>
+					<th>Name</th>	
+					<th>email</th>
+					<th>Companies</th>    <!-- This field will be visible only if the @current_user = Professional. Make sure of this -->
+					<th>Branches</th> 		
+					<th>Clients</th>
+					<th>Appointments</th>
+					<th>Actions</th>
+				</tr>
+			  </thead>
+			  <tbody>
+
+			<% @professionals.each do |professional| %>
+				<tr>	
+					<td><%= professional.id %></td>		
+					<td><%= professional.id_code %></td>
+					<td><%= professional.discipline %></td>
+					<td><%= professional.name %></td>
+					<td><%= professional.email %></td>
+					<td class="center"><%= professional.companies.size %></td> 	
+					<td class="center"><%= professional.branches.size %></td>							
+					<td class="center"><%= professional.clients.size %></td>
+					<td class="center"><%= professional.prof_appointments.size %></td>			
+
+					<td class="actions">
+
+				<%#= link_to("View professionals", {:controller => 'professionals', :professional_id => professional.id}, :class => 'action show') %>
+					
+					<%= link_to("Show", professional, :class => 'action show') %>
+					<%= link_to("Edit", [:edit,professional], :class => 'action edit') %>
+					<%= link_to("Delete", {:action => 'delete', :id => professional.id},:class => 'action delete') %>
+			
+
+					<%#= <%= link_to("Delete", [:delete,professional], :class => 'action delete') %> 
+				 	</td>
+				</tr>
+			<% end %>
+			</tbody>
+		</table>
+</div>
+

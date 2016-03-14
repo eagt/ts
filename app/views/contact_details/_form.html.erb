@@ -3,26 +3,46 @@
 to create to show in when showing the contact details of each object as : Users, Professionals, Branches and Companies. -->    
 
  
- 		<!--   /**  Form used for sign Up  **/  -->
+ 		<!--   /**  Form used for New/Update  **/  -->
 
- 	</tr>
-		<th> <%= t(:address_type) %></th>
-		<td><%= @company.address_type  %></td>
-	</tr>
-	</tr>
-		<th> <%= t(:address) %></th>
-		<td><%= @company.address  %></td>
-	</tr></tr>
-		<th> <%= t(:city) %></th>
-		<td><%= @company.city  %></td>
-	</tr></tr>
-		<th> <%= t(:state) %></th>
-		<td><%= @company.state  %></td>
-	</tr></tr>
-		<th> <%= t(:country) %></th>
-		<td><%= @company.country  %></td>
-	</tr>
-	</tr></tr>
-		<th> <%= t(:tel) %></th>
-		<td><%= @company.tel  %></td>
-	</tr>
+
+<%= error_messages_for(@contact_detail) %> 
+
+<div class="table-responsive">
+  <table id="fields_table" class="display responsive" summary="contact details form fields">
+    <tbody> 
+      <br>
+    <!--   <tr>
+        <th><%#= f.label(:address_type, t(:address_type)) %></th>
+        <td><%#= f.text_field(:address_type) %></td>
+      </tr>   -->  
+      <tr>
+        <th><%= f.label(:address, t(:address)) %></th>
+        <td><%= f.text_field(:address) %></td>
+      </tr>
+      <tr>
+        <th><%= f.label(:city, t(:city)) %></th>
+        <td><%= f.text_field(:city) %></td>
+      <tr>
+        <th><%= f.label(:state, t(:state)) %></th>
+        <td><%= f.text_field(:state) %></td>
+      </tr>       
+      <tr>
+        <th><%= f.label(:country, t(:country)) %></th>
+        <td><%= f.text_field(:country) %></td>
+      </tr>    
+      <tr>
+        <th><%= f.label(:telephone, t(:telephone)) %></th>
+        <td><%= f.text_field(:telephone) %></td>
+      </tr> 
+      
+     </tbody>
+    <%#= f.hidden_field(:id_token, :value => @appointmnet.id_token) %>
+  </table>
+</div>
+<br>
+<%= javascript_tag("$(document).ready( function () {$('#fields_table').DataTable();} );") %>
+<%= javascript_tag("$('#fields_table').DataTable( {responsive: true, paging: false} );") %>
+
+
+                  

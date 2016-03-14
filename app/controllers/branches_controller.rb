@@ -68,7 +68,7 @@ class BranchesController < ApplicationController
   private
 
   def branch_params
-    params.require(:branch).permit(:discipline, :company_id, :name, :email, :contact_details_id, :creator, :logged_as)
+    params.require(:branch).permit(:id_code, :discipline, :company_id, :name, :email, :contact_details_id, :creator, :logged_as)
   end
 
 end

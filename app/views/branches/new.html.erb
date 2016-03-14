@@ -1,25 +1,15 @@
 <% provide(:title, "Add New Branch") %>
-
-<h1>Add New Branch </h1>
-
-
 <%= error_messages_for(@branch) %> 
 
 <!--<% @page_title = t(:branch).pluralize(locale) %> -->
 
-<%= link_to("<< Back to Menu", {:controller => 'branches', :action => 'index'}, :class => 'back-link') %>
-
 <div class="branches new">
   <h2><%= t(:create) + " " + t(:branch) %></h2>
+  <%= link_to("<< Back to Menu", {:controller => 'branches', :action => 'index'}, :class => 'back-link') %>
 		  <%= form_for(@branch) do |f| %>
-
 		    <%= render(:partial => "form", :locals => {:f => f}) %>
-
-
 		    <div class="form_buttons">
 		       <%= submit_tag("Create Branch") %>
-
-
 		   <!--  <div class="form-buttons"> 
 		      <%#= submit_tag(t(:create) + " " + t(:branch)) %> -->
 		    </div>

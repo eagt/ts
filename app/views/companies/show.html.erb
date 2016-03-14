@@ -1,18 +1,14 @@
 <% provide(:title, "Show Company") %> 
 
-<h1>Company Details</h1>
+<h2>Company Details</h2>
 
 <%= link_to("<< Back to Menu", {:controller => 'companies', :action => 'index'}, :class => 'back-link') %>
-
-
-
 <div class="companies show">
-
 <div class="table-responsive">
     <table id="show_table" class="display responsive" summary="company detail view">
       <tbody>
-
-      <tr>	
+      	<br>
+     <tr>	
 		<th><%= t(:id) %></th>
 		<td><%= @company.id%></td>
 	 </tr>
@@ -72,11 +68,11 @@
 		<td><%#= @company.last_in %></td>
 		 </tr> -->
 	 <tr>
-		<th><%= t(:Created_at) %></th>
+		<th><%= t(:created_at) %></th>
 		<td><%= @company.created_at %></td>
 	 </tr>
 	 <tr>
-		<th> <%= t(:Updated_at) %></th>
+		<th> <%= t(:updated_at) %></th>
 		<td><%= @company.updated_at %></td>
 	 </tr>
 
