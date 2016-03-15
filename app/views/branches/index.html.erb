@@ -1,34 +1,34 @@
 
-
-
-
 <% provide(:title, "Branch Index") %> 
+<!-- 
+<% @page_title = t(:branch).pluralize(locale) %> -->
 
+<div class="professionals index">
+  
+<%= @current_user ? link_to("<< " + t(:home), [@current_user]) : "-" %>
+<br /><br />
+  
+<%= link_to(image_tag('plus_sign.png', :size => '11x11', :alt => '+') + " " +t(:add_new_branch), [:new, @current_user, params[:controller].singularize, @is_company ? {} : {:company_id => params[:company_id]}], :class => 'action new') %>
+  
 
-<div class="Branch index">
-	
-		<h2> Branches </h2>
-<%= link_to("Add New Branch", new_branch_path, :class => 'action new') %>
-		
-	<!-- Here I will pluralize to say how many companies are/is found -->
-		
-		<div><%= pluralize(@branches.size, 'branch') %> found</div>
-		
-		<table class= "table table-striped" summary="Branch List">
-		  <thead>
-		  	<br>
-			<tr>				
-				<th>id</th>
-				<th>Id Code</th>
-				<th>Discipline</th>
-				<th>Name</th>
-				<th>Company</th>
-				<th>email</th>
+  <div><%= @branches.size.to_s + " " + t(:branch).pluralize(@branches.size, locale) + " " + t(:found) %></div>
+  
+  <div class="table-responsive">
+    <table id="index_table" class="display responsive" summary="Branches list">
+      <thead class="thead-inverse">
+			<tr>	
+				<th>&nbsp;</th>			
+				<th><%= t(:id) %></th>
+				 <th><%= t(:id_code) %></th>
+				<th><%= t(:discipline)%></th>
+				<th><%= t(:name)%></th>
+   			    <th><%= t(:company) %></th>
+			    <th><%= t(:email) %></th>
 
-				<th>Professionals</th>  <!-- This field will be visible only if the @current_user = Company. Make sure of this -->
-				<th>Clients</th>
-				<th>Appointments</th>
-				<th>Actions</th>
+				<th><%= t(:professional).pluralize(locale) %></th> <!-- This field will be visible only if the @current_user = Company. Make sure of this -->
+				<th><%= t(:client).pluralize(locale) %></th>
+				<th><%= t(:appointment).pluralize(locale) %></th>
+				 <th><%= t(:action) %></th>
 			</tr>
 		  </thead>
 		  <tbody>
@@ -41,25 +41,22 @@
 				<td><%= branch.name %></td>
 				<td><%= branch.company_id %></td>
 				<td><%= branch.email %></td>
-				<td class="center"><%= branch.professionals.size %></td> 
-				
+				<td class="center"><%= branch.professionals.size %></td> 		
 				<td class="center"><%= branch.clients.size %></td>
-				<td class="center"><%= branch.appointments.size %></td>			
-
+				<td class="center"><%= branch.appointments.size %></td>	
 				<td class="actions">
 
-			<%#= link_to("View Companies", {:controller => 'companies', :company_id => company.id}, :class => 'action show') %>
-				
-				<%= link_to("Show", branch, :class => 'action show') %>
-				<%= link_to("Edit", [:edit,branch], :class => 'action edit') %>
-				<%= link_to("Delete", {:action => 'delete', :id => branch.id},:class => 'action delete') %>
-		
+			   <%= link_to(t(:show), [@current_user, branch], :class => 'action show') %>
+              <%= link_to(t(:edit), [:edit, @current_user, branch], :class => 'action edit') %>
+              <%= link_to(t(:delete), [:delete, @current_user, branch], :class => 'action delete') %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-				<%#= <%= link_to("Delete", [:delete,company], :class => 'action delete') %> 
-			 </td>
-		</tr>
-		<% end %>
-		</tbody>
-	</table>
+<%= javascript_tag("$(document).ready( function () {$('#index_table').DataTable();} );") %>
+<%= javascript_tag("$('#index_table').DataTable( {responsive: true, fixedHeader: true} );") %>
+
 </div>
-

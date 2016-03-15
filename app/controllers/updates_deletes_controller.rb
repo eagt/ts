@@ -1,6 +1,6 @@
 class UpdatesDeletesController < ApplicationController
   
-
+# IT IS MISSING TO DO THE NESTED FOR THIS CONTROLLER
 
         layout "companies" 
 

@@ -1,17 +1,21 @@
 <% provide(:title, 'Edit Client') %>
 
+<!-- 
+<% @page_title = t(:client).pluralize(locale) %>
+ -->
+<%= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %>
 
-
-
-<!-- When action is implemented fully, I must be able to update all the users details -->
-<%= error_messages_for(@client) %>
 <div class="client edit">
-  <h2>Edit Client</h2>
-  <%= link_to("<< Back to Menu", {:action => 'index'}, :class => 'back-link') %> 
-	  <%= form_for(@client) do |f| %>
-	  <%= render(:partial => 'form', :locals => {:f => f} ) %>
-	<div class="form_buttons">
-	   <%= submit_tag('Update Client') %>
-	</div>
-  	  <% end %>
+  <h2><%= t(:update) + " " + t(:client) %></h2>
+
+  <%= form_for([@current_user, @client]) do |f| %>
+
+    <%= render(:partial => "form", :locals => {:f => f}) %>
+
+    <div class="form-buttons">
+      <%= submit_tag(t(:edit) + " " + t(:client)) %>
+    </div>
+
+  <% end %>
+
 </div>

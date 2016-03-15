@@ -20,4 +20,68 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  login: Login
+  username: Username
+  password: Password
+  enter_email: Enter e-mail
+  enter_password: Enter password
+  remember_me: Remember me
+  not_a_member: Not a member
+  sign_up: Sign Up
+  user: User
+  forgot: Forgot
+  cancel: Cancel
+  found: found
+  return_to: Return to list
+  action: Action
+  create: Create
+  show: Show
+  edit: Edit
+  update: Update
+  delete: Delete
+  register: Register
+  professional: Professional
+  company: Company
+  branch: Branch
+  client: Client
+  appointment: Appointment
+  shared: Shared
+  status: Status
+  needs_folloup: Needs Followup
+  task_type: Task Type
+  task_note: Task Note
+  total_project_price: Total Project Price
+  task_payment: Task Payment
+  professional_fee: Professional Fee
+  note: Note
+  remove: Remove
+  remaining_project_payment: Ramaining Project Payment
+  add_new_professional: Add new professional
+  add_new_company: Add new Company
+  add_new_branch: Add new Branch
+  add_new_client: Add new Client
+  add_new_appointment: Add new Appointment
+  first_name: Name
+  last_name: Last Name
+  email: e-mail
+  id: ID
+  dob: Date of Birth
+  speciality: Speciality
+  pass_active: Password Active?
+  acc_active: Account Active?
+  created_at: Created at
+  updated_at: Updated at
+  last_in: Last login
+  date_time: Date/Time
+  time_zone: Time Zone
+  column: In Column
+  search: Search for
+  home: Home
+  create_success: created successfully
+  update_success: updated successfully
+  delete_message: Are you sure you want to delete this record permanently?
+  destroy_success: destroyed successfully
+  save_error: prohibited this record from being saved
+  field_prob: There were problems with the following fields
+  create_unsuccess: cannot be created at the moment. Please try again later.
+  uniqueness_unsuccess: Retries exhausted. Cannot create a unique token.

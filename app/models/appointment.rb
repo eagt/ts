@@ -13,14 +13,40 @@ class Appointment < ActiveRecord::Base
 	has_and_belongs_to_many :clients
 		
 	# Many-to-Many Rich
-	has_many :prof_appointments
+
 		
 	# Many-to-Many through
+	has_many :assigments
+	has_many :professionals, :through => :assignments
+
+
+	accepts_nested_attributes_for :assignments, reject_if: :all_blank
+
+
+	after_initialize :generate_token, :if => :new_record?
 
 
 	scope :sorted_discipline, lambda { order("appointments.discipline ASC")}
   	scope :newest_first, lambda { order("appointments.created_at DESC")}
   	scope :search, lambda {|query| where (["name LIKE?", "%#{query}%"])}
+
+
+
+  	private
+		MAX_RETRIES = 3
+		# generate a unique token id for new records
+		def generate_token
+			self.id_token ||= SecureRandom.hex(8) 
+			if Appointment.exists?(:id_token => id_token)
+				self.id_token = nil
+				raise
+			end			
+		rescue Exception => e
+			@token_attempts = @token_attempts.to_i + 1
+			puts "Record not unique " + @token_attempts.to_s
+			retry if @token_attempts < MAX_RETRIES
+			raise e, "#{I18n.t(:professional)}: #{I18n.t(:create_unsuccess)} #{I18n.t(:uniqueness_unsuccess)}"
+		end
 
 end
 

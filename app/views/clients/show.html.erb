@@ -1,11 +1,13 @@
-<% provide(:title, "Show Client") %> 
+<% provide(:title, "Show Client") %> <!-- 
 
-<h2>Client Details</h2>
+<% @page_title = t(:client).pluralize(locale) %> -->
 
-<%= link_to("<< Back to Menu", {:controller => 'clients', :action => 'index'}, :class => 'back-link') %>
-<div class="clients show">
+<%= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %>
 
-<div class="table-responsive">
+<div class="client show">
+  <h2><%= t(:show) + " " + t(:client) %></h2>
+
+  <div class="table-responsive">
     <table id="show_table" class="display responsive" summary="client detail view">
       <tbody>
 	 <br>
@@ -19,24 +21,29 @@
 	 </tr>
 
 	 <tr>
-		<th><%=  t(:name) %></th>
-		<td><%= @client.name %></td>
+		<th><%=  t(:first_name) %></th>
+		<td><%= @client.first_name %></td>
 	 </tr>
 	 <tr>
 		<th><%=  t(:last_name) %></th>
 		<td><%= @client.last_name %></td>
 	 </tr>
-  
 	 <tr>
-		<th><%=  t(:company_id) %></th>
-		<td><%= @client.company_id %></td>
-	 </tr>
-	  <th> <%= t(:branch_id) %></th>
-		<td><%= @client.branch_id  %></td>
-	 </tr>
-   	 <th> <%= t(:email) %></th>
+          <th><%= t(:dob) %></th>
+          <td><%= @client.dob %></td>
+     </tr>
+        <th> <%= t(:email) %></th>
 		<td><%= @client.email  %></td>
 	 </tr>
+  
+	 <tr>
+		<th><%=  t(:company) %></th>
+		<td><%= @client.company_id %></td>
+	 </tr>
+	 <th> <%= t(:branch) %></th>
+		<td><%= @client.branch_id  %></td>
+	 </tr>
+   	 
 
 
 <!-- If Contact Details isn't placed in index  I think that this is a great place to place contact details
@@ -77,3 +84,5 @@
 
 <%= javascript_tag("$(document).ready( function () {$('#show_table').DataTable();} );") %>
 <%= javascript_tag("$('#show_table').DataTable( {responsive: true, paging: false} );") %>
+
+</div>

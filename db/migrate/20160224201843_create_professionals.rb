@@ -4,6 +4,11 @@ class CreateProfessionals < ActiveRecord::Migration
 
       create_table :professionals do |t|
 
+        # Token to identify a register, not unique as it links instance for different users
+        t.string "id_token", :null => false
+
+
+
          t.string "discipline", :limit => 25
 
         # In the next two columns I will leave the visible value while developing and testing...
@@ -15,7 +20,7 @@ class CreateProfessionals < ActiveRecord::Migration
 
 
         t.string "id_code", :limit => 25
-        t.string "name", :limit => 50, :null => false
+        t.string "first_name", :limit => 50, :null => false
         t.string "last_name", :limit => 50   #:null => false
         t.date "dob", :null => false, :default => Time.now
         t.string "email", :default => "@", :null => false
@@ -31,13 +36,18 @@ class CreateProfessionals < ActiveRecord::Migration
         # could be assigned to each branch independely by the global admin user in the company. It has to be taking
         # into account that the Branch Admin user won't be able to do CRUD in anything to do with the Company
              
-        # t.boolean "pass_active", :default => false 
-        # t.boolean "acc_active", :default => false  
+        t.boolean "pass_active", :default => false 
+        t.boolean "acc_active", :default => false  
 
         t.string "password_digest"
         t.string "remember_digest"
 
         t.datetime "last_in"
+
+         t.boolean "is_virtual", :default => true
+        #t.boolean "is_default", :default => false
+
+      t.string "time_zone"
 
         t.timestamps null: false
 
@@ -51,6 +61,7 @@ class CreateProfessionals < ActiveRecord::Migration
         add_index("professionals", "specialty")
         add_index("professionals", "dob")
         add_index("professionals", "email")
+         add_index("professionals", "id_token")
     end
 
 

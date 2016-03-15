@@ -1,14 +1,18 @@
-<% @page_tittle = "Delete Appointment" %>
+<% @page_title = t(:appointment).pluralize(locale) %>
 
-<div class="companies delete">
-	<h2> Delete Appointment </h2>
-	<%= link_to("<< Back to Menu", {:action => 'index'}, :class => 'back-link') %>
-	<br>
-		<%= form_for(@appointment, :html => {:method => :delete}) do |f| %>
-			<br>
-		<p class="reference-id"><%= "Are you sure you want to permanently delete appointment No. #{@appointment.id} "%></p>
-		<div class="form_buttons">
-			<%= submit_tag("Delete Appointment") %>
+<%= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %>
+
+<div class="appointment delete">
+	<h2><%= t(:delete) + " " + t(:appointment) %></h2>
+
+	<%= form_for([@current_user, @appointment], :html => {:method => :delete}) do |f| %>
+
+		<p> <%= t(:delete_message) %> </p>
+
+		<p class="reference-name"><%= @appointment.date_time %></p>
+
+		<div class="form-buttons">
+			<%= submit_tag(t(:delete) + " " + t(:appointment)) %>
 		</div>
-		<% end %>
+	<% end %>
 </div>

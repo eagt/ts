@@ -35,6 +35,7 @@
       </tr> 
     </tbody>
   </table>
+   <%= f.hidden_field(:company_id, :value => @branch.company_id) %>
 </div>
 
 <%= javascript_tag("$(document).ready( function () {$('#fields_table').DataTable();} );") %>

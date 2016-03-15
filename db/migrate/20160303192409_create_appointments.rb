@@ -4,6 +4,8 @@ def up
 
   create_table :appointments do |t|
 
+       # Token to identify a register, not unique as it links instance for different users
+       t.string "id_token", :null => false
        t.integer "company_id"
        t.integer "branch_id"
        t.integer "client_id"
@@ -14,10 +16,12 @@ def up
        t.integer "follow_up_code"  # When appointment is created this field initialize in Zero (0). 
                                  # In case the field needs_follwup is checked this field will add 1 to the appointment_code
                                  # This will be done to see appointments related to a same subject/issue/problem
+       
+       t.boolean "shared", :default => false
        t.string "task_type", :limit => 50
        t.text "task_note"
        t.string "photo"        
-       t.boolean "needs_followup", :default => false
+       t.boolean "needs_folloup", :default => false
        t.string "payment_details_id"
        # In the next two columns I will leave the visible value while developing and testing...
        t.string "creator", :visible => true  # This has to be FILL IN automatically and kept on the data base depending who is the logger when creating it
@@ -37,6 +41,7 @@ def up
         add_index("appointments", "appointment_code")
         add_index("appointments", "date_time")
         add_index("appointments", "status")
+        add_index("appointments", "needs_folloup")
 
  end
 

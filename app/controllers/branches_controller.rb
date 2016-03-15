@@ -1,74 +1,105 @@
 class BranchesController < ApplicationController
-  
-  layout "companies"  
+   
 
-  def index
-      @branches = Branch.sorted_name
+layout "professional"
+
+  before_action :set_locale
+  before_action :current_user
+
+
+  def index    
+    if @is_company # if the user is a company list the branches under it
+      @branches = @current_user.branches
+    else # if the user is a professional check that the param company_id exist to show the branches under a specific companuy
+      if params[:company_id]
+        @branches = Branch.where(company_id: params[:company_id])
+      else
+        redirect_to([@current_user, :companies])
+      end
+    end 
   end
 
-
   def show
-     @branch  = Branch.find(params[:id])
+    @branch = Branch.find(params[:id])
   end
 
   def new
-       @branch  = Branch.new({:name => " "})
-       @branch_count = Branch.count + 1
+    begin
+      if @is_company #if the user is a company
+        @branch = @current_user.branches.new()
+      else
+        if params[:company_id]
+          @branch = Branch.new(company_id: params[:company_id])
+        else
+          redirect_to([@current_user, :companies])
+        end
+      end
+    rescue Exception => e # Catch exceptions 
+      flash[:notice] = e.to_s
+      redirect_to([@current_user, :companies])
+    end
   end
 
-   def create
-# #Instantiate the new object using the form parameters
-
-     @branch  = Branch.new(branch_params)
-# Save the object
- 
+  def create  
+    # Instantiate a new object using form parameters
+    @branch = Branch.new(branch_params)
+    redirect_to([@current_user, :companies])
     if @branch.save
-          flash[:notice] = " Branch #{@branch.name} created successfully!"
-# If the save succeed, it will redirect some where (this case, index action)
-          redirect_to(@branch)    
-    else 
-# If the save fails, redisplay the form so the user can fix the problem and the submit it
-    @branch_count = Branch.count + 1
-    render('new')
+      # If save succeeds, redirect to the index action
+      flash[:notice] = "#{t(:branch)} #{t(:create_success)}" 
+      # begin
+      #   # If save succeeds, redirect to the index action
+      #   flash[:notice] = "#{t(:branch)} #{t(:create_success)}"
+        
+      # rescue Exception => e # Catch exceptions if it can't create the children of a company
+      #   # If there is an exception delete the objects created and redirect to index        
+      #   if @branch then @branch.destroy end        
+        
+      #   flash[:notice] = "#{t(:branch)}->" + e.to_s
+      #   redirect_to([@current_user, :branches])
+      # end    
+    else
+      # If save fails, redisplay the from so user can fix problems
+        render('new')
     end
-  
-   end
-
+  end
 
   def edit
     @branch = Branch.find(params[:id])
-    @branch_count = Branch.count
   end
 
   def update
+    # Find and existing object using form parameters
     @branch = Branch.find(params[:id])
+    # Update the object
     if @branch.update_attributes(branch_params)
-      flash[:notice] = " Branch #{@branch.name} updated successfully!"
-      redirect_to(:action => 'show', :id => @branch.id)
+      # If update succeeds, redirect to the index action
+      flash[:notice] = "#{t(:branch)} #{t(:update_success)}"
+      redirect_to([@current_user, @branch])
     else
-      @branch_count = Branch.count
-      render ('edit')
+      # If save fails, redisplay the from so user can fix problems
+      render('edit')
     end
   end
 
+  def delete
+    @branch = Branch.find(params[:id])
+  end
 
-   def delete
-     @branch  = Branch.find(params[:id])
-   end
-
-   def destroy
-#     #I Find an existing object using the form parameters
-     branch = Branch.find(params[:id]).destroy 
-     flash[:notice] = "Branch #{branch.name} destroyed successfully!"
-     redirect_to(:action => 'index')
-   end
- 
-
+  def destroy
+    branch = Branch.find(params[:id]).destroy
+    flash[:notice] = "#{t(:branch)} '#{branch.name}' #{t(:destroy_success)}"
+    redirect_to([@current_user, :branches])
+  end
 
   private
 
+    def set_locale
+      I18n.locale = params[:locale] || I18n.default_locale
+    end
+
   def branch_params
-    params.require(:branch).permit(:id_code, :discipline, :company_id, :name, :email, :contact_details_id, :creator, :logged_as)
+    params.require(:branch).permit(:id_code, :id_token, :discipline, :company_id, :name, :email, :contact_details_id, :creator, :logged_as, :time_zone)
   end
 
 end

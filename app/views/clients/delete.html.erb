@@ -1,12 +1,21 @@
 <% @page_tittle = "Delete Client" %>
-<div class="companies delete">
-	<h2> Delete Client </h2>
-	<%= link_to("<< Back to Menu", {:action => 'index'}, :class => 'back-link') %>
-		<p></p>
-		<%= form_for(@client, :html => {:method => :delete}) do |f| %>
-			<p class="reference-name"><%= "Are you sure you want to permanently delete #{@client.name.upcase} client?" %></p>
-		<div class="form_buttons">
-			<%= submit_tag("Delete Client") %>
+<!-- 
+
+<% @page_title = t(:client).pluralize(locale) %> -->
+
+<%= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %>
+
+<div class="client delete">
+	<h2><%= t(:delete) + " " + t(:client) %></h2>
+
+	<%= form_for([@current_user, @client], :html => {:method => :delete}) do |f| %>
+
+		<p> <%= t(:delete_message) %> </p>
+
+		<p class="reference-name"><%= @client.first_name %></p>
+
+		<div class="form-buttons">
+			<%= submit_tag(t(:delete) + " " + t(:client)) %>
 		</div>
-		<% end %>
+	<% end %>
 </div>

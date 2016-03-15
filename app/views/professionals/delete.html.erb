@@ -1,17 +1,18 @@
-<% @page_tittle = "Delete Profesional" %>
+<% @page_title = t(:professional).pluralize(locale) %>
 
-
+<%= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %>
 
 <div class="professional delete">
-	<h2> Delete Contact Detail </h2>
-			<%= link_to("<< Back to Menu", {:action => 'index'}, :class => 'back-link') %>
-			<p></p>
-			<%= form_for(@professional, :html => {:method => :delete}) do |f| %>				
-				<p class="reference-name"><%= "Are you sure you want to permanently delete professional with id No. #{@professional.id} ?" %></p>
-					<div class="form_buttons">
-						<%= submit_tag("Delete Profesional") %>
-					</div>
+	<h2><%= t(:delete) + " " + t(:professional) %></h2>
 
-			<% end %>
+	<%= form_for([@current_user, @professional], :html => {:method => :delete}) do |f| %>
 
+		<p> <%= t(:delete_message) %> </p>
+
+		<p class="reference-name"><%= @professional.email %></p>
+
+		<div class="form-buttons">
+			<%= submit_tag(t(:delete) + " " + t(:professional)) %>
+		</div>
+	<% end %>
 </div>

@@ -1,80 +1,92 @@
 <% provide(:title, "Show Branch") %> 
+<!-- 
+<% @page_title = t(:branch).pluralize(locale) %>
+ -->
+<%= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %>
 
-<h2>Branch Details</h2>
-
-<%= link_to("<< Back to Menu", {:controller => 'branches', :action => 'index'}, :class => 'back-link') %>
-<div class="branches show">
+<div class="Branches show">
+  <h2><%= t(:show) + " " + t(:branch) %></h2>
 
 <div class="table-responsive">
     <table id="show_table" class="display responsive" summary="branch detail view">
       <tbody>
       	<br>
-       <tr>	
-		<th><%= t(:id) %></th>
-		<td><%= @branch.id%></td>
-	 </tr>
-     <tr>	
-		<th><%= t(:id_code) %></th>
-		<td><%= @branch.id_code %></td>
-	 </tr>
-	 <tr>
-		<th> <%= t(:discipline) %></th>
-		<td><%= @branch.discipline %></td>
-	 </tr>
-
-	 <tr>
-		<th><%=  t(:name) %></th>
-		<td><%= @branch.name %></td>
-	 </tr> 
-	 <tr>
-		<th><%=  t(:company_id) %></th>
-		<td><%= @branch.company_id %></td>
-	 </tr>
-   	 <th> <%= t(:email) %></th>
-		<td><%= @branch.email  %></td>
-	 </tr>
-
-
-<!-- If Contact Details isn't placed in index  I think that this is a great place to place contact details
-<%#= link_to(t(:contact_details), {:controller => 'contact_details', :professional_id => professional.id}, :class => 'action show') %> 
--->
-	 </tr>
-		<th> <%= t(:contact_details_id) %></th>
-		<td><%= @branch.contact_details_id  %></td>
-	</tr>
-
-
-<!-- This has to be FILL IN automatically and kept on the data base depending who is the logger when creating it. It could be either Company or Professional. In the View  it has to be a dropdown with both ooptions. -->
-	<tr>
-		<th> <%= t(:creator) %></th>  
-		<td><%= @branch.creator %></td>
-	</tr>
-
-<!-- This has to be FILL IN automatically depending who is the logger in the current session. It would be deleted as soon as the user log off. Sort of virtual attribute. -->
-			<!-- <tr>
-		<th><%#= t(:pass_active) %></th>
-		<td><%#= @company.pass_active ? 'true' : 'false' %></td>
+         <tr>	
+			<th><%= t(:id) %></th>
+			<td><%= @branch.id%></td>
+		 </tr>
+	     <tr>	
+			<th><%= t(:id_code) %></th>
+			<td><%= @branch.id_code %></td>
 		 </tr>
 		 <tr>
-		<th><%#= (:acc_active) %></th>
-		<td><%#= @company.acc_active ? 'true' : 'false' %></td>
+			<th> <%= t(:discipline) %></th>
+			<td><%= @branch.discipline %></td>
+		 </tr>
+
+		 <tr>
+			<th><%=  t(:name) %></th>
+			<td><%= @branch.name %></td>
+		 </tr> 
+		 <tr>
+			<th><%=  t(:company) %></th>
+			<td><%= @branch.company_id %></td>
+		 </tr>
+	   	 <th> <%= t(:email) %></th>
+			<td><%= @branch.email  %></td>
+		 </tr>
+
+
+	<!-- If Contact Details isn't placed in index  I think that this is a great place to place contact details
+	<%#= link_to(t(:contact_details), {:controller => 'contact_details', :professional_id => professional.id}, :class => 'action show') %> 
+	-->
+		 </tr>
+			<th> <%= t(:contact_details_id) %></th>
+			<td><%= @branch.contact_details_id  %></td>
+		 </tr>
+
+
+	<!-- This has to be FILL IN automatically and kept on the data base depending who is the logger when creating it. It could be either Company or Professional. In the View  it has to be a dropdown with both ooptions. -->
+		<tr>
+			<th> <%= t(:creator) %></th>  
+			<td><%= @branch.creator %></td>
+		</tr>
+
+	<!-- This has to be FILL IN automatically depending who is the logger in the current session. It would be deleted as soon as the user log off. Sort of virtual attribute. -->
+			
+
+		<tr>
+          <th><%= t(:professional).pluralize(locale) %></th>
+          <td><%= @branch.company.professionals.size %></td>
+        </tr>
+        <tr>
+          <th><%= t(:client).pluralize(locale) %></th>
+          <td><%= @branch.clients.size %></td>
+        </tr>
+        <tr>
+          <th><%= link_to(t(:appointment).pluralize(locale), [@branch.company, :appointments])  %></th>
+          <td><%= @branch.appointments.size %></td>
+        </tr>
+        <tr>
+          <th><%= t(:pass_active) %></th>
+          <td><%= status_tag(@branch.pass_active) %></td>
+        </tr>
+        <tr>
+          <th><%= t(:acc_active) %></th>
+          <td><%= status_tag(@branch.acc_active) %></td>
+        </tr>
+        <tr>
+          <th><%= t(:last_in) %></th>
+          <td><%= @branch.last_in %></td>
+	     </tr>
+		 <tr>
+			<th><%= t(:Created_at) %></th>
+			<td><%= @branch.created_at %></td>
 		 </tr>
 		 <tr>
-		<th><#%= (:password_digest) %></th>
-		<td><%#= @company.password_digest ? 'true' : 'false' %></td>
+			<th> <%= t(:Updated_at) %></th>
+			<td><%= @branch.updated_at %></td>
 		 </tr>
-		 <tr>
-			<th><%#= t(:last_in) %></th>
-		<td><%#= @company.last_in %></td>
-		 </tr> -->
-	 <tr>
-		<th><%= t(:Created_at) %></th>
-		<td><%= @branch.created_at %></td>
-	 </tr>
-	 <tr>
-		<th> <%= t(:Updated_at) %></th>
-		<td><%= @branch.updated_at %></td>
-	 </tr>
 
 
 	 <!-- This link below will take me to see more contact details

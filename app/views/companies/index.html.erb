@@ -1,19 +1,22 @@
 
 
-
-
 <% provide(:title, "Company Index") %> 
+<!-- 
+<% @page_title = t(:company).pluralize(locale) %> -->
 
-<!-- <% @page_tittle = " Companies " %> -->
+<div class="companies index">
 
-<div class="company index">
-	
-<h2> Companies </h2>
-<%= link_to("Add New Company", new_company_path, :class => 'action new') %>		
-	<!-- Here I will pluralize to say how many companies are/is found -->
-<div><%= pluralize(@companies.size, 'company') %> found</div>		
-<table class= "table table-striped" summary="Company List">
-		  <thead>
+<%= @current_user ? link_to("<< " + t(:home), [@current_user]) : "-" %>
+<br /><br />
+  
+<%= link_to(image_tag('plus_sign.png', :size => '11x11', :alt => '+') + " " +t(:add_new_company), [:new, @current_user, params[:controller].singularize], :class => 'action new') %>
+  
+
+  <div><%= @companies.size.to_s + " " + t(:company).pluralize(@companies.size, locale) + " " + t(:found) %></div>
+
+  <div class="table-responsive">
+    <table id="index_table" class="display responsive" summary="Company list">
+      <thead class="thead-inverse">
 		  	<br>
 			<tr>
 				<th>id</th>
@@ -21,42 +24,42 @@
 				<th>Discipline</th>
 				<th>Name</th>	<!-- This field will be visible only if the @current_user = Professional. Make sure of this -->
 				<th>email</th>
-				<th>Branches</th> 
+				<th>Branch</th> 
 		
-				<th>Professionals</th>    <!-- This field will be visible only if the @current_user = Company. Make sure of this -->
-				<th>Clients</th>
-				<th>Appointments</th>
-				<th>Actions</th>
+				<th>Professional</th>    <!-- This field will be visible only if the @current_user = Company. Make sure of this -->
+				<th>Client</th>
+				<th>Appointment</th>
+				<th>Action</th>
 			</tr>
 		  </thead>
 		  <tbody>
 
 		<% @companies.each do |company| %>
-		<tr>	
+		
+		 <tr class="<%= cycle('odd', 'even') %>">	
 				<td><%= company.id %></td>		
 				<td><%= company.id_code %></td>
 				<td><%= company.discipline %></td>
 				<td><%= company.name %></td>
 				<td><%= company.email %></td>
-				<td class="center"><%= company.branches.size %></td>
-				<td class="center"><%= company.professionals.size %></td> 				
-				<td class="center"><%= company.clients.size %></td>
-				<td class="center"><%= company.appointments.size %></td>			
+			    <td class="center"><%= @current_user ? "1" : company.professionals.size %></td>
+	            <td class="center"><%= company.branches.size %></td>
+	            <td class="center"><%= @current_user ? @current_user.clients.select {|s| s.company_id == company.id}.size : company.clients.size %></td>
+	            <td class="center"><%= company.appointments.size %></td>			
 
 				<td class="actions">
 
-			<%#= link_to("View Companies", {:controller => 'companies', :company_id => company.id}, :class => 'action show') %>
-				
-				<%= link_to("Show", company, :class => 'action show') %>
-				<%= link_to("Edit", [:edit,company], :class => 'action edit') %>
-				<%= link_to("Delete", {:action => 'delete', :id => company.id},:class => 'action delete') %>
-		
-
-				<%#= <%= link_to("Delete", [:delete,company], :class => 'action delete') %> 
-			 </td>
+				<td class="actions">
+	              <%= link_to(t(:show), [@current_user, company], :class => 'action show') %>
+	              <%= link_to(t(:edit), [:edit, @current_user, company], :class => 'action edit') %>
+	              <%= link_to(t(:delete), [:delete, @current_user, company], :class => 'action delete') %>
+	            </td>
 		</tr>
 		<% end %>
 		</tbody>
 	</table>
 </div>
+<%= javascript_tag("$(document).ready( function () {$('#index_table').DataTable();} );") %>
+<%= javascript_tag("$('#index_table').DataTable( {responsive: true, fixedHeader: true} );") %>
 
+</div>

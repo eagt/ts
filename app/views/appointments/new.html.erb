@@ -1,29 +1,19 @@
 <% provide(:title, "Add New Appointment") %>
+<!--  @page_title = t(:appointment).pluralize(locale) %> -->
 
-<%= error_messages_for(@appointment) %> 
-
-<!--<% @page_title = t(:appointment).pluralize(locale) %> -->
-
-<!-- <%#= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %> -->
+<%= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %>
 
 <div class="appointments new">
   <h2><%= t(:create) + " " + t(:appointment) %></h2>
 
+  <%= form_for([@current_user, @appointment]) do |f| %>
 
-<%= link_to("<< Back to Menu", {:controller => 'appointments', :action => 'index'}, :class => 'back-link') %>
-<br>
+    <%= render(:partial => "form", :locals => {:f => f}) %>
 
-		  <%= form_for(@appointment) do |f| %>
+    <div class="form-buttons">
+      <%= submit_tag(t(:create) + " " + t(:appointment)) %>
+    </div>
 
-		    <%= render(:partial => "form", :locals => {:f => f}) %>
+  <% end %>
 
-
-		    <div class="form_buttons">
-		       <%= submit_tag("Create Appointment") %>
-
-
-		   <!--  <div class="form-buttons"> 
-		      <%#= submit_tag(t(:create) + " " + t(:appointment)) %> -->
-		    </div>
-		  <% end %>
 </div>

@@ -1,58 +1,61 @@
 
 <% provide(:title, "Professionals Index") %> 
 
-<!-- <% @page_tittle = " Professionals " %> -->
+<!-- <% @page_title = t(:professional).pluralize(locale) %>  -->
 
 <div class="professionals index">
-	
-<h2> Professionals </h2>
-<%= link_to("Add New Professional", new_professional_path, :class => 'action new') %>
-		
-	<div><%= pluralize(@professionals.size, 'company') %> found</div>		
-		<table class= "table table-striped" summary="Professional List">
-			  <thead>
-				<tr>
-					<br>
-					<th>id</th>
-					<th>Id Code</th>
-					<th>Discipline</th>
-					<th>Name</th>	
-					<th>email</th>
-					<th>Companies</th>    <!-- This field will be visible only if the @current_user = Professional. Make sure of this -->
-					<th>Branches</th> 		
-					<th>Clients</th>
-					<th>Appointments</th>
-					<th>Actions</th>
-				</tr>
-			  </thead>
-			  <tbody>
+  
+<%= @current_user ? link_to("<< " + t(:home), [@current_user]) : "-" %>
+<br /><br />
+  
+<%= link_to(image_tag('plus_sign.png', :size => '11x11', :alt => '+') + " " +t(:add_new_professional), [:new, @current_user, params[:controller].singularize], :class => 'action new') %>
+  
 
-			<% @professionals.each do |professional| %>
-				<tr>	
-					<td><%= professional.id %></td>		
-					<td><%= professional.id_code %></td>
-					<td><%= professional.discipline %></td>
-					<td><%= professional.name %></td>
-					<td><%= professional.email %></td>
-					<td class="center"><%= professional.companies.size %></td> 	
-					<td class="center"><%= professional.branches.size %></td>							
-					<td class="center"><%= professional.clients.size %></td>
-					<td class="center"><%= professional.prof_appointments.size %></td>			
+  <div><%= @professionals.size.to_s + " " + t(:professional).pluralize(@professionals.size, locale) + " " + t(:found) %></div>
+  
+  <div class="table-responsive">
+    <table id="index_table" class="display responsive" summary="Professional list">
+      <thead class="thead-inverse">
+        <tr>
+          <th>&nbsp;</th>
+          <th><%= t(:first_name) %></th>
+          <th><%= t(:last_name) %></th>
+          <th><%= t(:email) %></th>
+          <th><%= t(:id) %></th>
+          <th><%= t(:dob) %></th>
+          <th><%= t(:speciality) %></th>
+          <th><%= t(:company).pluralize(locale) %></th>
+          <th><%= t(:client).pluralize(locale) %></th>
+          <th><%= t(:appointment).pluralize(locale) %></th>
+          <th><%= t(:action) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @professionals.each do |professional| %>
+        
+          <tr class="<%= cycle('odd', 'even') %>">
+            <td><%= professional.id %></td>
+            <td><%= professional.first_name %></td>
+            <td><%= professional.last_name %></td>
+            <td><%= professional.email %></td>
+            <td><%= professional.id_code %></td>
+            <td><%= professional.dob %></td>
+            <td><%= professional.speciality %></td>
+            <td class="center"><%= professional.companies.size %></td>
+            <td class="center"><%= professional.clients.size %></td>
+            <td class="center"><%= professional.appointments.size %></td>
+            <td class="actions">
+              <%= link_to(t(:show), [@current_user, professional], :class => 'action show') %>
+              <%= link_to(t(:edit), [:edit, @current_user, professional], :class => 'action edit') %>
+              <%= link_to(t(:delete), [:delete, @current_user, professional], :class => 'action delete') %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-					<td class="actions">
+<%= javascript_tag("$(document).ready( function () {$('#index_table').DataTable();} );") %>
+<%= javascript_tag("$('#index_table').DataTable( {responsive: true, fixedHeader: true} );") %>
 
-				<%#= link_to("View professionals", {:controller => 'professionals', :professional_id => professional.id}, :class => 'action show') %>
-					
-					<%= link_to("Show", professional, :class => 'action show') %>
-					<%= link_to("Edit", [:edit,professional], :class => 'action edit') %>
-					<%= link_to("Delete", {:action => 'delete', :id => professional.id},:class => 'action delete') %>
-			
-
-					<%#= <%= link_to("Delete", [:delete,professional], :class => 'action delete') %> 
-				 	</td>
-				</tr>
-			<% end %>
-			</tbody>
-		</table>
 </div>
-

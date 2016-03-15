@@ -33,7 +33,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
  gem 'bcrypt', '3.1.7'
 
 # Use Unicorn as the app server
- gem 'unicorn'
+ #gem 'unicorn'
+
+ # Use Passenger as the app server
+gem 'passenger'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -44,6 +47,15 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # end
 
 
+# makes it easier to handle nested forms.
+gem "cocoon"
+
+# Adds datetime picker
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
+
+
+
 # From Sample APP
 gem 'faker', '~> 1.6', '>= 1.6.2'
 gem 'carrierwave', '~> 0.10.0'
@@ -52,31 +64,21 @@ gem 'fog', '~> 1.37'
 gem 'will_paginate', '~> 3.1'
 gem 'bootstrap-will_paginate', '~> 0.0.10'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
-gem 'web-console', '~> 3.1', '>= 3.1.1', group: :development
 
-group :development, :test do 
-#gem 'mysql2', '>= 0.3.13', '< 0.5'
 
-  gem 'byebug', '~> 8.2', '>= 8.2.2'
-  #gem 'web-console', '~> 3.1', '>= 3.1.1'
-  gem 'spring', '~> 1.6', '>= 1.6.3'
-  gem 'guard'
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
 end
 
-group :test do
-  gem 'minitest-reporters', '~> 1.1', '>= 1.1.8' 
-  gem 'mini_backtrace'
-  gem 'guard' # This is required for 'guard-minitest' to work
-  gem 'guard-minitest', '~> 2.4', '>= 2.4.4'
+group :development do
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
 end
-
-# group :development do
-#   # Access an IRB console on exception pages or by using <%= console %> in views
-#   gem 'web-console', '~> 2.0'
-
-#   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-#   gem 'spring'
-
 
 
 

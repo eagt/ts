@@ -11,3 +11,6 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 
 Rails.application.config.assets.precompile += %w( company.css )
+Rails.application.config.assets.precompile += %w( public.js )
+Rails.application.config.assets.precompile += %w( access.css )
+Rails.application.config.assets.precompile += %w( professional.css )

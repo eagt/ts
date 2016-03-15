@@ -1,74 +1,116 @@
 class ProfessionalsController < ApplicationController
 
-  layout "companies"  
- 
-# /** -- I could place in here any form of sorting I desire depending on  the methods I've
-# created in the professional model
-  def index
-    @professionals = Professional.sorted_lastname
-  end
+  layout "professional"
 
-  def show
-    @professional = Professional.find(params[:id])
-  end
+  before_action :set_locale
+  before_action :current_user
 
-  def new
-    @professional = Professional.new({:name => " "})
-    @professional_count = Professional.count + 1
-  end
-
-  def create
-    #@professional = Professional.new(params[:professional])  =>  # Not the final implementation!
-    @professional = Professional.new(professional_params)
-      if @professional.save
-        flash[:success] = "Welcome to TS App '#{@professional.name}'!"
-      # Handle a successful save.
-         redirect_to @professional
-      else
-       render 'new'
-      end
-  end
-
- def edit
-     @professional  = Professional.find(params[:id])
-     @professional_count = Professional.count
-   end
-
-   def update
-  # Find an existing object using the form parameters
-       @professional  = Professional.find(params[:id])       
-  #  Update the object 
-      if @professional.update_attributes(professional_params)
-       flash[:notice] = " Professional #{@professional.name} updated successfully!"
-  #  If the update succeeds, it will redirect some where (this case, index action)
-       redirect_to(:action => 'show', :id => @professional.id)
-       else 
-  #  If the save fails, redisplay the form so the user can fix the problem and the submit it
-       @professional_count = Professional.count
-       render('edit')
-       end
-     end
-
-
-   def delete
-     @professional  = Professional.find(params[:id])
-   end
-
-   def destroy
-#     #I Find an existing object using the form parameters
-     professional = Professional.find(params[:id]).destroy 
-     flash[:notice] = "Professional #{professional.name} destroyed successfully!"
-     redirect_to(:action => 'index')
-   end
- 
-
-  private
-
-    def professional_params
-      params.require(:professional).permit(:id, :id_code, :discipline, :name, :email, :contact_details_id, :creator, :logged_as, :updated_at, :comapny_id, :branch_id, :client_id, :appointment, :password,
-                                   :password_confirmation)
+    def login
+      render layout: false
     end
 
+    def index
+      if @is_company # If the user is a Company
+        @professionals = @current_user.professionals
+      else # If the user is professional pass the whole list ONLY for testing
+        @professionals = Professional.all
+      end
+    end
+
+    def show
+      @professional = Professional.find(params[:id])
+    end
+
+    def new
+      begin
+        if @is_company # If the user is a company and is creating a new virtual professional
+          @professional = @current_user.professionals.new
+        else # kicks in when registering a new Professional
+          @professional = Professional.new(is_virtual: false)
+        end    
+      rescue Exception => e # Catch exceptions 
+        flash[:notice] = e.to_s
+        redirect_to([@current_user, :professionals])
+      end
+    end
+
+    def create        
+      # Instantiate a new object using form parameters
+      @professional = Professional.new(professional_params)
+      if @professional.save
+        if @is_company then Employment.create(:company => @current_user, :professional => @professional, :note => "Real company, Virtual professional", :validated => true) end
+        # If save succeeds, redirect to the index action
+        flash[:notice] = "#{t(:professional)} #{t(:create_success)}"
+        redirect_to([@current_user, :professionals]) 
+        # begin
+        #   if !@is_company # If user is a professional then create a virtual company and default (empty) children
+        #     company = Company.create(is_default: true, name: "-")
+        #     Employment.create(:company => company, :professional => @professional, :note => "Virtual company, Real professional", :validated => true)
+        #     branch = company.branches.create(is_default: true, name: "-")
+        #     client = branch.clients.create(is_default: true, company_id: company.id, dob: "1900-01-01", first_name: "-", last_name: "-")
+        #     @professional.clients << client
+        #   else # if the user is a company just make the proper associations to the new virtual professional
+        #     Employment.create(:company => @current_user, :professional => @professional, :note => "Real company, Virtual professional", :validated => true)
+        #   end      
+
+        #   # If save succeeds, redirect to the index action
+        #   flash[:notice] = "#{t(:professional)} #{t(:create_success)}"
+        #   redirect_to([@current_user, :professionals])      
+
+        # rescue Exception => e # Catch exceptions if it can't create the children of a company
+        #   # If there is an exception delete the objects created and redirect to index
+        #   @professional.destroy
+        #   if branch then branch.destroy end        
+        #   if client then client.destroy end
+        #   if company then company.destroy end
+
+        #   flash[:notice] = "#{t(:professional)}->" + e.to_s
+        #   redirect_to([@current_user, :professionals])
+        # end      
+      else
+        # If save fails, redisplay the from so user can fix problems
+        render('new')
+      end
+    end
+
+    def edit
+      @professional = Professional.find(params[:id])
+    end
+
+    def update
+      # Find and existing object using form parameters
+      @professional = Professional.find(params[:id])
+      # Update the object
+      if @professional.update_attributes(professional_params)
+        # If update succeeds, redirect to the index action
+        flash[:notice] = "#{t(:professional)} #{t(:update_success)}"
+        redirect_to([@current_user, @professional])
+      else
+        # If save fails, redisplay the from so user can fix problems
+        render('edit')
+      end
+    end
+
+    def delete
+      @professional = Professional.find(params[:id])
+    end
+
+    def destroy
+      professional = Professional.find(params[:id]).destroy
+      flash[:notice] = "#{t(:professional)} '#{professional.email}' #{t(:destroy_success)}"
+      redirect_to([@current_user, :professionals])
+    end
+
+    private
+
+      def set_locale
+        I18n.locale = params[:locale] || I18n.default_locale
+      end
+
+      def professional_params
+        params.require(:professional).permit(:id, :id_token, :id_code, :discipline, :first_name, :last_name, :dob, :email, :specialty, :contact_details_id, :creator, :logged_as, :updated_at, :comapny_id, :branch_id, :client_id, :appointment, :password,
+                                     :password_confirmation, :is_virtual, :is_default, :time_zone)
+      end
 
 
-end
+ end

@@ -1,9 +1,18 @@
 class ClientsController < ApplicationController
   
-  layout "companies" 
+  layout "professional"
+
+  before_action :set_locale
+  before_action :current_user
 
   def index
-    @clients = Client.sorted_lname
+    if !@is_company && params[:company_id]
+      @clients = @current_user.clients.where(company_id: params[:company_id])
+    elsif @is_company && params[:professional_id]
+      @clients = @current_user.clients.joins(:professionals).where(professionals: {id: params[:professional_id]})
+    else
+      @clients = @current_user.clients
+    end    
   end
 
   def show
@@ -11,58 +20,75 @@ class ClientsController < ApplicationController
   end
 
   def new
-    @client = Client.new({:name => " "})
-    @client_count = Client.count + 1
+    begin
+      @client = @current_user.clients.new()
+    rescue Exception => e # Catch exceptions 
+      flash[:notice] = e.to_s
+      redirect_to([@current_user, :clients])
+    end
   end
 
-  def create
-    @client = Client.new(client_params)
+  def create    
+    # Instantiate a new object using form parameters
+    @client = Client.new(client_params) 
     if @client.save
-      flash[:notice] = "Cleint #{@client.name.upcase} created successfuly!!" 
-      redirect_to(@client)
+      # If save succeeds, redirect to the index action
+      flash[:notice] = "#{t(:client)} #{t(:create_success)}"
+      redirect_to([@current_user, :clients])
+      # begin   
+      #   @current_user.clients << @client
+      #   # If save succeeds, redirect to the index action
+      #   flash[:notice] = "#{t(:client)} #{t(:create_success)}"
+      #   redirect_to([@current_user, :clients])
+      # rescue Exception => e # Catch exceptions if it can't create the children of a company
+      #   # If there is an exception delete the objects created and redirect to index
+      #   if @client then @client.destroy end
+
+      #   flash[:notice] = "#{t(:client)}->" + e.to_s
+      #   redirect_to([@current_user, :clients])        
+      # end
     else
-      @client_count = Client.count + 1
+      # If save fails, redisplay the from so user can fix problems
       render('new')
-      # Note: A method has to been created to make sure that an user with the same details can be entered
     end
   end
 
   def edit
-     @client = Client.find(params[:id])
-     @client_count = Client.count
+    @client = Client.find(params[:id])
   end
 
   def update
-     @client = Client.find(params[:id])
-     if @client.update_attributes(client_params)
-      flash[:notice] = " Client #{@client.name.upcase} updated successfully!"
-  #  If the update succeeds, it will redirect some where (this case, index action)
-      redirect_to(:action => 'show', :id => @client.id)
-     else 
-      @clienty_count = Client.count
-       redenr ('edit')
-     end
+    # Find and existing object using form parameters
+    @client = Client.find(params[:id])
+    # Update the object
+    if @client.update_attributes(client_params)
+      # If update succeeds, redirect to the index action
+      flash[:notice] = "#{t(:client)} #{t(:update_success)}"
+      redirect_to([@current_user, @client])
+    else
+      # If save fails, redisplay the from so user can fix problems
+      render('edit')
+    end
   end
-
-
 
   def delete
     @client = Client.find(params[:id])
   end
 
   def destroy
-    client = Client.find(params[:id]).destroy 
-     flash[:notice] = "Client #{client.name.upcase} destroyed successfully!"
-     redirect_to(:action => 'index')
+    client = Client.find(params[:id]).destroy
+    flash[:notice] = "#{t(:client)} '#{client.first_name}' #{t(:destroy_success)}"
+    redirect_to([@current_user, :clients])
   end
-
-
 
   private
+
+    def set_locale
+      I18n.locale = params[:locale] || I18n.default_locale
+    end
+
   def client_params
-    params.require(:client).permit(:id_code, :discipline, :company_id, :branch_id, :name, :last_name, :email, :dod, :photo, :contact_details_id, :creator, :logged_as)
-
-
-
+    params.require(:client).permit(:id_code, :id_token, :discipline, :company_id, :branch_id, :first_name, :last_name, :email, :dod, :photo, :contact_details_id, :creator, :logged_as)
   end
+
 end

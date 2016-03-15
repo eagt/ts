@@ -2,7 +2,7 @@
 <%= error_messages_for(@client) %>
 
 <div class="table-responsive">
-  <table id="fields_table" class="display responsive" summary="Branch form fields">
+  <table id="fields_table" class="display responsive" summary="Clients form fields">
     <tbody>
       <br>
       <tr>
@@ -13,23 +13,26 @@
         <th><%= f.label(:discipline, t(:discipline)) %></th>
         <td><%= f.text_field(:discipline) %></td>
       </tr> 
-       <tr>
-        <th><%= f.label(:company_id, t(:company_id)) %></th>
-        <td><%= f.text_field(:company_id) %></td>
-      </tr> 
-       <tr>
-        <th><%= f.label(:branch_id, t(:branch_id)) %></th>
-        <td><%= f.text_field(:branch_id) %></td>
-      </tr>  
       <tr>
-        <th><%= f.label(:name, t(:name)) %></th>
-        <td><%= f.text_field(:name) %></td>
+        <th><%= f.label(:company_id, t(:company)) %></th>
+        <td><%= @is_company ? @current_user.name : f.collection_select(:company_id, @current_user.companies, :id, :name,include_blank: true) %></td>
+      </tr>
+      <tr>
+        <th><%= f.label(:branch_id, t(:branch)) %></th>
+        <td><%= @is_company ? f.collection_select(:branch_id, @current_user.branches, :id, :name, include_blank: true) : f.grouped_collection_select(:branch_id, @current_user.companies, :branches, :name, :id, :name, include_blank: true) %></td>
+      </tr> 
+      <tr>
+        <th><%= f.label(:first_name, t(:first_name)) %></th>
+        <td><%= f.text_field(:first_name) %></td>
       </tr>
       <tr>
         <th><%= f.label(:last_name, t(:last_name)) %></th>
         <td><%= f.text_field(:last_name) %></td>
-      </tr>    
-         
+      </tr>  
+       <tr>
+        <th><%= f.label(:dob, t(:dob)) %></th>
+        <td><%= f.date_select(:dob, {:start_year => 1900, :end_year => Time.zone.now.year}) %></td>
+      </tr>           
       <tr>
         <th><%= f.label(:email, t(:email)) %></th>
         <td><%= f.text_field(:email) %></td>

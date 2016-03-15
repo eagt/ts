@@ -1,62 +1,102 @@
 
-<% provide(:title, "Appointment Index") %> 
+<% provide(:title, "Appointment Index") %>
 
-<!-- <% @page_tittle = " Appointments " %> -->
+<!--  <% @page_title = t(:appointment).pluralize(locale) %> -->
 
-<div class="appointment index">
-		<h2> Appointments </h2>
-<%= link_to("Add New Appointment", new_appointment_path, :class => 'action new') %>
-		
-	<!-- Here I will pluralize to say how many Appointments are/is found -->
+<div class="appointments index">
+  
+<%= @current_user ? link_to("<< " + t(:home), [@current_user]) : "-" %>
+<br /><br />
+  
+<%= link_to(image_tag('plus_sign.png', :size => '11x11', :alt => '+') + " " +t(:add_new_appointment), [:new, @current_user, params[:controller].singularize], :class => 'action new') %>
 
-		<div><%= pluralize(@appointments.size, 'appointment') %> found</div>
-		
-		<table class= "table table-striped" summary="Appointment List">
-		  <thead>
-		  	<br>
-			<tr>
-				
-				<th>id</th>
-				<th>Discipline</th>
-				<th>Company</th>
-				<th>Branch</th>	
-		<!-- 		<th>Professional</th>	 -->			
-	   			<th>Client</th>
-	   			<th>Status</th>
-	   			<th>Date/Time</th>
-	   			<th>Creator</th>
-	   			<th>Logged As</th>
-				<th>Actions</th>
-			</tr>
-		  </thead>
-		  <tbody>
+    
+  <div><%= @appointments.size.to_s + " " + t(:appointment).pluralize(@appointments.size, locale) + " " + t(:found) %></div>
 
-		<% @appointments.each do |appointment| %>
-		<tr>	
-				<td><%= appointment.id %></td>	
-				<td><%= appointment.discipline %></td>		
-				<td><%= appointment.company_id %></td>
-				<td><%= appointment.branch_id %></td>
-				<!-- <td><%#= appointment.professional.prof_appointments_id %></td> -->
-				<td><%= appointment.client_id %></td>
-				<td><%= appointment.status %></td>
-				<td><%= appointment.date_time %></td>
-				<td><%= appointment.creator %></td>
-				<td><%= appointment.logged_as %></td>
-				<td class="actions">
+  
 
-			<%#= link_to("View Appointment|s", {:controller => 'appointment|s', :appointment_id => appointment_id}, :class => 'action show') %>
-				
-				<%= link_to("Show", appointment, :class => 'action show') %>
-				<%= link_to("Edit", [:edit,appointment], :class => 'action edit') %>
-				<%= link_to("Delete", {:action => 'delete', :id => appointment.id},:class => 'action delete') %>
-	
+  <div class="table-responsive">
+    <table id="index_table" class="display responsive" summary="appointment list">
+      <thead class="thead-inverse">
+        <tr>
+          <th>&nbsp;</th>
+          <th><%= "--" %></th>
+          <th><%= select_tag("col2_filter", "",html_options={ class: "column_filter", :onchange => "filterColumn(2)", :include_blank => true}) %></th>
+          <th><%= "--" %></th>
+          <th><%= "--" %></th>
+          <th><%= "--" %></th>
+          <th><%= "--" %></th>
+          <th><%= select_tag("col7_filter", "",html_options={ class: "column_filter", :onchange => "filterColumn(7)", :include_blank => true}) %></th>
+          <th><%= "--" %></th>
+          <th><%= "--" %></th>
+          <th><%= "--" %></th>
+        </tr>
+        <tr>
+          <th>&nbsp;</th>
+          <th><%= t(:shared) %></th>
+          <th><%= t(:company) %></th>
+			<!--	<th>Discipline</th>  -->
+<th><%= t(:branch) %></th>
+          <th><%= t(:professional) %></th>
+          <th><%= t(:client) %></th>
+          <th><%= t(:date_time) %></th>
+          <th><%= t(:status) %></th>
+          <th><%= t(:task_type) %></th>
+          <th><%= t(:professional_fee) %></th>
+          <th><%= t(:action) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @appointments.each do |appointment| %>
+        
+          <tr class="<%= cycle('odd', 'even') %>">
+            <td><%= appointment.id %></td>
+            <td><%= appointment.shared %></td>
+            <td><%= appointment.company_id %></td>
+            <td><%= appointment.branch_id %></td>
+            <td><%= appointment.professionals.size %></td>
+            <td><%= appointment.client_id %></td>
+            <td><%= appointment.date_time %></td>
+            <td><%= appointment.status %></td>
+            <td><%= appointment.task_type %></td>
+            <td><%#= appointment.professional_fee %></td>
+            <td class="actions">
+              <%= link_to(t(:show), [@current_user, appointment], :class => 'action show') %>
+              <%= link_to(t(:edit), [:edit, @current_user, appointment], :class => 'action edit') %>
+              <%= link_to(t(:delete), [:delete, @current_user, appointment], :class => 'action delete') %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-				<%#= <%= link_to("Delete", [:delete,company], :class => 'action delete') %> 
-			 </td>
-		</tr>
-		<% end %>
-		</tbody>
-	</table>
+<%= javascript_tag("$(document).ready( function () {$('#index_table').DataTable({responsive: true, fixedHeader: true});} );") %>
+
+<%= javascript_tag("function filterColumn ( i ) {$('#index_table').DataTable().column( i ).search( $('#col'+i+'_filter').val()).draw();}") %>
+
+<%= javascript_tag("window.onload = function(){$('#index_table').DataTable().column(7).data().unique().sort().each( function ( value ) {select = document.getElementById('col7_filter'), option = null; option = document.createElement('option');option.value = value;option.innerHTML = value;select.appendChild(option);} );$('#index_table').DataTable().column(2).data().unique().sort().each( function ( value ) {select = document.getElementById('col2_filter'), option = null; option = document.createElement('option');option.value = value;option.innerHTML = value;select.appendChild(option);} );};") %>
+
+
+
+<!--
+  options_for_select(["A","B"]),
+window.onload = function(){
+$('#index_table').DataTable().column(7).data().unique().sort.each( function ( value ) {
+        select = document.getElementById('col7_filter'), option = null;
+        option = document.createElement('option');
+        option.value = value;
+        option.innerHTML = value;
+        select.appendChild(option);
+    } );};
+window.onload = function(){
+    select = document.getElementById('col7_filter'), option = null;
+    for(var i = 0; i <= 10; i++) {
+        option = document.createElement('option');
+        option.value = i;
+        option.innerHTML = i;
+        select.appendChild(option);
+    }
+};
+-->
 </div>
-

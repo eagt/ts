@@ -1,8 +1,11 @@
+
 class CreateClients < ActiveRecord::Migration
 
 	def up
-
 	    create_table :clients do |t|
+
+	      # Token to identify a register, not unique as it links instance for different users
+          t.string "id_token", :null => false
 
 	      t.integer "company_id", :visible => false
 	      t.integer "branch_id", :visible => false
@@ -11,7 +14,7 @@ class CreateClients < ActiveRecord::Migration
 
 
 	      t.string "id_code", :limit => 25
-	      t.string "name", :limit => 50, :null => false
+	      t.string "first_name", :limit => 50, :null => false
 	      t.string "last_name", :limit => 50, :null => false
 	      t.date "dob" #, :null => false
 	      t.string "email", :default => "@"

@@ -4,6 +4,9 @@ class CreateBranches < ActiveRecord::Migration
 
     create_table :branches do |t|
 
+       # Token to identify a register, not unique as it links instance for different users
+      t.string "id_token", :null => false
+
       t.integer "company_id", :visible => false  # I can change it if I want to see it
 
       t.string "discipline", :limit => 25
@@ -16,7 +19,7 @@ class CreateBranches < ActiveRecord::Migration
 
        t.integer "contact_details_id", :visible => false
  
-      #t.boolean "branch", :default => true
+     
 
       # Note: In the next two columns I will leave the visible value while developing and testing...
       t.string "creator", :visible => true  # This has to be FILL IN automatically and kept on the data base depending who is the logger when creating it
@@ -25,7 +28,11 @@ class CreateBranches < ActiveRecord::Migration
       t.string "logged_as", :visible => true  # This has to be FILL IN automatically depending who is the logger in the current session
                     # It would be deleted as soon as the user log off. Sort of virtual attribute.
     
+      t.boolean "pass_active", :default => false
+      t.boolean "acc_active", :default => false
 
+      t.string "password_digest"
+ 
 # #  Note: It will be necessary to create usernames and password for each user. It may be that these usrnames and passwords
 # # could be assigned to each branch independely by the global admin user in the company. It has to be taking
 # # into account that the Branch Admin user won't be able to do CRUD in anything to do with the Company
@@ -34,13 +41,15 @@ class CreateBranches < ActiveRecord::Migration
       
        t.datetime "last_in"
 
+       t.string "time_zone"
+
        t.timestamps null: false
 
      end
 #       This is a multi column index ... add_index :branches, ["company_id", "professional_id", "name", "id_code", "email"]
-        add_index("branches", "company_id")
-       
-        add_index("branches", "name")
+        add_index("branches", "company_id")       
+        add_index("branches", "name")      
+        add_index("branches", "id_token")
         add_index("branches", "id_code")
         add_index("branches", "email")
         add_index("branches", "discipline")

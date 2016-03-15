@@ -1,16 +1,20 @@
 <% @page_tittle = "Delete Branch" %>
+<!-- 
+<% @page_title = t(:branch).pluralize(locale) %>
+ -->
+<%= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %>
 
+<div class="branch delete">
+	<h2><%= t(:delete) + " " + t(:branch) %></h2>
 
+	<%= form_for([@current_user, @branch], :html => {:method => :delete}) do |f| %>
 
-<div class="companies delete">
-	<h2> Delete Branch </h2>
-	<%= link_to("<< Back to Menu", {:action => 'index'}, :class => 'back-link') %>
-		<br>
-		<p></p>
-			<%= form_for(@branch, :html => {:method => :delete}) do |f| %>
-			<p class="reference-name"><%= "Are you sure you want to permanently delete #{@branch.name.upcase} branch?" %></p>
-			<div class="form_buttons">
-				<%= submit_tag("Delete Branch") %>
-			</div>
-			<% end %>
+		<p> <%= t(:delete_message) %> </p>
+
+		<p class="reference-name"><%= @branch.name %></p>
+
+		<div class="form-buttons">
+			<%= submit_tag(t(:delete) + " " + t(:branch)) %>
+		</div>
+	<% end %>
 </div>

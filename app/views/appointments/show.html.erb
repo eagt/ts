@@ -1,14 +1,13 @@
 <% provide(:title, "Show Appointment") %> 
-
-<h2>Appointmnet Details</h2>
-
-<%= link_to("<< Back to Menu", {:controller => 'appointments', :action => 'index'}, :class => 'back-link') %>
-
-
+<!-- 
+<% @page_title = t(:appointment).pluralize(locale) %>
+ -->
+<%= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %>
 
 <div class="appointments show">
+  <h2><%= t(:show) + " " + t(:appointment) %></h2>
 
-<div class="table-responsive">
+  <div class="table-responsive">
     <table id="show_table" class="display responsive" summary="appointment detail view">
       <tbody>
 
@@ -28,9 +27,21 @@
     <th><%= t(:branch_id) %></th>
     <td><%= @appointment.branch_id %></td>
    </tr>
+   <tr>
+     <th><%= t(:professional) %></th>
+     <td><%= @appointment.professionals.size %></td>
+   </tr>
    <tr> 
     <th><%= t(:client_id) %></th>
     <td><%= @appointment.client_id %></td>
+   </tr>
+   <tr>
+     <th><%= t(:shared) %></th>
+     <td><%= @appointment.shared %></td>
+   </tr>
+   <tr>
+     <th><%= t(:date_time) %></th>
+     <td><%= @appointment.date_time %></td>
    </tr>
    <tr> 
     <th><%= t(:status) %></th>
@@ -57,8 +68,8 @@
     <td><%= @appointment.photo %></td>
    </tr>
    <tr> 
-    <th><%= t(:needs_followup) %></th>
-    <td><%= @appointment.needs_followup %></td>
+    <th><%= t(:needs_folloup) %></th>
+    <td><%= @appointment.needs_folloup %></td>
    </tr>
    <tr> 
     <th><%= t(:payment_details_id) %></th>
@@ -79,15 +90,7 @@
    <tr>
     <th> <%= t(:Updated_at) %></th>
     <td><%= @appointment.updated_at %></td>
-   </tr>
-
-
-
-
-     <!--   </tr>  <tr>
-        <th><%#= f.label(:professional_id, t(:professiopnal)) %></th>
-        <td><%#= f.text_field(:professional_id) %></td>
-      </tr>  -->     
+   </tr>    
    </tbody>
 </table>
 

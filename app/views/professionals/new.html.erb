@@ -1,17 +1,20 @@
 <% provide(:title, 'Create Professional') %>
 
-<!--<% @page_title = t(:professional).pluralize(locale) %> -->
-	<div class="professionals new">
-	  <h2><%= t(:create) + " " + t(:professional) %></h2>
+<!-- <% @page_title = t(:professional).pluralize(locale) %>  --> 
 
-			<%= link_to("<< Back to Menu", {:controller => 'professionals', :action => 'index'}, :class => 'back-link') %>
-	   		<%= error_messages_for(@professional) %> 
-			  <%= form_for(@professional) do |f| %>
-			    <%= render(:partial => "form", :locals => {:f => f}) %>
-				    <div class="form_buttons">
-				       <%= submit_tag("Create Professional") %>
-				   <!--  <div class="form-buttons"> 
-				      <%#= submit_tag(t(:create) + " " + t(:professional)) %> -->
-				    </div>
-			  <% end %>
-	</div>
+<%= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %>
+
+<div class="professionals new">
+  <h2><%= t(:create) + " " + t(:professional) %></h2>
+
+  <%= form_for([@current_user, @professional]) do |f| %>
+
+    <%= render(:partial => "form", :locals => {:f => f}) %>
+
+    <div class="form-buttons">
+      <%= submit_tag(t(:create) + " " + t(:professional)) %>
+    </div>
+
+  <% end %>
+
+</div>

@@ -1,8 +1,11 @@
 <% provide(:title, "Show Professional") %> 
 
-<h1>Professional Details</h1>
+<!-- <% @page_title = t(:professional).pluralize(locale) %> -->
 
-<%= link_to("<< Back to Menu", {:controller => 'professionals', :action => 'index'}, :class => 'back-link') %>
+<%= @current_user ? link_to("<< " + t(:return_to), [@current_user, params[:controller]]) : "-" %>
+
+<div class="Professionals show">
+  <h2><%= t(:show) + " " + t(:professional) %></h2>
 
 <div class="professional show">
 
@@ -13,96 +16,104 @@
 								<th><%= t(:id) %></th>
 								<td><%= @professional.id%></td>
 							 </tr>
-
 						     <tr>	
 								<th><%= t(:id_code) %></th>
 								<td><%= @professional.id_code %></td>
 							 </tr>
-							  <tr>
+							 <tr>
 								<th> <%= t(:discipline) %></th>
 								<td><%= @professional.discipline %></td>
 							 </tr>
-
 							 <tr>
-								<th><%=  t(:name) %></th>
-								<td><%= @professional.name %></td>
+								<th><%=  t(:first_name) %></th>
+								<td><%= @professional.first_name %></td>
 							 </tr>	
+							 <tr>
+								<th><%=  t(:last_name) %></th>
+								<td><%= @professional.name %></td>
+							 </tr>
+							 <tr>
+						         <th><%= t(:dob) %></th>
+						         <td><%= @professional.dob %></td>
+						      </tr>
 
 						   	 <th> <%= t(:email) %></th>
 								<td><%= @professional.email  %></td>
 							 </tr>
-							</tr>
+							 </tr>
 								<th> <%= t(:contact_details_id) %></th>
 								<td><%= @professional.contact_details_id  %></td>
-							</tr>
+							 </tr>
 
 						<!-- This has to be FILL IN automatically and kept on the data base depending who is the logger when creating it. It could be either Company or Professional. In the View  it has to be a dropdown with both ooptions. -->
 							<tr>
 								<th> <%= t(:creator) %></th>  
 								<td><%= @professional.creator %></td>
 							</tr>
+							<tr>
+					          <th><%= t(:specialty) %></th>
+					          <td><%= @professional.specialty %></td>
+					        </tr>
 
 						<!-- This has to be FILL IN automatically depending who is the logger in the current session. It would be deleted as soon as the user log off. Sort of virtual attribute. -->
-							 <tr>
+							<tr>
 							 	<th> <%= t(:logged_as) %></th>
 								<td><%= @professional.logged_as %></td>
-							 </tr>
-
+							</tr>
 							<tr>
 								<th><%= t(:last_in) %></th>
 								<td><%= @professional.last_in %></td>
-						 	</tr>
-
-								<!-- <tr>
-								<th><%#= t(:pass_active) %></th>
-								<td><%#= @company.pass_active ? 'true' : 'false' %></td>
-								 </tr>
-								 <tr>
-								<th><%#= (:acc_active) %></th>
-								<td><%#= @company.acc_active ? 'true' : 'false' %></td>
-								 </tr>
-								 <tr>
-								<th><#%= (:password_digest) %></th>
-								<td><%#= @company.password_digest ? 'true' : 'false' %></td>
-								 </tr>
-								 <tr>
-									<th><%#= t(:last_in) %></th>
-								<td><%#= @company.last_in %></td>
-								 </tr> -->
-							 <tr>
+						 	</tr>								
+						    <tr>
+							    <th><%= link_to(t(:company).pluralize(locale), @is_company ? [@current_user] : [@professional, :companies]) %></th>
+							    <td><%= @is_company ? "1" : @professional.companies.size %></td>
+						    </tr>
+						    <tr>
+							    <th><%= link_to(t(:client).pluralize(locale), @is_company ? [@current_user, :clients, {:professional_id => @professional.id}] : [@professional, :clients]) %></th>
+							    <td><%= @is_company ? @professional.clients.select {|s| s.company_id == @current_user.id}.size : @professional.clients.size %></td>
+						    </tr>
+						    <tr>
+						   		 <th><%= link_to(t(:appointment).pluralize(locale), @is_company ? [@current_user, :appointments, {:professional_id => @professional.id}] : [@professional, :appointments])  %></th>
+						   		 <td><%= @is_company ? @current_user.appointments.select {|s| s.professional_id == params[:id].to_i}.size : @professional.appointments.size %></td>
+						    </tr>
+						    <tr>
+						         <th><%= t(:pass_active) %></th>
+						         <td><%= @professional.pass_active %><%#= status_tag(@professional.pass_active) %></td>
+						    </tr>
+						    <tr>
+						          <th><%= t(:acc_active) %></th>
+						          <td><%= @professional.acc_active %><%#= status_tag(@professional.acc_active) %></td>
+						    </tr>
+						    <tr>
+						          <th><%= "ID Token" %></th>
+						          <td><%= @professional.id_token %></td>
+						    </tr>
+						    <tr>
+						          <th><%= "is Virtual?" %></th>
+						          <td><%= @professional.is_virtual %></td>
+						    </tr>
+						    <tr>
+						          <th><%= "is Default?" %></th>
+						          <td><%#= @professional.is_default %></td>
+						    </tr>	
+						    <tr>
 								<th><%= t(:Created_at) %></th>
 								<td><%= @professional.created_at %></td>
-							 </tr>
-							 <tr>
+							</tr>
+							<tr>
 								<th> <%= t(:Updated_at) %></th>
 								<td><%= @professional.updated_at %></td>
-							 </tr>
-<!-- 
-							<tr>
-								<th><%#= t(:company_id) %></th>
-								<td><%#= @professional.company_id %></td>
-						 	</tr> -->
-
-						<!-- 	<tr>
-								<th><%#= t(:branch) %></th>
-								<td><%#= @professional.branch %></td>
-						 	</tr>
-
-							<tr>
-								<th><%#= t(:client) %></th>
-								<td><%#= @professional.client %></td>
-						 	</tr>
-
-							<tr>
-								<th><%#= t(:appointment) %></th>
-								<td><%#= @professional.appointment %></td>
-						 	</tr> -->
-							 <!-- This link below will take me to see more contact details
-							 <%#= link_to("<< Contact Details", {:controller => 'contact_details', :action => 'show'}, :class => 'back-link') %> -->					 
+							</tr>		 
 					  </tbody>
 			</table>
-
 	</div>
 
 <%= javascript_tag("$(document).ready( function () {$('#show_table').DataTable();} );") %>
 <%= javascript_tag("$('#show_table').DataTable( {responsive: true, paging: false} );") %>
+
+
+
+
+
+
+

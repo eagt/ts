@@ -1,14 +1,18 @@
-<% provide(:title, 'Edit Professional') %>
+<% @page_title = t(:professional).pluralize(locale) %>
 
-<div class="professional edit">
-	  <h2>Edit Professional</h2>
-	  <%= link_to("<< Back to List", {:action => 'index'}, :class => 'back-link') %>
-	  <%= error_messages_for(@professional) %>
-	  		<br>
-		    <%= form_for(@professional) do |f| %>
-			  <%= render(:partial => 'form', :locals => {:f => f} ) %>
-			<div class="form_buttons">
-			   <%= submit_tag('Update Professional') %>
-			</div>
-		  	  <% end %>
+<%= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %>
+
+<div class="professionals edit">
+  <h2><%= t(:update) + " " + t(:professional) %></h2>
+
+  <%= form_for([@current_user, @professional]) do |f| %>
+
+    <%= render(:partial => "form", :locals => {:f => f}) %>
+
+    <div class="form-buttons">
+      <%= submit_tag(t(:edit) + " " + t(:professional)) %>
+    </div>
+
+  <% end %>
+
 </div>

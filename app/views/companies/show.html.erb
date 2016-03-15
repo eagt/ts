@@ -1,89 +1,116 @@
 <% provide(:title, "Show Company") %> 
 
-<h2>Company Details</h2>
+<!-- <% @page_title = t(:company).pluralize(locale) %> -->
 
-<%= link_to("<< Back to Menu", {:controller => 'companies', :action => 'index'}, :class => 'back-link') %>
-<div class="companies show">
-<div class="table-responsive">
-    <table id="show_table" class="display responsive" summary="company detail view">
+<%= @current_user ? link_to("<< " + t(:return_to), [@current_user, params[:controller]]) : "-" %>
+<%#= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %>
+
+<div class="Company show">
+  <h2><%= t(:show) + " " + t(:company) %></h2>
+
+  <div class="table-responsive">
+    <table id="show_table" class="display responsive" summary="Company detail view">
       <tbody>
       	<br>
-     <tr>	
-		<th><%= t(:id) %></th>
-		<td><%= @company.id%></td>
-	 </tr>
-     <tr>	
-		<th><%= t(:id_code) %></th>
-		<td><%= @company.id_code %></td>
-	 </tr>
-	  <tr>
-		<th> <%= t(:discipline) %></th>
-		<td><%= @company.discipline %></td>
-	</tr>
-	 <tr>
-		<th><%=  t(:name) %></th>
-		<td><%= @company.name %></td>
-	 </tr>
-		<th> <%= t(:email) %></th>
-		<td><%= @company.email  %></td>
-	</tr>
-
-<!-- If Contact Details isn't placed in index  I think that this is a great place to place contact details
-<%#= link_to(t(:contact_details), {:controller => 'contact_details', :professional_id => professional.id}, :class => 'action show') %> 
--->
-	</tr>
-		<th> <%= t(:contact_details_id) %></th>
-		<td><%= @company.contact_details_id  %></td>
-	</tr>
-<!-- This has to be FILL IN automatically and kept on the data base depending who is the logger when creating it. It could be either Company or Professional. In the View  it has to be a dropdown with both ooptions. -->
-	<tr>
-		<th> <%= t(:creator) %></th>  
-		<td><%= @company.creator %></td>
-	</tr>
-
-<!-- This has to be FILL IN automatically depending who is the logger in the current session. It would be deleted as soon as the user log off. Sort of virtual attribute. -->
-	 <tr>
-	 	<th> <%= t(:logged_as) %></th>
-		<td><%= @company.logged_as %></td>
-	 </tr>
-	<tr>
-		<th><%= t(:last_in) %></th>
-		<td><%= @company.last_in %></td>
- 	</tr>
-
-		<!-- <tr>
-		<th><%#= t(:pass_active) %></th>
-		<td><%#= @company.pass_active ? 'true' : 'false' %></td>
+	     <tr>	
+			<th><%= t(:id) %></th>
+			<td><%= @company.id%></td>
+		 </tr>
+	     <tr>	
+			<th><%= t(:id_code) %></th>
+			<td><%= @company.id_code %></td>
+		 </tr>
+		  <tr>
+			<th> <%= t(:discipline) %></th>
+			<td><%= @company.discipline %></td>
 		 </tr>
 		 <tr>
-		<th><%#= (:acc_active) %></th>
-		<td><%#= @company.acc_active ? 'true' : 'false' %></td>
+			<th><%=  t(:name) %></th>
+			<td><%= @company.name %></td>
+		 </tr>
+			<th> <%= t(:email) %></th>
+			<td><%= @company.email  %></td>
+		 </tr>
+
+	<!-- If Contact Details isn't placed in index  I think that this is a great place to place contact details
+	<%#= link_to(t(:contact_details), {:controller => 'contact_details', :professional_id => professional.id}, :class => 'action show') %> 
+	-->
+		
+	<!-- This has to be FILL IN automatically and kept on the data base depending who is the logger when creating it. It could be either Company or Professional. In the View  it has to be a dropdown with both ooptions. -->
+		 <tr>
+			<th> <%= t(:creator) %></th>  
+			<td><%= @company.creator %></td>
+		 </tr>
+
+	<!-- This has to be FILL IN automatically depending who is the logger in the current session. It would be deleted as soon as the user log off. Sort of virtual attribute. -->
+		 <tr>
+		 	<th> <%= t(:logged_as) %></th>
+			<td><%= @company.logged_as %></td>
 		 </tr>
 		 <tr>
-		<th><#%= (:password_digest) %></th>
-		<td><%#= @company.password_digest ? 'true' : 'false' %></td>
+			<th><%= t(:last_in) %></th>
+			<td><%= @company.last_in %></td>
+	 	 </tr>
+
+ 	     <tr>
+          <th><%= link_to(t(:professional).pluralize(locale), @is_company ? [@company, :professionals] : [@current_user]) %></th>
+          <td><%= @is_company ? @company.professionals.size : "1" %></td>
+         </tr>
+         <tr>
+          <th><%= link_to(t(:branch).pluralize(locale), @is_company ? [@company, :branches] : [@current_user, :branches, {:company_id => @company.id}]) %></th>
+          <td><%= @company.branches.size %></td>
+         </tr>
+         <tr>
+          <th><%= link_to(t(:client).pluralize(locale), @is_company ? [@company, :clients] : [@current_user, :clients, {:company_id => @company.id}]) %></th>
+          <td><%= @is_company ? @company.clients.size : @current_user.clients.select {|s| s.company_id == params[:id].to_i}.size %></td>
+         </tr>
+         <tr>
+          <th><%= link_to(t(:appointment).pluralize(locale), @is_company ? [@company, :appointments] : [@current_user, :appointments, {:company_id => @company.id}])  %></th>
+          <td><%= @is_company ? @company.appointments.size : @current_user.appointments.select {|s| s.company_id == params[:id].to_i}.size %></td>
+         </tr>
+         <tr>
+          <th><%= t(:pass_active) %></th>
+          <td><%= @company.pass_active %><%#= status_tag(@company.pass_active) %></td>
+         </tr>
+ 		 <tr>
+          <th><%= t(:acc_active) %></th>
+          <td><%= @company.acc_active %><%#= status_tag(@company.acc_active) %></td>
+         </tr>
+         <tr>
+          <th><%= "ID Token" %></th>
+          <td><%= @company.id_token %></td>
+         </tr>
+         <tr>
+          <th><%= "is Virtual?" %></th>
+          <td><%= @company.is_virtual %></td>
+         </tr>
+         <tr>
+          <th><%= "is Default?" %></th>
+          <td><%#= @company.is_default %></td>
+         </tr>	
+		 <tr>
+			<th><%= t(:created_at) %></th>
+			<td><%= @company.created_at %></td>
 		 </tr>
 		 <tr>
-			<th><%#= t(:last_in) %></th>
-		<td><%#= @company.last_in %></td>
-		 </tr> -->
-	 <tr>
-		<th><%= t(:created_at) %></th>
-		<td><%= @company.created_at %></td>
-	 </tr>
-	 <tr>
-		<th> <%= t(:updated_at) %></th>
-		<td><%= @company.updated_at %></td>
-	 </tr>
+			<th> <%= t(:updated_at) %></th>
+			<td><%= @company.updated_at %></td>
+		 </tr>
 
 
-	 <!-- This link below will take me to see more contact details
-	 <%#= link_to("<< Contact Details", {:controller => 'contact_details', :action => 'show'}, :class => 'back-link') %> -->
-	 
-	    </tbody>
+		 <!-- This link below will take me to see more contact details
+		 <%#= link_to("<< Contact Details", {:controller => 'contact_details', :action => 'show'}, :class => 'back-link') %> -->
+		 </tr>
+			<th> <%= t(:contact_details_id) %></th>
+			<td><%= @company.contact_details_id  %></td>
+		 </tr>
+	</tbody>
 </table>
 
 </div>
 
 <%= javascript_tag("$(document).ready( function () {$('#show_table').DataTable();} );") %>
 <%= javascript_tag("$('#show_table').DataTable( {responsive: true, paging: false} );") %>
+
+</div>
+

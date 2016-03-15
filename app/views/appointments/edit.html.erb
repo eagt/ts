@@ -1,18 +1,20 @@
 <% provide(:title, 'Edit Appointment') %>
 
+<!-- <% @page_title = t(:appointment).pluralize(locale) %> -->
 
+<%= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %>
 
+<div class="appointments edit">
+  <h2><%= t(:update) + " " + t(:appointment) %></h2>
 
-<!-- When action is implemented fully, I must be able to update all the users details -->
+  <%= form_for([@current_user, @appointment]) do |f| %>
 
-<div class="appointment edit">
-  <h2>Edit Appointment</h2>
-  <%= link_to("<< Back to Menu", {:action => 'index'}, :class => 'back-link') %>
-  <%= error_messages_for(@appointment) %>
-		  <%= form_for(@appointment) do |f| %>
-		  <%= render(:partial => "form", :locals => {:f => f}) %>
-		<div class="form_buttons">
-		   <%= submit_tag('Update Appointment') %>
-		</div>
-	  	  <% end %>
+    <%= render(:partial => "form", :locals => {:f => f}) %>
+
+    <div class="form-buttons">
+      <%= submit_tag(t(:edit) + " " + t(:appointment)) %>
+    </div>
+
+  <% end %>
+
 </div>

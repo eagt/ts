@@ -18,7 +18,7 @@ class CreateContactDetails < ActiveRecord::Migration
 	      t.string "state"
 	      t.string "country"
 
-	      t.string "telephone"
+	      t.string "tel"
 
 	      t.boolean "validated", :default => false
 
@@ -34,7 +34,7 @@ class CreateContactDetails < ActiveRecord::Migration
 		add_index("contact_details", "city")
 		add_index("contact_details", "state")
 		add_index("contact_details", "country")
-		add_index("contact_details", "telephone")
+		add_index("contact_details", "tel")
 	  end
 
 

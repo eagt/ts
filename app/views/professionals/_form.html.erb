@@ -12,9 +12,17 @@
               <td><%= f.text_field(:discipline) %></td>
             </tr> 
             <tr>
-              <th><%= f.label(:name, t(:name)) %></th>
-              <td><%= f.text_field(:name) %></td>
+              <th><%= f.label(:first_name, t(:first_name)) %></th>
+              <td><%= f.text_field(:first_name) %></td>
             </tr> 
+            <tr>
+              <th><%= f.label(:last_name, t(:last_name)) %></th>
+              <td><%= f.text_field(:last_name) %></td>
+            </tr>
+            <tr>
+                <th><%= f.label(:dob, t(:dob)) %></th>
+                <td><%= f.date_select(:dob, {:start_year => 1900, :end_year => Time.zone.now.year}) %></td>
+            </tr>
             <tr>
               <th><%= f.label(:email, t(:email)) %></th>
               <td><%= f.text_field(:email) %></td>
@@ -27,8 +35,12 @@
               <th><%= f.label(:creator, t(:creator)) %></th>
               <td><%= f.text_field(:creator) %></td>
             </tr> 
+            <tr>
+              <th><%= f.label(:specialty, t(:specialty)) %></th>
+              <td><%= f.text_field(:specialty) %></td>
+            </tr>
           </tbody>
-    <%#= f.hidden_field(:id_token, :value => @company.id_token) %>
+    <%= f.hidden_field(:id_token, :value => @professional.id_token) %>
      </table>
 </div>
 
