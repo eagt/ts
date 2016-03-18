@@ -51,7 +51,7 @@ class ProfessionalsController < ApplicationController
   end
 
 
-  
+
 
     # def new
     #      if @is_company # If the user is a company and is creating a new virtual professional
@@ -116,8 +116,7 @@ class ProfessionalsController < ApplicationController
       end
 
       def professional_params
-        params.require(:professional).permit( :id, :id_token, :id_code, :discipline, :first_name, :last_name, :dob, :email, :specialty, :contact_details_id, :creator, :logged_as, :updated_at, :comapny_id, :branch_id, :client_id, :appointment, :password,
-                                     :password_confirmation)
+        params.require(:professional).permit( :id, :id_code, :discipline, :first_name, :last_name, :dob, :email, :contact_details_id, :service, :specialty, :creator, :logged_as, :pass_active, :acc_active)
       end
 
 

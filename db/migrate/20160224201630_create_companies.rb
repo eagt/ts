@@ -7,10 +7,13 @@ def up
      
         
         t.string "id_code", :limit => 25
+        t.string "discipline", :limit => 25
         t.string "name", :limit => 50, :null => false
         t.string "email", :default => "@", :null => false
 
-         t.integer "contact_details_id", :visible => false
+        t.integer "contact_details_id", :visible => false
+        t.string "service", :limit => 25
+        t.string "specialty", :limit => 50, :null => false
 
           # In the next two columns I will leave the visible value while developing and testing...
         t.string "creator", :visible => true  # This has to be FILL IN automatically and kept on the data base depending who is the logger when creating it
@@ -24,9 +27,9 @@ def up
         # will show the rest as branches unless somethng else is specified. In the view must be 
         # a button to link to create new branch once it is inside a Companny edit.
 
-        t.string "discipline", :limit => 25
+        
 
-        t.boolean "head_quarter", :visible => false, :default => true 
+        #t.boolean "head_quarter", :visible => false, :default => true 
              
         
 
@@ -41,9 +44,13 @@ def up
 
         t.datetime "last_in"
 
+        t.boolean "is_virtual", :default => true
+        #t.boolean "is_default", :default => false
+
+        t.string "time_zone"
+
         t.timestamps null: false
-    end
-       # add_index :companies, [ "professional_id", "id_code", "name", "email", "head_quarter"] 
+    end 
 
         add_index("companies", "id_code")
         add_index("companies", "name")

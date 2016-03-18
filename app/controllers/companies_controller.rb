@@ -180,7 +180,7 @@ class CompaniesController < ApplicationController
          # same as using "params[:subject]", except that it:
          # - raises an error if :subject is not present
          # - allows listed attributes to be mass-assigned
-          params.require(:company).permit(:id, :id_code, :id_token, :discipline, :company_id, :name, :email, :contact_details_id, :creator, :logged_as, :is_virtual, :is_default, :time_zone)
+          params.require(:company).permit(:id, :id_code, :discipline, :name, :email, :contact_details_id, :service, :specialty, :creator, :logged_as, :pass_active, :acc_active)
       end
   
 
