@@ -12,7 +12,7 @@
 
     <%= render(:partial => "form", :locals => {:f => f}) %>
 
-    <%#= f.hidden_field(:professionals, :value => @current_user.id) %>
+    <%= f.hidden_field(:professionals, :value => @current_user.id) %>
 
     <div class="form-buttons">
       <%= submit_tag(t(:create) + " " + t(:company)) %>

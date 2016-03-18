@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20160304163324) do
     t.integer  "branch_id",          limit: 4
     t.integer  "client_id",          limit: 4
     t.string   "discipline",         limit: 25
-    t.datetime "date_time",                        default: '2016-03-15 14:56:17', null: false
+    t.datetime "date_time",                        default: '2016-03-17 20:54:14', null: false
     t.string   "status",             limit: 255
     t.integer  "appointment_code",   limit: 4
     t.integer  "follow_up_code",     limit: 4
@@ -139,16 +139,19 @@ ActiveRecord::Schema.define(version: 20160304163324) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "id_code",            limit: 25
-    t.string   "name",               limit: 50,                 null: false
-    t.string   "email",              limit: 255, default: "@",  null: false
+    t.string   "name",               limit: 50,                  null: false
+    t.string   "email",              limit: 255, default: "@",   null: false
     t.integer  "contact_details_id", limit: 4
     t.string   "creator",            limit: 255
     t.string   "logged_as",          limit: 255
     t.string   "discipline",         limit: 25
     t.boolean  "head_quarter",                   default: true
+    t.boolean  "pass_active",                    default: false
+    t.boolean  "acc_active",                     default: false
+    t.string   "password_digest",    limit: 255
     t.datetime "last_in"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
   end
 
   add_index "companies", ["discipline"], name: "index_companies_on_discipline", using: :btree
@@ -223,7 +226,7 @@ ActiveRecord::Schema.define(version: 20160304163324) do
     t.string   "id_code",            limit: 25
     t.string   "first_name",         limit: 50,                         null: false
     t.string   "last_name",          limit: 50
-    t.date     "dob",                            default: '2016-03-15', null: false
+    t.date     "dob",                            default: '2016-03-17', null: false
     t.string   "email",              limit: 255, default: "@",          null: false
     t.string   "service",            limit: 25
     t.string   "specialty",          limit: 25

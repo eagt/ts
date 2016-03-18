@@ -14,7 +14,7 @@ class CompaniesController < ApplicationController
     if !@is_company # If the user is a professional
       @companies = @current_user.companies
     else # If the user is companies pass the whole list ONLY for testing
-      @companies = Company.all
+       @companies = Company.sorted_name    #@companies = Company.all   THIS WAS CHANGED
     end
   end
 
@@ -22,59 +22,124 @@ class CompaniesController < ApplicationController
     @company = Company.find(params[:id])
   end
 
+
+
+
   def new
-    begin
-      if !@is_company # If the user is a professional and is creating a new virtual company
-        @company = @current_user.companies.new
-      else # kicks in when registering a new Company
-        @company = Company.new(is_virtual: false)
+      if !@is_company # If the user is a professional 
+         @company = @current_user.companies.new  
+         @company_count = Company.count + 1      
+      else            # If it is a company create only one 
+        @company = Company.new   # this is new
+        @company_count = Company.count + 1 
+           if @company_count == 2                                 
+              flash[:notice] = " As a Company you can only create your own Company"  
+              redirect_to :back  
+           end
       end 
-    rescue Exception => e # Catch exceptions 
-      flash[:notice] = e.to_s
-      redirect_to([@current_user, :companies])
-    end
   end
 
+  
+  # def create  
+  #     # if !@is_company              
+  #   # Instantiate a new object using form parameters
+  #     @company = @current_user.companies.new(company_params) 
+  #           #@company = Company.new(company_params)
+  #     if @company.save
+  #      Employment.create(:company => @company, :professional => @current_user, :note => "virtual company, Real professional", :validated => true) end
+  #         # If save succeeds, redirect to the index action     
+  #         flash[:notice] = "#{t(:company)} #{t(:create_success)}"
+  #         redirect_to([@current_user, :companies])   
+  #     end
+  # end
+
+#/**** Working **/
+  # def new
+  #     if !@is_company # If the user is a professional 
+  #        @company = @current_user.companies.new  
+  #        @company_count = Company.count + 1      
+  #     else            # If it is a company create only one 
+  #       @company = Company.new   # this is new
+  #       @company_count = Company.count + 1 
+  #          if @company_count == 2                                 
+  #             flash[:notice] = " As a Company you can only create your own Company"  
+  #             redirect_to :back  
+  #          end
+  #     end 
+  # end
+
+  
   def create               
     # Instantiate a new object using form parameters
-    @company = Company.new(company_params)
-    if @company.save
-      if !@is_company then Employment.create(:company => @company, :professional => @current_user, :note => "virtual company, Real professional", :validated => true) end
-      # If save succeeds, redirect to the index action     
-      flash[:notice] = "#{t(:company)} #{t(:create_success)}"
-      redirect_to([@current_user, :companies])   
-      # begin
-      #   # Create the default (empty) children for a new company
-      #   branch = @company.branches.create(is_default: true, name: "-")
-      #   client = branch.clients.create(is_default: true, company_id: @company.id, dob: "1900-01-01", first_name: "-", last_name: "-")
-      #   if @is_company # If user is a company then create a virtual professional
-      #     professional = Professional.create(is_default: true, dob: "1900-01-01", first_name: "-", last_name: "-")
-      #     Employment.create(:company => @company, :professional => professional, :note => "Real company, virtual professional", :validated => true)
-      #     professional.clients << client
-      #   else # If user is already a professional just make the proper associations to the new virtual company           
-      #     Employment.create(:company => @company, :professional => @current_user, :note => "virtual company, Real professional", :validated => true)
-      #     @current_user.clients << client
-      #   end
-
-      #   # If save succeeds, redirect to the index action     
-      #   flash[:notice] = "#{t(:company)} #{t(:create_success)}"
-      #   redirect_to([@current_user, :companies])      
-      
-      # rescue Exception => e # Catch exceptions if it can't create the children of a company
-      #   # If there is an exception delete the objects created and redirect to index
-      #   if @company then @company.destroy end
-      #   if branch then branch.destroy end        
-      #   if client then client.destroy end
-      #   if professional then professional.destroy end
-
-      #   flash[:notice] = "#{t(:company)}->" + e.to_s
-      #   redirect_to([@current_user, :companies])  
-      # end   
-    else
-      # If save fails, redisplay the from so user can fix problems
-      render('new')
-    end 
+      @company = Company.new(company_params)
+      if @company.save
+          if !@is_company then Employment.create(:company => @company, :professional => @current_user, :note => "virtual company, Real professional", :validated => true) end
+          # If save succeeds, redirect to the index action     
+          flash[:notice] = "#{t(:company)} #{t(:create_success)}"
+          redirect_to([@current_user, :companies])   
+      end
   end
+
+#/***  Working ***/
+
+
+
+#  /****  This is the old code  ****/ 
+
+
+
+  # def new
+
+
+  #   #begin     
+  #     if !@is_company # If the user is a professional and is creating a new virtual company
+  #        @company = @current_user.companies.new       
+  #     elsif # kicks in when registering a new Company ... If it is a company create one. and only one. 
+
+
+
+  #       @company = Company.new #(is_virtual: false) 
+  #       @company_count = Company.count + 1        #This is new  
+
+
+
+  #     #else    This is new uncommented       
+  #   # rescue Exception => e # Catch exceptions 
+  #   #   flash[:notice] = e.to_s
+  #   #   redirect_to([@current_user, :companies])
+  #     end
+  #      @company_count = Company.count + 1
+  # end
+
+          
+
+  # def create               
+  #   # Instantiate a new object using form parameters
+  #   @company = Company.new(company_params)
+  #   if @company.save
+  #     if !@is_company 
+  #      Employment.create(:name => @company, :professional => @current_user, :note => "virtual company, Real professional", :validated => true) 
+  #     end
+  #     # If save succeeds, redirect to the index action     
+  #     flash[:notice] = "#{t(:company)} #{t(:create_success)}"
+  #     redirect_to([@current_user, :companies])    
+  #   else 
+
+  #       @company_count == 2                       # This is new ... This could work but I need to declare that the delete action won't show once it the company is created
+  #       flash[:notice] = " You can't create more Companies"   # This is new
+  #       redirect_to :back
+  #     # If save fails, redisplay the from so user can fix problems
+  #       # @company_count >= 1                        # This is new ... This could work but I need to declare that the delete action won't show once it the company is created
+  #       # flash[:notice] = " You can't create more Companies"   # This is new
+  #       # redirect_to :back
+  #      #render('new')
+  #   end
+  # end
+
+
+  #  /****  This is the old code  ****/ 
+
+
 
   def edit
     @company = Company.find(params[:id])
@@ -107,16 +172,16 @@ class CompaniesController < ApplicationController
 
   private
 
-    def set_locale
-      I18n.locale = params[:locale] || I18n.default_locale
-    end
+      def set_locale
+          I18n.locale = params[:locale] || I18n.default_locale
+      end
 
-   def company_params
-     # same as using "params[:subject]", except that it:
-     # - raises an error if :subject is not present
-     # - allows listed attributes to be mass-assigned
-      params.require(:company).permit(:id_code, :id_token, :discipline, :company_id, :name, :email, :contact_details_id, :creator, :logged_as, :is_virtual, :is_default, :time_zone)
-  end
+       def company_params
+         # same as using "params[:subject]", except that it:
+         # - raises an error if :subject is not present
+         # - allows listed attributes to be mass-assigned
+          params.require(:company).permit(:id, :id_code, :id_token, :discipline, :company_id, :name, :email, :contact_details_id, :creator, :logged_as, :is_virtual, :is_default, :time_zone)
+      end
+  
 
 end
-

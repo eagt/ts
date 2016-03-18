@@ -4,12 +4,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
 
-  around_filter :user_time_zone, if: :current_user
+  #around_filter :user_time_zone, if: :current_user
 
   helper_method :current_user
 
   def current_user
-    # Take the URL to extract the resource: [Professional, Company]
+    # Take the URL to extract the resource: [Professional or Company]
     resource= request.path.split('/')[2]
     
     @is_company = resource == "companies" ? true : false
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   	{ locale: I18n.locale }.merge options
 	end
 
-	def user_time_zone(&block)
-    Time.use_zone(current_user.time_zone, &block)
-	end
+	# def user_time_zone(&block)
+ #    Time.use_zone(current_user.time_zone, &block)
+	# end
 end

@@ -1,6 +1,6 @@
 class Company < ActiveRecord::Base
 
-	#validates :name, presence: true, length: { maximum: 20 }
+	validates :name, presence: true, length: { maximum: 20 }
 	include SharedMethods
 
 	# 0ne-to-One
@@ -31,21 +31,21 @@ class Company < ActiveRecord::Base
   	scope :search, lambda {|query| where (["name LIKE?", "%#{query}%"])}
 
 
-  	after_initialize :generate_token, :if => :new_record?
+ #  	after_initialize :generate_token, :if => :new_record?
 
-	private
-		MAX_RETRIES = 3
-		# generate a unique token id for new records
-		def generate_token			
-			self.id_token ||= SecureRandom.hex(8) 
-			if Company.exists?(:id_token => self.id_token)
-				self.id_token = nil
-				raise
-			end			
-		rescue Exception => e
-			@token_attempts = @token_attempts.to_i + 1
-			puts "Record not unique " + @token_attempts.to_s
-			retry if @token_attempts < MAX_RETRIES
-			raise e, "#{I18n.t(:company)}: #{I18n.t(:create_unsuccess)} #{I18n.t(:uniqueness_unsuccess)}"
-		end
+	# private
+	# 	MAX_RETRIES = 3
+	# 	# generate a unique token id for new records
+	# 	def generate_token			
+	# 		self.id_token ||= SecureRandom.hex(8) 
+	# 		if Company.exists?(:id_token => self.id_token)
+	# 			self.id_token = nil
+	# 			raise
+	# 		end			
+	# 	rescue Exception => e
+	# 		@token_attempts = @token_attempts.to_i + 1
+	# 		puts "Record not unique " + @token_attempts.to_s
+	# 		retry if @token_attempts < MAX_RETRIES
+	# 		raise e, "#{I18n.t(:company)}: #{I18n.t(:create_unsuccess)} #{I18n.t(:uniqueness_unsuccess)}"
+	# 	end
 end

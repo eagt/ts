@@ -21,57 +21,65 @@ class ProfessionalsController < ApplicationController
       @professional = Professional.find(params[:id])
     end
 
-    def new
-      begin
-        if @is_company # If the user is a company and is creating a new virtual professional
-          @professional = @current_user.professionals.new
-        else # kicks in when registering a new Professional
-          @professional = Professional.new(is_virtual: false)
-        end    
-      rescue Exception => e # Catch exceptions 
-        flash[:notice] = e.to_s
-        redirect_to([@current_user, :professionals])
-      end
+
+
+ def new
+    begin
+      if @is_company # If the user is a company and is creating a new virtual professional
+        @professional = @current_user.professionals.new
+      else # kicks in when registering a new Professional
+        @professional = Professional.new(is_virtual: false)
+      end    
+    rescue Exception => e # Catch exceptions 
+      flash[:notice] = e.to_s
+      redirect_to([@current_user, :professionals])
     end
+  end
 
-    def create        
-      # Instantiate a new object using form parameters
-      @professional = Professional.new(professional_params)
-      if @professional.save
-        if @is_company then Employment.create(:company => @current_user, :professional => @professional, :note => "Real company, Virtual professional", :validated => true) end
-        # If save succeeds, redirect to the index action
-        flash[:notice] = "#{t(:professional)} #{t(:create_success)}"
-        redirect_to([@current_user, :professionals]) 
-        # begin
-        #   if !@is_company # If user is a professional then create a virtual company and default (empty) children
-        #     company = Company.create(is_default: true, name: "-")
-        #     Employment.create(:company => company, :professional => @professional, :note => "Virtual company, Real professional", :validated => true)
-        #     branch = company.branches.create(is_default: true, name: "-")
-        #     client = branch.clients.create(is_default: true, company_id: company.id, dob: "1900-01-01", first_name: "-", last_name: "-")
-        #     @professional.clients << client
-        #   else # if the user is a company just make the proper associations to the new virtual professional
-        #     Employment.create(:company => @current_user, :professional => @professional, :note => "Real company, Virtual professional", :validated => true)
-        #   end      
-
-        #   # If save succeeds, redirect to the index action
-        #   flash[:notice] = "#{t(:professional)} #{t(:create_success)}"
-        #   redirect_to([@current_user, :professionals])      
-
-        # rescue Exception => e # Catch exceptions if it can't create the children of a company
-        #   # If there is an exception delete the objects created and redirect to index
-        #   @professional.destroy
-        #   if branch then branch.destroy end        
-        #   if client then client.destroy end
-        #   if company then company.destroy end
-
-        #   flash[:notice] = "#{t(:professional)}->" + e.to_s
-        #   redirect_to([@current_user, :professionals])
-        # end      
-      else
-        # If save fails, redisplay the from so user can fix problems
-        render('new')
-      end
+ def create        
+    # Instantiate a new object using form parameters
+    @professional = Professional.new(professional_params)
+    if @professional.save
+      if @is_company then Employment.create(:company => @current_user, :professional => @professional, :note => "Real company, Virtual professional", :validated => true) end
+      # If save succeeds, redirect to the index action
+      flash[:notice] = "#{t(:professional)} #{t(:create_success)}"
+      redirect_to([@current_user, :professionals])          
+    else
+      # If save fails, redisplay the from so user can fix problems
+      render('new')
     end
+  end
+
+
+  
+
+    # def new
+    #      if @is_company # If the user is a company and is creating a new virtual professional
+    #         @professional = @current_user.professionals.new
+    #         @professional_count = Professional.count + 1 
+    #      else           # If it is a company create only one 
+    #         @professional = Professional.new   # this is new
+    #         @professional_count = Professional.count + 1 
+    #            if @professional_count == 2
+    #               flash[:notice] = " As a Professional you can only create yourself"  
+    #               redirect_to :back  
+    #            end
+    #      end 
+    # end
+
+    # def create                
+    #   # Instantiate a new object using form parameters
+    #      @professional = Professional.new(professional_params)     # Professional.new(professional_params)
+    #      if @professional.save
+    #        # if is_company then Employment.create(:company => @current_user, :professional => @professional, :note => "Real company, Virtual professional", :validated => true) end
+    #        #   # If save succeeds, redirect to the index action
+    #          flash[:notice] = "#{t(:professional)} #{t(:create_success)}"
+    #          redirect_to([@current_user, :professionals]) 
+    #     end
+    # end
+
+
+
 
     def edit
       @professional = Professional.find(params[:id])
@@ -108,8 +116,8 @@ class ProfessionalsController < ApplicationController
       end
 
       def professional_params
-        params.require(:professional).permit(:id, :id_token, :id_code, :discipline, :first_name, :last_name, :dob, :email, :specialty, :contact_details_id, :creator, :logged_as, :updated_at, :comapny_id, :branch_id, :client_id, :appointment, :password,
-                                     :password_confirmation, :is_virtual, :is_default, :time_zone)
+        params.require(:professional).permit( :id, :id_token, :id_code, :discipline, :first_name, :last_name, :dob, :email, :specialty, :contact_details_id, :creator, :logged_as, :updated_at, :comapny_id, :branch_id, :client_id, :appointment, :password,
+                                     :password_confirmation)
       end
 
 

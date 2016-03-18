@@ -10,6 +10,9 @@ class AccessController < ApplicationController
     # render('login')
   end
 
+  # def show
+  # end
+
   
   def login
     @professionals = Professional.all
@@ -31,34 +34,34 @@ class AccessController < ApplicationController
 
   end
 
-  def professional_new
-      @professional = Professional.new
-      render('professional_new')    
-  end
+  # def professional_new
+  #     @professional = Professional.new
+  #     render('professional_new')    
+  # end
 
-  def professional_create
-    # Instantiate a new object using form parameters
-    @professional = Professional.new(professional_params)
-    # Save the object
-    if @professional.save
-    # If save succeeds, redirect to the index action
-      flash[:notice] = "#{t(:professional)} #{t(:create_success)}"
-      redirect_to(:action => 'login')      
-    else
-    # If save fails, redisplay the from so user can fix problems
-      render('professional_new')
-    end
-  end
+  # def professional_create
+  #   # Instantiate a new object using form parameters
+  #   @professional = Professional.new(professional_params)
+  #   # Save the object
+  #   if @professional.save
+  #   # If save succeeds, redirect to the index action
+  #     flash[:notice] = "#{t(:professional)} #{t(:create_success)}"
+  #     redirect_to(:action => 'login')      
+  #   else
+  #   # If save fails, redisplay the from so user can fix problems
+  #     render('professional_new')
+  #   end
+  # end
 
-  def professional_delete
-    @professional = Professional.find(params[:id])
-  end
+  # def professional_delete
+  #   @professional = Professional.find(params[:id])
+  # end
 
-  def professional_destroy
-    professional = Professional.find(params[:id]).destroy
-    flash[:notice] = "#{t(:professional)} '#{professional.email}' #{t(:destroy_success)}"
-    redirect_to(:action => 'login')
-  end
+  # def professional_destroy
+  #   professional = Professional.find(params[:id]).destroy
+  #   flash[:notice] = "#{t(:professional)} '#{professional.email}' #{t(:destroy_success)}"
+  #   redirect_to(:action => 'login')
+  # end
 
   def company_new
       @company = Company.new
@@ -103,12 +106,13 @@ class AccessController < ApplicationController
       params.require(:professional).permit(:first_name, :last_name, :id_code, :dob, :email, :speciality, :discipline, :acc_active)
     end
 
-    def company_params
+       def company_params
       # same as using "params[:company]", except taht it:
       # - raises an error if :company is not present
       # - allows listed attributes to be mass-assigned
       params.require(:company).permit(:name, :id_code, :email, :acc_active)
     end
+
 end
 
 

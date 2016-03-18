@@ -52,10 +52,15 @@
 			<td><%= @company.last_in %></td>
 	 	 </tr>
 
- 	     <tr>
+
+
+
+ 	 	 <tr>
           <th><%= link_to(t(:professional).pluralize(locale), @is_company ? [@company, :professionals] : [@current_user]) %></th>
           <td><%= @is_company ? @company.professionals.size : "1" %></td>
-         </tr>
+         </tr> 
+
+
          <tr>
           <th><%= link_to(t(:branch).pluralize(locale), @is_company ? [@company, :branches] : [@current_user, :branches, {:company_id => @company.id}]) %></th>
           <td><%= @company.branches.size %></td>
@@ -68,26 +73,26 @@
           <th><%= link_to(t(:appointment).pluralize(locale), @is_company ? [@company, :appointments] : [@current_user, :appointments, {:company_id => @company.id}])  %></th>
           <td><%= @is_company ? @company.appointments.size : @current_user.appointments.select {|s| s.company_id == params[:id].to_i}.size %></td>
          </tr>
-         <tr>
-          <th><%= t(:pass_active) %></th>
-          <td><%= @company.pass_active %><%#= status_tag(@company.pass_active) %></td>
+       <!--   <tr>
+          <th><%#= t(:pass_active) %></th>
+          <td><%#= @company.pass_active %><%#= status_tag(@company.pass_active) %></td>
          </tr>
- 		 <tr>
-          <th><%= t(:acc_active) %></th>
-          <td><%= @company.acc_active %><%#= status_tag(@company.acc_active) %></td>
+ 		<tr>
+          <th><%#= t(:acc_active) %></th>
+          <td><%#= @company.acc_active %><%#= status_tag(@company.acc_active) %></td>
          </tr>
-         <tr>
-          <th><%= "ID Token" %></th>
-          <td><%= @company.id_token %></td>
-         </tr>
-         <tr>
-          <th><%= "is Virtual?" %></th>
-          <td><%= @company.is_virtual %></td>
+ -->        <!--  <tr>
+          <th><%#= "ID Token" %></th>
+          <td><%#= @company.id_token %></td>
          </tr>
          <tr>
-          <th><%= "is Default?" %></th>
-          <td><%#= @company.is_default %></td>
-         </tr>	
+          <th><%#= "is Virtual?" %></th>
+          <td><%#= @company.is_virtual %></td>
+         </tr>
+         <tr>
+          <th><%#= "is Default?" %></th>
+          <td><%##= @company.is_default %></td>
+         </tr>	 --> 
 		 <tr>
 			<th><%= t(:created_at) %></th>
 			<td><%= @company.created_at %></td>
@@ -98,7 +103,7 @@
 		 </tr>
 
 
-		 <!-- This link below will take me to see more contact details
+		 <!-- There will be a link below to take me to see more contact details
 		 <%#= link_to("<< Contact Details", {:controller => 'contact_details', :action => 'show'}, :class => 'back-link') %> -->
 		 </tr>
 			<th> <%= t(:contact_details_id) %></th>
@@ -113,4 +118,3 @@
 <%= javascript_tag("$('#show_table').DataTable( {responsive: true, paging: false} );") %>
 
 </div>
-

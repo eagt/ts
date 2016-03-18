@@ -35,9 +35,9 @@ def up
         # into account that the Branch Admin user won't be able to do CRUD in anything to do with the Company
                
 
-        # t.boolean "pass_active", :default => false
-        # t.boolean "acc_active", :default => false
-        # t.string "password_digest"
+        t.boolean "pass_active", :default => false
+        t.boolean "acc_active", :default => false                                                                                                                                                                                                           
+        t.string "password_digest"
 
         t.datetime "last_in"
 
