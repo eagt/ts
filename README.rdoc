@@ -27,7 +27,7 @@ Things you may want to cover:
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
 
-
+////// -----  ****** ------ ///////
 Working with Git & Github
 
 Creating a new repository for a new project.
@@ -42,29 +42,35 @@ Then I need to go to github.com   → Select new repository
 &
 - git push –u origin mater
 
+// -----  ****** ------ //
 
 Pushing to the master repository
 - git add . (enter)
 - git commit –m ”project’s master name”  (enter)
 - git push –u origin mater  (enter)
 
+// -----  ****** ------ //
 
 Creating a new branch for the repository
 - git checkout –b nameofnewbranch
 With this action, git creates a new branch and position itself in the new branch repository with all the information from the master repository.
 
+// -----  ****** ------ //
 
 To know at any time on which branch are you working and the branches that are in the repository 
 - git branch
 
+// -----  ****** ------ //
 
 To only know in what branch I am
 - git status
 
+// -----  ****** ------ //
 
 To switch between branches to work on
 - git  checkout branchname
 
+// -----  ****** ------ //
 
 To work on a branch and then push its updates to itself
 First I need to get the branch on which I would like to work
@@ -73,7 +79,9 @@ First I need to get the branch on which I would like to work
 - git commit –m ”branch name”  (enter)
 - git push –u origin branchname or simply git push  (enter)
 
+// -----  ****** ------ //
 
 To send an ready branch to the original master
 - git merge branchname (enter)
 
+// -----  ****** ------ //
