@@ -39,7 +39,6 @@ Creating a new repository for a new project.
 - Give a name of the new proyect
 - Select create Reposiory
 - Copy & paste the bid where says:
- 
 - git remote add origin http://git hub.com/eagt/(new repository neme).git
 &
 - git push –u origin mater
@@ -67,8 +66,8 @@ First I need to get the branch on which I would like to work
 - git  checkout branchname
 - git add . (enter)
 - git commit –m ”branch name”  (enter)
-- git push –u origin branch name or simply git push  (enter)
+- git push –u origin branchname or simply git push  (enter)
 
-TO send an ready branch to the original master
-- git merge branch name (enter)
+* To send an ready branch to the original master
+- git merge branchname (enter)
 
