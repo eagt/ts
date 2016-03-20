@@ -27,62 +27,84 @@ Things you may want to cover:
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
 
-////// -----  ****** ------ ///////
+////// —– ****** —— ///////
 
 Working with Git & Github
 
 Creating a new repository for a new project.
-- git init (enter) 
-- git add . (enter)
-- git commit –m ”name of the new proyect”
-Then I need to go to github.com   → Select new repository
-- Give a name of the new proyect
-- Select create Reposiory
-- Copy & paste the bid where says:
-- git remote add origin http://git hub.com/eagt/(new repository neme).git
-&
-- git push –u origin mater
 
-// -----  ****** ------ //
+    git init (enter)
+
+    git add . (enter)
+
+    git commit –m ”name of the new proyect”
+
+Then I need to go to github.com → Select new repository
+
+    Give a name of the new proyect
+
+    Select create Reposiory
+
+    Copy & paste the bid where says:
+
+    git remote add origin git hub.com/eagt/(new repository neme).git
+
+&
+
+    git push –u origin mater
+
+// —– ****** —— //
 
 Pushing to the master repository
-- git add . (enter)
-- git commit –m ”project’s master name”  (enter)
-- git push –u origin mater  (enter)
 
-// -----  ****** ------ //
+    git add . (enter)
+
+    git commit –m ”project’s master name” (enter)
+
+    git push –u origin mater (enter)
+
+// —– ****** —— //
 
 Creating a new branch for the repository
-- git checkout –b nameofnewbranch
+
+    git checkout –b nameofnewbranch
+
 With this action, git creates a new branch and position itself in the new branch repository with all the information from the master repository.
 
-// -----  ****** ------ //
+// —– ****** —— //
 
-To know at any time on which branch are you working and the branches that are in the repository 
-- git branch
+To know at any time on which branch are you working and the branches that are in the repository
 
-// -----  ****** ------ //
+    git branch
+
+// —– ****** —— //
 
 To only know in what branch I am
-- git status
 
-// -----  ****** ------ //
+    git status
+
+// —– ****** —— //
 
 To switch between branches to work on
-- git  checkout branchname
 
-// -----  ****** ------ //
+    git checkout branchname
 
-To work on a branch and then push its updates to itself
-First I need to get the branch on which I would like to work
-- git  checkout branchname
-- git add . (enter)
-- git commit –m ”branch name”  (enter)
-- git push –u origin branchname or simply git push  (enter)
+// —– ****** —— //
 
-// -----  ****** ------ //
+To work on a branch and then push its updates to itself First I need to get the branch on which I would like to work
+
+    git checkout branchname
+
+    git add . (enter)
+
+    git commit –m ”branch name” (enter)
+
+    git push –u origin branchname or simply git push (enter)
+
+// —– ****** —— //
 
 To send an ready branch to the original master
-- git merge branchname (enter)
 
-// -----  ****** ------ //
+    git merge branchname (enter)
+
+// —– ****** —— //
