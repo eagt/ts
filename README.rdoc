@@ -31,9 +31,9 @@ Please feel free to use a different markup language if you do not plan to run
 Working with Git & Github
 
 Creating a new repository for a new project.
-git init (enter) 
-git add . (enter)
-git commit –m ”name of the new proyect”
+- git init (enter) 
+- git add . (enter)
+- git commit –m ”name of the new proyect”
 
 * Then I need to go to github.com   → Select new repository
 - Give a name of the new proyect
@@ -45,9 +45,9 @@ git commit –m ”name of the new proyect”
 - git push –u origin mater
 
 * Pushing to the master repository
-git add . (enter)
-git commit –m ”project’s master name”  (enter)
-git push –u origin mater  (enter)
+- git add . (enter)
+- git commit –m ”project’s master name”  (enter)
+- git push –u origin mater  (enter)
 
 * Creating a new branch for the repository
 - git checkout –b nameofnewbranch
@@ -70,5 +70,5 @@ First I need to get the branch on which I would like to work
 - git push –u origin branch name or simply git push  (enter)
 
 TO send an ready branch to the original master
-git merge branch name (enter)
+- git merge branch name (enter)
 
