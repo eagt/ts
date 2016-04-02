@@ -19,39 +19,72 @@ class ClientsController < ApplicationController
     @client = Client.find(params[:id])
   end
 
-  def new
-    begin
-      @client = @current_user.clients.new()
-    rescue Exception => e # Catch exceptions 
-      flash[:notice] = e.to_s
-      redirect_to([@current_user, :clients])
-    end
-  end
 
-  def create    
-    # Instantiate a new object using form parameters
-    @client = Client.new(client_params) 
+   # def new
+   #  #begin
+   #    if @is_company #if the user is a company
+   #      @client = @current_user.clients.new()
+       
+   #    else   # if the user is a professional check that the param company_id exist to show the clients under a specific professional ( REVISAR QUE FUNCIONE)
+   #       params[:company_id]
+   #       @client = Client.new(company_id: params[:company_id])
+   #      # redirect_to([@current_user, :companies])
+   #    end
+   #     @client_count = Client.count + 1 
+   #   end
+
+   def new
+  #   begin
+       @client = @current_user.clients.new()
+  #   rescue Exception => e # Catch exceptions 
+  #     flash[:notice] = e.to_s
+       @client_count = Client.count + 1 
+  #   end
+   end
+
+
+
+    def create  
+  #   # Instantiate a new object using form parameters
+     @client = Client.new(client_params)
+  #   # Save the object
+     flash[:notice] = "#{t(:client)} #{t(:create_success)}"    
     if @client.save
-      # If save succeeds, redirect to the index action
-      flash[:notice] = "#{t(:client)} #{t(:create_success)}"
-      redirect_to([@current_user, :clients])
-      # begin   
-      #   @current_user.clients << @client
-      #   # If save succeeds, redirect to the index action
-      #   flash[:notice] = "#{t(:client)} #{t(:create_success)}"
-      #   redirect_to([@current_user, :clients])
-      # rescue Exception => e # Catch exceptions if it can't create the children of a company
-      #   # If there is an exception delete the objects created and redirect to index
-      #   if @client then @client.destroy end
-
-      #   flash[:notice] = "#{t(:client)}->" + e.to_s
-      #   redirect_to([@current_user, :clients])        
-      # end
+  #     # If save succeeds, redirect to the index action
+       redirect_to([@current_user, :clients])
     else
-      # If save fails, redisplay the from so user can fix problems
-      render('new')
-    end
-  end
+  #     # If save fails, redisplay the from so user can fix problems
+         render('new')
+     end
+   end
+
+
+
+
+  # def create    
+  #   # Instantiate a new object using form parameters
+  #   @client = Client.new(client_params) 
+  #   if @client.save
+  #     # If save succeeds, redirect to the index action
+  #     flash[:notice] = "#{t(:client)} #{t(:create_success)}"
+  #     redirect_to([@current_user, :clients])
+  #     # begin   
+  #     #   @current_user.clients << @client
+  #     #   # If save succeeds, redirect to the index action
+  #     #   flash[:notice] = "#{t(:client)} #{t(:create_success)}"
+  #     #   redirect_to([@current_user, :clients])
+  #     # rescue Exception => e # Catch exceptions if it can't create the children of a company
+  #     #   # If there is an exception delete the objects created and redirect to index
+  #     #   if @client then @client.destroy end
+
+  #     #   flash[:notice] = "#{t(:client)}->" + e.to_s
+  #     #   redirect_to([@current_user, :clients])        
+  #     # end
+  #   else
+  #     # If save fails, redisplay the from so user can fix problems
+  #     render('new')
+  #   end
+  # end
 
   def edit
     @client = Client.find(params[:id])
@@ -88,7 +121,8 @@ class ClientsController < ApplicationController
     end
 
   def client_params
-    params.require(:client).permit(:id_code, :id_token, :discipline, :company_id, :branch_id, :first_name, :last_name, :email, :dod, :photo, :contact_details_id, :creator, :logged_as)
+    params.require(:client).permit(:id_code, :discipline, :company_id, :branch_id, :first_name, :last_name, :email, :dob, :photo, :contact_details_id, :creator, :logged_as)
+    #:id_token, 
   end
 
 end

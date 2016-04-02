@@ -16,11 +16,12 @@
       <tr>
         <th><%= f.label(:company_id, t(:company)) %></th>
         <td><%= @is_company ? @current_user.name : f.collection_select(:company_id, @current_user.companies, :id, :name,include_blank: true) %></td>
+        <%= @is_company ? f.hidden_field(:company_id, :value => @current_user.id) : "-" %> <!-- This needs to change when a PROFESSIONAL -->
       </tr>
       <tr>
         <th><%= f.label(:branch_id, t(:branch)) %></th>
         <td><%= @is_company ? f.collection_select(:branch_id, @current_user.branches, :id, :name, include_blank: true) : f.grouped_collection_select(:branch_id, @current_user.companies, :branches, :name, :id, :name, include_blank: true) %></td>
-      </tr> 
+      </tr>
       <tr>
         <th><%= f.label(:first_name, t(:first_name)) %></th>
         <td><%= f.text_field(:first_name) %></td>
@@ -31,7 +32,7 @@
       </tr>  
        <tr>
         <th><%= f.label(:dob, t(:dob)) %></th>
-        <td><%= f.date_select(:dob, {:start_year => 1900, :end_year => Time.zone.now.year}) %></td>
+        <td><%= f.date_select(:dob, {:start_year => 1900, :end_year => Time.zone.now.year, :order => [ :day, :month, :year]}) %></td>
       </tr>           
       <tr>
         <th><%= f.label(:email, t(:email)) %></th>
@@ -47,9 +48,30 @@
       </tr> 
 
     </tbody>
-    <%#= f.hidden_field(:id_token, :value => @branch.id_token) %>
   </table>
 </div>
 
 <%= javascript_tag("$(document).ready( function () {$('#fields_table').DataTable();} );") %>
 <%= javascript_tag("$('#fields_table').DataTable( {responsive: true, paging: false} );") %>
+
+
+<%# JS function to refresh the selectors %>
+<%= javascript_tag do %>
+window.onload = function() {
+  var branches;  
+  branches = $('#client_branch_id').html();
+  return $('#client_company_id').change(
+    function() {
+      var company, options_branches;
+      company = $('#client_company_id :selected').text();      
+      options_branches = $(branches).filter("optgroup[label='" + company + "']").html();
+      if (options_branches) {
+        $('#client_branch_id').html(options_branches);
+      } else {
+        $('#client_branch_id').empty();
+      }
+      return;
+    }    
+  );
+};
+<% end %>

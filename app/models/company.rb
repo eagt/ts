@@ -1,7 +1,7 @@
 class Company < ActiveRecord::Base
 
 	validates :name, presence: true, length: { maximum: 20 }
-	include SharedMethods
+	#include SharedMethods
 
 	# 0ne-to-One
 	has_one :contact_details
@@ -13,7 +13,7 @@ class Company < ActiveRecord::Base
 	has_many :appointments
 
  	# Many-to-Many Simple
- 	has_many :clients
+ 	
 
  	# Many-to-Many Rich
  	
@@ -22,6 +22,10 @@ class Company < ActiveRecord::Base
  	has_many :employments
  	has_many :professionals, :through => :employments
 
+
+accepts_nested_attributes_for :branches
+accepts_nested_attributes_for :clients
+accepts_nested_attributes_for :appointments
 
 
 

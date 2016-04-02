@@ -10,12 +10,18 @@ belongs_to :branch
 
 
 # Many-to-Many Simple
-has_and_belongs_to_many :appointments
-has_and_belongs_to_many :professionals
+
+
 
 # Many-to-Many Rich
 
 # Many-to-Many through
+
+	has_many :appointclienships
+	has_many :appointments, :through => :appointclienships
+
+	has_many :clienprofeships
+	has_many :professionals, :through => :clienprofeships
 
 
 # scopes
@@ -24,7 +30,8 @@ has_and_belongs_to_many :professionals
   	scope :search, lambda {|query| where (["name LIKE?", "%#{query}%"])}
 
 
-validates_presence_of :company_id, :branch_id
+#validates_presence_of :company_id, :branch_id  REMOVED BECAUSE IT WASN'T ALLOWING TO SAVE A NEW CLIENT.
+
 
 # after_initialize :generate_token, :if => :new_record?
 

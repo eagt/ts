@@ -12,7 +12,7 @@
 
     <%= render(:partial => "form", :locals => {:f => f}) %>
 
-    <%= f.hidden_field(:professionals, :value => @current_user.id) %>
+    <%#= f.hidden_field(:professionals, :value => @current_user.id) %>  <!--Commented out because it was showing the creating the Add New Company view -->
 
     <div class="form-buttons">
       <%= submit_tag(t(:create) + " " + t(:company)) %>

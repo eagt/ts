@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160304163324) do
+ActiveRecord::Schema.define(version: 20160318164108) do
 
   create_table "appointbranchship", force: :cascade do |t|
     t.integer "appointment_id", limit: 4
@@ -22,14 +22,14 @@ ActiveRecord::Schema.define(version: 20160304163324) do
   add_index "appointbranchship", ["appointment_id", "branch_id"], name: "index_appointbranchship_on_appointment_id_and_branch_id", using: :btree
   add_index "appointbranchship", ["creator"], name: "index_appointbranchship_on_creator", using: :btree
 
-  create_table "appointclienship", force: :cascade do |t|
+  create_table "appointclienships", force: :cascade do |t|
     t.integer "appointment_id", limit: 4
     t.integer "client_id",      limit: 4
     t.string  "creator",        limit: 255
   end
 
-  add_index "appointclienship", ["appointment_id", "client_id"], name: "index_appointclienship_on_appointment_id_and_client_id", using: :btree
-  add_index "appointclienship", ["creator"], name: "index_appointclienship_on_creator", using: :btree
+  add_index "appointclienships", ["appointment_id", "client_id"], name: "index_appointclienships_on_appointment_id_and_client_id", using: :btree
+  add_index "appointclienships", ["creator"], name: "index_appointclienships_on_creator", using: :btree
 
   create_table "appointments", force: :cascade do |t|
     t.string   "id_token",           limit: 255,                                   null: false
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20160304163324) do
     t.integer  "branch_id",          limit: 4
     t.integer  "client_id",          limit: 4
     t.string   "discipline",         limit: 25
-    t.datetime "date_time",                        default: '2016-03-18 13:13:55', null: false
+    t.datetime "date_time",                        default: '2016-03-29 17:21:10', null: false
     t.string   "status",             limit: 255
     t.integer  "appointment_code",   limit: 4
     t.integer  "follow_up_code",     limit: 4
@@ -62,6 +62,18 @@ ActiveRecord::Schema.define(version: 20160304163324) do
   add_index "appointments", ["needs_folloup"], name: "index_appointments_on_needs_folloup", using: :btree
   add_index "appointments", ["status"], name: "index_appointments_on_status", using: :btree
 
+  create_table "assignments", force: :cascade do |t|
+    t.integer  "professional_id", limit: 4
+    t.integer  "appointment_id",  limit: 4
+    t.string   "creator",         limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "assignments", ["appointment_id"], name: "index_assignments_on_appointment_id", using: :btree
+  add_index "assignments", ["creator"], name: "index_assignments_on_creator", using: :btree
+  add_index "assignments", ["professional_id"], name: "index_assignments_on_professional_id", using: :btree
+
   create_table "branchclienship", force: :cascade do |t|
     t.integer "branch_id", limit: 4
     t.integer "client_id", limit: 4
@@ -72,12 +84,12 @@ ActiveRecord::Schema.define(version: 20160304163324) do
   add_index "branchclienship", ["creator"], name: "index_branchclienship_on_creator", using: :btree
 
   create_table "branches", force: :cascade do |t|
-    t.string   "id_token",           limit: 255,                 null: false
+    t.string   "id_token",           limit: 255
     t.integer  "company_id",         limit: 4
     t.string   "discipline",         limit: 25
-    t.string   "name",               limit: 50,                  null: false
+    t.string   "name",               limit: 50
     t.string   "id_code",            limit: 25
-    t.string   "email",              limit: 255, default: "@",   null: false
+    t.string   "email",              limit: 255, default: "@"
     t.integer  "contact_details_id", limit: 4
     t.string   "creator",            limit: 255
     t.string   "logged_as",          limit: 255
@@ -97,26 +109,26 @@ ActiveRecord::Schema.define(version: 20160304163324) do
   add_index "branches", ["id_token"], name: "index_branches_on_id_token", using: :btree
   add_index "branches", ["name"], name: "index_branches_on_name", using: :btree
 
-  create_table "branchprofeship", force: :cascade do |t|
+  create_table "branchprofeships", force: :cascade do |t|
     t.integer "branch_id",       limit: 4
     t.integer "professional_id", limit: 4
     t.string  "creator",         limit: 255
   end
 
-  add_index "branchprofeship", ["branch_id", "professional_id"], name: "index_branchprofeship_on_branch_id_and_professional_id", using: :btree
-  add_index "branchprofeship", ["creator"], name: "index_branchprofeship_on_creator", using: :btree
+  add_index "branchprofeships", ["branch_id", "professional_id"], name: "index_branchprofeships_on_branch_id_and_professional_id", using: :btree
+  add_index "branchprofeships", ["creator"], name: "index_branchprofeships_on_creator", using: :btree
 
-  create_table "clienprofeship", force: :cascade do |t|
+  create_table "clienprofeships", force: :cascade do |t|
     t.integer "client_id",       limit: 4
     t.integer "professional_id", limit: 4
     t.string  "creator",         limit: 255
   end
 
-  add_index "clienprofeship", ["client_id", "professional_id"], name: "index_clienprofeship_on_client_id_and_professional_id", using: :btree
-  add_index "clienprofeship", ["creator"], name: "index_clienprofeship_on_creator", using: :btree
+  add_index "clienprofeships", ["client_id"], name: "index_clienprofeships_on_client_id", using: :btree
+  add_index "clienprofeships", ["creator"], name: "index_clienprofeships_on_creator", using: :btree
+  add_index "clienprofeships", ["professional_id"], name: "index_clienprofeships_on_professional_id", using: :btree
 
   create_table "clients", force: :cascade do |t|
-    t.string   "id_token",           limit: 255,               null: false
     t.integer  "company_id",         limit: 4
     t.integer  "branch_id",          limit: 4
     t.string   "discipline",         limit: 25
@@ -154,7 +166,7 @@ ActiveRecord::Schema.define(version: 20160304163324) do
     t.string   "email",              limit: 255, default: "@",   null: false
     t.integer  "contact_details_id", limit: 4
     t.string   "service",            limit: 25
-    t.string   "specialty",          limit: 50,                  null: false
+    t.string   "specialty",          limit: 50
     t.string   "creator",            limit: 255
     t.string   "logged_as",          limit: 255
     t.boolean  "pass_active",                    default: false
@@ -236,7 +248,7 @@ ActiveRecord::Schema.define(version: 20160304163324) do
     t.string   "discipline",         limit: 25
     t.string   "first_name",         limit: 50,                         null: false
     t.string   "last_name",          limit: 50
-    t.date     "dob",                            default: '2016-03-18', null: false
+    t.date     "dob",                            default: '2016-03-29', null: false
     t.string   "email",              limit: 255, default: "@",          null: false
     t.integer  "contact_details_id", limit: 4
     t.string   "service",            limit: 25

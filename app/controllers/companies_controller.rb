@@ -23,22 +23,73 @@ class CompaniesController < ApplicationController
   end
 
 
-
-
-  def new
-      if !@is_company # If the user is a professional 
-         @company = @current_user.companies.new  
-         @company_count = Company.count + 1      
-      else            # If it is a company create only one 
-        @company = Company.new   # this is new
+ def new
+      if !@is_company # If the user is a professional and is creating a new virtual company
+        @company = @current_user.companies.new
         @company_count = Company.count + 1 
-           if @company_count == 2                                 
-              flash[:notice] = " As a Company you can only create your own Company"  
-              redirect_to :back  
-           end
-      end 
+      else # kicks in when registering a new Company
+           @company = Company.new   # this is new
+           @company_count = Company.count + 1 
+            if @company_count >= 2                                 
+               flash[:notice] = " As a Company you can only create your own Company"  
+               redirect_to :back  
+            end      
+      end
+      #redirect_to([@current_user, :companies])
   end
 
+  def create               
+    # Instantiate a new object using form parameters
+    @company = Company.new(company_params)
+    if @company.save
+      if !@is_company then Employment.create(:company => @company, :professional => @current_user, :validated => true) end
+      # If save succeeds, redirect to the index action     
+      flash[:notice] = "#{t(:company)} #{t(:create_success)}"
+      redirect_to([@current_user, :companies])   
+      else
+      # If save fails, redisplay the from so user can fix problems
+      render('new')
+    end 
+  end
+
+
+
+ # ***** ------------------------------------ ******
+# Latest bid working
+
+  # def new
+  #     if !@is_company # If the user is a professional 
+  #        @company = @current_user.companies.new  
+  #        @company_count = Company.count + 1      
+  #     else            # If it is a company create only one 
+  #       @company = Company.new   # this is new
+  #       @company_count = Company.count + 1 
+  #          if @company_count >= 2                                 
+  #             flash[:notice] = " As a Company you can only create your own Company"  
+  #             redirect_to :back  
+  #          end
+  #     end 
+  # end
+
+
+
+# def create               
+#     # Instantiate a new object using form parameters
+#       @company = Company.new(company_params)
+#       if @company.save
+#           if !@is_company then Employment.create(:company => @company, :professional => @current_user, :note => "virtual company, Real professional", :validated => true) end
+#           # If save succeeds, redirect to the index action     
+#           flash[:notice] = "#{t(:company)} #{t(:create_success)}"
+#           redirect_to([@current_user, :companies])   
+#       end
+#   end
+
+ # ***** ------------------------------------ ******
+
+
+
+
+  # I don't remmeber this part below if is working or not??????
   
   # def create  
   #     # if !@is_company              
@@ -69,16 +120,7 @@ class CompaniesController < ApplicationController
   # end
 
   
-  def create               
-    # Instantiate a new object using form parameters
-      @company = Company.new(company_params)
-      if @company.save
-          if !@is_company then Employment.create(:company => @company, :professional => @current_user, :note => "virtual company, Real professional", :validated => true) end
-          # If save succeeds, redirect to the index action     
-          flash[:notice] = "#{t(:company)} #{t(:create_success)}"
-          redirect_to([@current_user, :companies])   
-      end
-  end
+  
 
 #/***  Working ***/
 

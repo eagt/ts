@@ -2,7 +2,9 @@
 
 <!-- <% @page_title = t(:professional).pluralize(locale) %> -->
 
-<%= @current_user ? link_to("<< " + t(:return_to), [@current_user, params[:controller]]) : "-" %>
+<%#= @current_user ? link_to("<< " + t(:return_to), [@current_user, params[:controller]]) : "-" %> <!-- This is showing a (-) sign which I don't know why is there?? --> 
+
+<%= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %>
 
 <div class="Professionals show">
   <h2><%= t(:show) + " " + t(:professional) %></h2>
@@ -30,7 +32,7 @@
 							 </tr>	
 							 <tr>
 								<th><%=  t(:last_name) %></th>
-								<td><%= @professional.name %></td>
+								<td><%= @professional.last_name %></td>
 							 </tr>
 							 <tr>
 						         <th><%= t(:dob) %></th>
@@ -64,26 +66,26 @@
 								<th><%= t(:last_in) %></th>
 								<td><%= @professional.last_in %></td>
 						 	</tr>								
-						    <tr>
+						   <tr>
 							    <th><%= link_to(t(:company).pluralize(locale), @is_company ? [@current_user] : [@professional, :companies]) %></th>
 							    <td><%= @is_company ? "1" : @professional.companies.size %></td>
 						    </tr>
-						    <tr>
-							    <th><%= link_to(t(:client).pluralize(locale), @is_company ? [@current_user, :clients, {:professional_id => @professional.id}] : [@professional, :clients]) %></th>
-							    <td><%= @is_company ? @professional.clients.select {|s| s.company_id == @current_user.id}.size : @professional.clients.size %></td>
+						    <!-- <tr>
+							    <th><%#= link_to(t(:client).pluralize(locale), @is_company ? [@current_user, :clients, {:professional_id => @professional.id}] : [@professional, :clients]) %></th>
+							    <td><%#= @is_company ? @professional.clients.select {|s| s.company_id == @current_user.id}.size : @professional.clients.size %></td>
 						    </tr>
 						    <tr>
-						   		 <th><%= link_to(t(:appointment).pluralize(locale), @is_company ? [@current_user, :appointments, {:professional_id => @professional.id}] : [@professional, :appointments])  %></th>
-						   		 <td><%= @is_company ? @current_user.appointments.select {|s| s.professional_id == params[:id].to_i}.size : @professional.appointments.size %></td>
+						   		 <th><%#= link_to(t(:appointment).pluralize(locale), @is_company ? [@current_user, :appointments, {:professional_id => @professional.id}] : [@professional, :appointments])  %></th>
+						   		 <td><%#= @is_company ? @current_user.appointments.select {|s| s.professional_id == params[:id].to_i}.size : @professional.appointments.size %></td>
+						    </tr> -->
+						   <!--  <tr>
+						         <th><%#= t(:pass_active) %></th>
+						         <td><%#= @professional.pass_active %><%#= status_tag(@professional.pass_active) %></td>
 						    </tr>
 						    <tr>
-						         <th><%= t(:pass_active) %></th>
-						         <td><%= @professional.pass_active %><%#= status_tag(@professional.pass_active) %></td>
-						    </tr>
-						    <tr>
-						          <th><%= t(:acc_active) %></th>
-						          <td><%= @professional.acc_active %><%#= status_tag(@professional.acc_active) %></td>
-						    </tr>
+						          <th><%#= t(:acc_active) %></th>
+						          <td><%#= @professional.acc_active %><%#= status_tag(@professional.acc_active) %></td>
+						    </tr> -->
 						   <!--  <tr>
 						          <th><%#= "ID Token" %></th>
 						          <td><%#= @professional.id_token %></td>

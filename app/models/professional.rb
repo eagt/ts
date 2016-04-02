@@ -1,7 +1,7 @@
 class Professional < ActiveRecord::Base
 
 	#validates :name, presence: true, length: { maximum: 20 }
-	include SharedMethods
+	#include SharedMethods
  	# has_secure_password
  	# VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
  	#validates :name, presence: true, length: { maximum: 20 }
@@ -13,15 +13,22 @@ class Professional < ActiveRecord::Base
 	has_many :updates_deletes
 
 	# Many-to-Many Simple
-	has_and_belongs_to_many :branches
-	has_and_belongs_to_many :clients
+
 
  	# Many-to-Many Rich
 	
 
 	# Many-to-Many through
+	has_many :clienprofeships
+	has_many :clients, :through => :clienprofeships
+
+	has_many :branchprofeships
+	has_many :branches, :through => :branchprofeships
+
+
 	has_many :assignments
 	has_many :appointments, :through => :assignments
+	
 	has_many :employments
  	has_many :companies, :through => :employments
 

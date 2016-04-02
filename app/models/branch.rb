@@ -10,12 +10,14 @@ class Branch < ActiveRecord::Base
 	has_many :clients
 
 	# Many-to-Many Simple
-	has_and_belongs_to_many :professionals
+	
 	
 
  	# Many-to-Many Rich
 
  	# Many-to-Many through
+ 	has_many :branchprofeships
+	has_many :professionals, :through => :branchprofeships
 
 
  	# scopes
@@ -23,9 +25,17 @@ class Branch < ActiveRecord::Base
   	scope :newest_first, lambda { order("branches.created_at DESC")}
   	scope :search, lambda {|query| where (["name LIKE?", "%#{query}%"])}
 
-  	validates_presence_of :company_id
+  	# /**************  ------------------  ******************** /
 
-  	after_initialize :generate_token, :if => :new_record?
+  	# validates_presence_of :company_id  This was removed to be able to see the create new branch
+
+  	# /**************  ------------------  ******************** /
+
+
+
+  	
+
+  	# after_initialize :generate_token, :if => :new_record?
 
 
   # 	private

@@ -13,7 +13,7 @@ def up
 
         t.integer "contact_details_id", :visible => false
         t.string "service", :limit => 25
-        t.string "specialty", :limit => 50, :null => false
+        t.string "specialty", :limit => 50      #, :null => false
 
           # In the next two columns I will leave the visible value while developing and testing...
         t.string "creator", :visible => true  # This has to be FILL IN automatically and kept on the data base depending who is the logger when creating it

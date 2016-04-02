@@ -17,15 +17,14 @@
     <table id="index_table" class="display responsive" summary="Branches list">
       <thead class="thead-inverse">
 			<tr>	
-				<th>&nbsp;</th>			
 				<th><%= t(:id) %></th>
-				 <th><%= t(:id_code) %></th>
+				<th><%= t(:id_code) %></th>
 				<th><%= t(:discipline)%></th>
 				<th><%= t(:name)%></th>
    			    <th><%= t(:company) %></th>
 			    <th><%= t(:email) %></th>
 
-				<th><%= t(:professional).pluralize(locale) %></th> <!-- This field will be visible only if the @current_user = Company. Make sure of this -->
+				<th><%= t(:professionals).pluralize(locale) %></th> <!-- This field will be visible only if the @current_user = Company. Make sure of this -->
 				<th><%= t(:client).pluralize(locale) %></th>
 				<th><%= t(:appointment).pluralize(locale) %></th>
 				 <th><%= t(:action) %></th>
@@ -41,7 +40,7 @@
 				<td><%= branch.name %></td>
 				<td><%= branch.company_id %></td>
 				<td><%= branch.email %></td>
-				<td class="center"><%= branch.professionals.size %></td> 		
+				<td class="center"><%= @is_company ? branch.company.professionals.size : "1" %></td> 		
 				<td class="center"><%= branch.clients.size %></td>
 				<td class="center"><%= branch.appointments.size %></td>	
 				<td class="actions">

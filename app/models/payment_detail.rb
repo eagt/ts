@@ -4,11 +4,15 @@ class PaymentDetail < ActiveRecord::Base
 	# 0ne-to-One
 	# One-to- Many	
 	has_many :updates_deletes
+	belongs_to :appointmnet
+
 	# Many-to-Many Simple
+
  	# Many-to-Many Rich
+ 	
  	# Many-to-Many through
 
-	belongs_to :appointmnet
+	
 
 
 	scope :sorted_id, lambda { order("payment_details.id ASC")}

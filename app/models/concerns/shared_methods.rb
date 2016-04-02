@@ -20,7 +20,7 @@ module SharedMethods
     # before_save { first_name.camelcase! }
     # before_save { company.camelcase! }
   
-    validates :name, presence: true, length: { maximum: 20 }
+    validates :first_name, presence: true, length: { maximum: 20 }
     # The first part could be written as  validates(:name, presence: true)
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
     validates :email, presence: true, length: { maximum: 45 }, format: { with: VALID_EMAIL_REGEX }, 

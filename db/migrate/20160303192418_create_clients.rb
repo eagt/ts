@@ -5,7 +5,7 @@ class CreateClients < ActiveRecord::Migration
 	    create_table :clients do |t|
 
 	      # Token to identify a register, not unique as it links instance for different users
-          t.string "id_token", :null => false
+          #t.string "id_token", :null => false
 
 	      t.integer "company_id", :visible => false
 	      t.integer "branch_id", :visible => false

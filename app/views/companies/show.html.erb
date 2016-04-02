@@ -2,8 +2,10 @@
 
 <!-- <% @page_title = t(:company).pluralize(locale) %> -->
 
-<%= @current_user ? link_to("<< " + t(:return_to), [@current_user, params[:controller]]) : "-" %>
-<%#= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %>
+<%#= @current_user ? link_to("<< " + t(:return_to), [@current_user, params[:controller]]) : "-" %>
+
+
+<%= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %>
 
 <div class="Company show">
   <h2><%= t(:show) + " " + t(:company) %></h2>
@@ -32,9 +34,6 @@
 			<td><%= @company.email  %></td>
 		 </tr>
 
-	<!-- If Contact Details isn't placed in index  I think that this is a great place to place contact details
-	<%#= link_to(t(:contact_details), {:controller => 'contact_details', :professional_id => professional.id}, :class => 'action show') %> 
-	-->
 		
 	<!-- This has to be FILL IN automatically and kept on the data base depending who is the logger when creating it. It could be either Company or Professional. In the View  it has to be a dropdown with both ooptions. -->
 		 <tr>
@@ -58,21 +57,24 @@
  	 	 <tr>
           <th><%= link_to(t(:professional).pluralize(locale), @is_company ? [@company, :professionals] : [@current_user]) %></th>
           <td><%= @is_company ? @company.professionals.size : "1" %></td>
-         </tr> 
+        </tr>
 
-
+ 
          <tr>
           <th><%= link_to(t(:branch).pluralize(locale), @is_company ? [@company, :branches] : [@current_user, :branches, {:company_id => @company.id}]) %></th>
           <td><%= @company.branches.size %></td>
-         </tr>
-         <tr>
+         </tr> 
+         
+        <tr>
           <th><%= link_to(t(:client).pluralize(locale), @is_company ? [@company, :clients] : [@current_user, :clients, {:company_id => @company.id}]) %></th>
           <td><%= @is_company ? @company.clients.size : @current_user.clients.select {|s| s.company_id == params[:id].to_i}.size %></td>
          </tr>
+
+         <!--
          <tr>
-          <th><%= link_to(t(:appointment).pluralize(locale), @is_company ? [@company, :appointments] : [@current_user, :appointments, {:company_id => @company.id}])  %></th>
-          <td><%= @is_company ? @company.appointments.size : @current_user.appointments.select {|s| s.company_id == params[:id].to_i}.size %></td>
-         </tr>
+          <th><%#= link_to(t(:appointment).pluralize(locale), @is_company ? [@company, :appointments] : [@current_user, :appointments, {:company_id => @company.id}])  %></th>
+          <td><%#= @is_company ? @company.appointments.size : @current_user.appointments.select {|s| s.company_id == params[:id].to_i}.size %></td>
+         </tr> --> 
        <!--   <tr>
           <th><%#= t(:pass_active) %></th>
           <td><%#= @company.pass_active %><%#= status_tag(@company.pass_active) %></td>
@@ -80,8 +82,8 @@
  		<tr>
           <th><%#= t(:acc_active) %></th>
           <td><%#= @company.acc_active %><%#= status_tag(@company.acc_active) %></td>
-         </tr>
- -->        <!--  <tr>
+         </tr>  -->
+         <!--  <tr>
           <th><%#= "ID Token" %></th>
           <td><%#= @company.id_token %></td>
          </tr>
@@ -103,9 +105,14 @@
 		 </tr>
 
 
+	<!-- If Contact Details isn't placed in index  I think that this is a great place to place contact details
+	<%#= link_to(t(:contact_details), {:controller => 'contact_details', :professional_id => professional.id}, :class => 'action show') %> 
+	-->
+
+
 		 <!-- There will be a link below to take me to see more contact details
 		 <%#= link_to("<< Contact Details", {:controller => 'contact_details', :action => 'show'}, :class => 'back-link') %> -->
-		 </tr>
+		 <tr>
 			<th> <%= t(:contact_details_id) %></th>
 			<td><%= @company.contact_details_id  %></td>
 		 </tr>

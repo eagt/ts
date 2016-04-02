@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  professional_id: MyString
+  integer: MyString
+  appointment_id: MyString
+  integer: MyString
+  creator: MyString
+  string: MyString
+
+two:
+  professional_id: MyString
+  integer: MyString
+  appointment_id: MyString
+  integer: MyString
+  creator: MyString
+  string: MyString

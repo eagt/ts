@@ -10,17 +10,25 @@ class Appointment < ActiveRecord::Base
 	has_many :update_deletes
 
 	# Many-to-Many Simple
-	has_and_belongs_to_many :clients
+
 		
 	# Many-to-Many Rich
 
 		
 	# Many-to-Many through
+	has_many :appointclienships
+	has_many :clients, :through => :appointclienships
+
+
+	
 	has_many :assigments
 	has_many :professionals, :through => :assignments
 
-
+# /************* ------   ******************/
 	#accepts_nested_attributes_for :assignments       #, reject_if: :all_blank    THIS WAS COMMENTED OUT
+
+# /************* ------   ****************/
+
 
 
 	# after_initialize :generate_token, :if => :new_record?

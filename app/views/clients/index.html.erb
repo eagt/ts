@@ -20,32 +20,32 @@
     <table id="index_table" class="display responsive" summary="client list">
       <thead class="thead-inverse">
 		  	<br>
-			<tr>	
+			<!-- <tr>	
 			  <th>&nbsp;</th>
-	          <th><%= "--" %></th>
-	          <th><%= select_tag("col2_filter", "",html_options={ class: "column_filter", :onchange => "filterColumn(2)", :include_blank => true}) %></th>
-	          <th><%= "--" %></th>
-	          <th><%= "--" %></th>
-	          <th><%= "--" %></th>
-	          <th><%= "--" %></th>
-	          <th><%= select_tag("col7_filter", "",html_options={ class: "column_filter", :onchange => "filterColumn(7)", :include_blank => true}) %></th>
-	          <th><%= "--" %></th>
-	          <th><%= "--" %></th>
-	          <th><%= "--" %></th>
-	          <th><%= "--" %></th>
+	          <th><%#= "--" %></th>
+	          <th><%#= select_tag("col2_filter", "",html_options={ class: "column_filter", :onchange => "filterColumn(2)", :include_blank => true}) %></th>
+	          <th><%#= "--" %></th>
+	          <th><%#= "--" %></th>
+	          <th><%#= "--" %></th>
+	          <th><%#= "--" %></th>
+	          <th><%#= select_tag("col7_filter", "",html_options={ class: "column_filter", :onchange => "filterColumn(7)", :include_blank => true}) %></th>
+	          <th><%#= "--" %></th>
+	          <th><%#= "--" %></th>
+	          <th><%#= "--" %></th>
+	          <th><%#= "--" %></th>
 
-	        </tr>
+	        </tr> -->
 	        <tr>
-	          <th>&nbsp;</th>
+	      
 	          <th><%= t(:first_name) %></th>
 	          <th><%= t(:last_name) %></th>
 	          <th><%= t(:email) %></th>
 	          <th><%= t(:id) %></th>
 	          <th><%= t(:dob) %></th>     
-	          <th><%= t(:company) %></th>
-	          <th><%= t(:branch) %></th>
-	          <th><%= t(:professional).pluralize(locale) %></th>        
-	          <th><%= t(:discipline) %></th>
+	       <!--    <th><%#= t(:company) %></th>
+	          <th><%#= t(:branch) %></th>
+	          <th><%#= t(:professional).pluralize(locale) %></th>        
+	          <th><%#= t(:discipline) %></th> -->
 	          <th><%= t(:action) %></th>
 	        </tr>
 
@@ -58,16 +58,17 @@
 
           <tr class="<%= cycle('odd', 'even') %>">
 		<tr>	
-			<td><%= client.id %></td>
+			
             <td><%= client.first_name %></td>
             <td><%= client.last_name %></td>
             <td><%= client.email %></td>
             <td><%= client.id_code %></td>
             <td><%= client.dob %></td>
-            <td><%= client.company_id %></td>
-            <td><%= client.branch_id %></td>
-            <td><%= client.professionals.size %></td>
-            <td><%= client.discipline %></td>
+          <!--   <td><%#= client.company_id %></td>
+            <td><%#= client.branch_id %></td>
+            <td><%#= client.professionals.size %></td>
+            <td><%#= client.discipline %></td> -->
+            <td>
 			<%= link_to(t(:show), [@current_user, client], :class => 'action show') %>
               <%= link_to(t(:edit), [:edit, @current_user, client], :class => 'action edit') %>
               <%= link_to(t(:delete), [:delete, @current_user, client], :class => 'action delete') %>

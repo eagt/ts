@@ -17,13 +17,13 @@
     <table id="index_table" class="display responsive" summary="Professional list">
       <thead class="thead-inverse">
         <tr>
-          <th>&nbsp;</th>
+          <th><%= t(:id) %></th>
           <th><%= t(:first_name) %></th>
           <th><%= t(:last_name) %></th>
           <th><%= t(:email) %></th>
-          <th><%= t(:id) %></th>
+          <th><%= t(:id_code) %></th>
           <th><%= t(:dob) %></th>
-          <th><%= t(:speciality) %></th>
+          <th><%= t(:specialty) %></th>
           <th><%= t(:company).pluralize(locale) %></th>
           <th><%= t(:client).pluralize(locale) %></th>
           <th><%= t(:appointment).pluralize(locale) %></th>
@@ -40,9 +40,9 @@
             <td><%= professional.email %></td>
             <td><%= professional.id_code %></td>
             <td><%= professional.dob %></td>
-            <td><%= professional.speciality %></td>
+            <td><%= professional.specialty %></td>
             <td class="center"><%= professional.companies.size %></td>
-            <td class="center"><%= professional.clients.size %></td>
+            <td class="center"><%= professional.clients.size %></td>  
             <td class="center"><%= professional.appointments.size %></td>
             <td class="actions">
               <%= link_to(t(:show), [@current_user, professional], :class => 'action show') %>

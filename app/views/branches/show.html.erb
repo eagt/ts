@@ -55,10 +55,21 @@
 	<!-- This has to be FILL IN automatically depending who is the logger in the current session. It would be deleted as soon as the user log off. Sort of virtual attribute. -->
 			
 
-		<tr>
-          <th><%= t(:professional).pluralize(locale) %></th>
-          <td><%= @branch.company.professionals.size %></td>
+
+
+ 	 	 <tr>
+          <th><%= link_to(t(:professional).pluralize(locale), @is_company ? [@company, :professionals] : [@current_user]) %></th>
+          <td><%= @is_company ? @branch.company.professionals.size : "1" %></td>
         </tr>
+	
+
+	<!-- 
+		<tr>
+          <th><%#= t(:professional).pluralize(locale) %></th>
+          <td><%#= @branch.company.professionals.size %></td>
+        </tr> -->
+
+
         <tr>
           <th><%= t(:client).pluralize(locale) %></th>
           <td><%= @branch.clients.size %></td>

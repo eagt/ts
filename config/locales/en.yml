@@ -41,6 +41,7 @@ en:
   delete: Delete
   register: Register
   professional: Professional
+  professionals: professionals
   company: Company
   branch: Branch
   client: Client

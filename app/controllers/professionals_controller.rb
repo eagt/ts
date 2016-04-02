@@ -21,14 +21,12 @@ class ProfessionalsController < ApplicationController
       @professional = Professional.find(params[:id])
     end
 
-
-
- def new
+def new
     begin
       if @is_company # If the user is a company and is creating a new virtual professional
         @professional = @current_user.professionals.new
       else # kicks in when registering a new Professional
-        @professional = Professional.new(is_virtual: false)
+        @professional = Professional.new      #(is_virtual: false)
       end    
     rescue Exception => e # Catch exceptions 
       flash[:notice] = e.to_s
@@ -36,11 +34,27 @@ class ProfessionalsController < ApplicationController
     end
   end
 
- def create        
+# def new
+#       if @is_company # If the user is a company and is creating a new virtual company
+#         @professional = @current_user.professional.new
+#         @professional_count = Professional.count + 1 
+#       else # kicks in when registering a new Company
+#            @professional = Professional.new   # this is new
+#            @professional_count = Professional.count + 1 
+#             if @professional_count >= 2                                 
+#                flash[:notice] = " As a Professional you can only create your own Company"  
+#                redirect_to :back  
+#             end      
+#       end
+#       #redirect_to([@current_user, :companies])
+#   end
+
+
+def create        
     # Instantiate a new object using form parameters
     @professional = Professional.new(professional_params)
     if @professional.save
-      if @is_company then Employment.create(:company => @current_user, :professional => @professional, :note => "Real company, Virtual professional", :validated => true) end
+      if @is_company then Employment.create(:company => @current_user, :professional => @professional, :validated => true) end
       # If save succeeds, redirect to the index action
       flash[:notice] = "#{t(:professional)} #{t(:create_success)}"
       redirect_to([@current_user, :professionals])          
@@ -49,6 +63,63 @@ class ProfessionalsController < ApplicationController
       render('new')
     end
   end
+
+
+
+
+
+
+
+
+ # ***** ------------------------------------ ******
+#Latest --> Saving professionals as normal but it isn't saving on companies satck 
+
+#  def new
+#     @professional = Professional.new({:first_name => " "})
+#     @professional_count = Professional.count + 1
+#   end
+
+# def create
+#     #@professional = Professional.new(params[:professional]) 
+#     @professional = Professional.new(professional_params)
+#     if @professional.save
+#         flash[:success] = "Welcome to TS App '#{@professional.first_name}'!"
+#       # Handle a successful save.
+#          redirect_to @professional
+#     else
+#        render 'new'
+#     end
+#   end
+
+ # ***** ------------------------------------ ******
+
+
+ # def new
+ #    begin
+ #      if @is_company # If the user is a company and is creating a new virtual professional
+ #        @professional = @current_user.professionals.new
+ #      else # kicks in when registering a new Professional
+ #        @professional = Professional.new(is_virtual: false)
+ #      end    
+ #    rescue Exception => e # Catch exceptions 
+ #      flash[:notice] = e.to_s
+ #      redirect_to([@current_user, :professionals])
+ #    end
+ #  end
+
+ # def create        
+ #    # Instantiate a new object using form parameters
+ #    @professional = Professional.new(professional_params)
+ #    if @professional.save
+ #      if @is_company then Employment.create(:company => @current_user, :professional => @professional, :note => "Real company, Virtual professional", :validated => true) end
+ #      # If save succeeds, redirect to the index action
+ #      flash[:notice] = "#{t(:professional)} #{t(:create_success)}"
+ #      redirect_to([@current_user, :professionals])          
+ #    else
+ #      # If save fails, redisplay the from so user can fix problems
+ #      render('new')
+ #    end
+ #  end
 
 
 
