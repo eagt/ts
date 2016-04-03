@@ -18,9 +18,18 @@
       </tr>
 
       <tr>
-        <th><%= f.label(:company_id, t(:company_id)) %></th>
-        <td><%= f.text_field(:company_id) %></td>
+        <th><%= f.label(:company_id, t(:company)) %></th>
+        <td><%= @is_company ? @current_user.name : f.collection_select(:company_id, @current_user.companies, :id, :name,include_blank: true) %></td>
+        <%= @is_company ? f.hidden_field(:company_id, :value => @current_user.id) : "-" %> <!-- This needs to change when a PROFESSIONAL -->
+      </tr>
+<!-- 
+      <tr>
+        <th><%#= f.label(:company_id, t(:company_id)) %></th>
+        <td><%#= f.text_field(:company_id) %></td>
       </tr> 
+ -->
+
+
       <tr>
         <th><%= f.label(:email, t(:email)) %></th>
         <td><%= f.text_field(:email) %></td>

@@ -5,6 +5,9 @@
 <%= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %>
 
 <div class="branch edit">
+
+<h1><%= @is_company ? @current_user.name : f.collection_select(:company_id, @current_user.companies, :id, :name,include_blank: true) %></h1> <!-- Ccrouds -->
+
   <h2><%= t(:update) + " " + t(:branch) %></h2>
 
   <%= form_for([@current_user, @branch]) do |f| %>

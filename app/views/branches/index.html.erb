@@ -38,7 +38,7 @@
 				<td><%= branch.id_code %></td>
 				<td><%= branch.discipline %></td>
 				<td><%= branch.name %></td>
-				<td><%= branch.company_id %></td>
+				<td><%= branch.company.name %></td>
 				<td><%= branch.email %></td>
 				<td class="center"><%= @is_company ? branch.company.professionals.size : "1" %></td> 		
 				<td class="center"><%= branch.clients.size %></td>

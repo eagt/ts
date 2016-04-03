@@ -8,7 +8,9 @@
 <%= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %>
 
 <div class="Company show">
-  <h2><%= t(:show) + " " + t(:company) %></h2>
+
+  <h2><%= @company.name + " " + "Details" %></h2> <!-- Ccrouds -->
+ <!--  <h2><%#= t(:show) + " " + t(:company) %></h2> -->
 
   <div class="table-responsive">
     <table id="show_table" class="display responsive" summary="Company detail view">
@@ -70,11 +72,11 @@
           <td><%= @is_company ? @company.clients.size : @current_user.clients.select {|s| s.company_id == params[:id].to_i}.size %></td>
          </tr>
 
-         <!--
+         
          <tr>
-          <th><%#= link_to(t(:appointment).pluralize(locale), @is_company ? [@company, :appointments] : [@current_user, :appointments, {:company_id => @company.id}])  %></th>
-          <td><%#= @is_company ? @company.appointments.size : @current_user.appointments.select {|s| s.company_id == params[:id].to_i}.size %></td>
-         </tr> --> 
+          <th><%= link_to(t(:appointment).pluralize(locale), @is_company ? [@company, :appointments] : [@current_user, :appointments, {:company_id => @company.id}])  %></th>
+          <td><%= @is_company ? @company.appointments.size : @current_user.appointments.select {|s| s.company_id == params[:id].to_i}.size %></td>
+         </tr> 
        <!--   <tr>
           <th><%#= t(:pass_active) %></th>
           <td><%#= @company.pass_active %><%#= status_tag(@company.pass_active) %></td>

@@ -5,7 +5,7 @@ def up
   create_table :appointments do |t|
 
        # Token to identify a register, not unique as it links instance for different users
-       t.string "id_token", :null => false
+       t.string "id_token"        #, :null => false
        t.integer "company_id"
        t.integer "branch_id"
        t.integer "client_id"
