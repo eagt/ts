@@ -21,11 +21,11 @@ class Appointment < ActiveRecord::Base
 
 
 	
-	has_many :assigments
+	has_many :assignments
 	has_many :professionals, :through => :assignments
 
 # /************* ------   ******************/
-	#accepts_nested_attributes_for :assignments       #, reject_if: :all_blank    THIS WAS COMMENTED OUT
+	accepts_nested_attributes_for :assignments       #, reject_if: :all_blank    THIS WAS COMMENTED OUT
 
 # /************* ------   ****************/
 

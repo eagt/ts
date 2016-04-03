@@ -32,12 +32,12 @@ ActiveRecord::Schema.define(version: 20160318164108) do
   add_index "appointclienships", ["creator"], name: "index_appointclienships_on_creator", using: :btree
 
   create_table "appointments", force: :cascade do |t|
-    t.string   "id_token",           limit: 255,                                   null: false
+    t.string   "id_token",           limit: 255
     t.integer  "company_id",         limit: 4
     t.integer  "branch_id",          limit: 4
     t.integer  "client_id",          limit: 4
     t.string   "discipline",         limit: 25
-    t.datetime "date_time",                        default: '2016-03-29 17:21:10', null: false
+    t.datetime "date_time",                        default: '2016-04-03 13:30:21', null: false
     t.string   "status",             limit: 255
     t.integer  "appointment_code",   limit: 4
     t.integer  "follow_up_code",     limit: 4

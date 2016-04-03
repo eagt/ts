@@ -59,6 +59,7 @@ es:
   column: En Columna
   search: Buscar
   home: Pagina Inicial
+  Details: Informacion
   create_success: creado satisfactoriamente
   update_success: actualizado satisfactoriamente
   delete_message: Esta seguro que desea borrar este record permanentemente?

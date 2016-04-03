@@ -6,7 +6,11 @@
 <%= link_to("<< " + t(:return_to), [@current_user, params[:controller]], :class => 'back-link') %>
 
 <div class="company delete">
-	<h2><%= t(:delete) + " " + t(:company) %></h2>
+
+
+ <h2><%= "Delete"+ " " + @company.name %></h2> <!-- Ccrouds -->
+<!-- 
+	<h2><%#= t(:delete) + " " + t(:company) %></h2> -->
 
 	<%= form_for([@current_user, @company], :html => {:method => :delete}) do |f| %>
 
