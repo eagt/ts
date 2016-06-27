@@ -39,19 +39,22 @@ Creating a new repository for a new project.
 
     git commit –m "Write a short explanatory of what the commit does"  (i.e: “changing application layout settings”
 
-Then I need to go to github.com → Select new repository
+Then I need to go to github.com -> Sign in on my account -> Select new repository
 
-    Give a name of the new proyect
+    Give a name of the new proyect -> Leave the radio buttons checked as they are 
 
-    Select create Reposiory
+    Click on Create Reposiory
 
-    Copy & paste the bid where says:
+    Copy & paste on the command line below the parragraph that says 
+    or push an existing repository from the command line 
 
     git remote add origin git hub.com/eagt/(new repository neme).git
 
-&
+    Then, type
 
     git push –u origin mater
+    
+    You are done. Go back to your github account and click on the repository name and you should see all the files up there.
 
 // —– ****** —— //
 
