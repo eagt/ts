@@ -41,7 +41,7 @@ Creating a new repository for a new project.
 
 Then I need to go to github.com -> Sign in on my account -> Select new repository
 
-    Give a name of the new proyect -> Leave the radio buttons checked as they are 
+Give a name of the new proyect -> Leave the radio buttons checked as they are 
 
 Click on Create Reposiory button
 
