@@ -43,18 +43,18 @@ Then I need to go to github.com -> Sign in on my account -> Select new repositor
 
     Give a name of the new proyect -> Leave the radio buttons checked as they are 
 
-    Click on Create Reposiory
+Click on Create Reposiory button
 
-    Copy & paste on the command line below the parragraph that says 
-    or push an existing repository from the command line 
+Copy & paste on the command line below the parragraph that says 
+or push an existing repository from the command line 
 
     git remote add origin git hub.com/eagt/(new repository neme).git
 
-    Then, type
+Then, type
 
     git push –u origin mater
     
-    You are done. Go back to your github account and click on the repository name and you should see all the files up there.
+You are done. Go back to your github account and click on the repository name and you should see all the files up there.
 
 // —– ****** —— //
 
