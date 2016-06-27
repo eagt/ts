@@ -37,7 +37,7 @@ Creating a new repository for a new project.
 
     git add . (enter)
 
-    git commit –m ”name of the new proyect”
+    git commit –m "Write a short explanatory of what the commit does"  (i.e: “changing application layout settings”
 
 Then I need to go to github.com → Select new repository
 
