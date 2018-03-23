@@ -19,7 +19,7 @@ gem 'mysql2', '>= 0.3.13', '< 0.5'
 #gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '4.0.3'
+gem 'jquery-rails', '4.0.4'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 #gem 'turbolinks', '2.3.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
